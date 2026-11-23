@@ -1397,7 +1397,9 @@ var SH=[];
   if(!seen[key]){seen[key]=1;var n=cur.length;SH.push({cells:cur,w:mx+1,h:my+1,c:bi%7,wt:n<=4?3:n===5?1.4:n===6?1:.6});}
   cur=cur.map(function(p){return[my-p[1],p[0]];});}});})();
 function rng(seed){var a=seed>>>0;return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
-function pickShape(R){var tot=0,i;for(i=0;i<SH.length;i++)tot+=SH[i].wt;var x=R()*tot;for(i=0;i<SH.length;i++){x-=SH[i].wt;if(x<=0)return SH[i];}return SH[0];}
+function endBoost(){return G&&G.mode==="endless"?Math.min(1,(G.score||0)/2500):0;}
+function shW(p,b){if(!b)return p.wt;var n=p.cells.length;return p.wt*(n>=5?1+2.4*b:n<=3?1-.55*b:1);}
+function pickShape(R){var tot=0,i,b=endBoost();for(i=0;i<SH.length;i++)tot+=shW(SH[i],b);var x=R()*tot;for(i=0;i<SH.length;i++){x-=shW(SH[i],b);if(x<=0)return SH[i];}return SH[0];}
 function canPlace(grid,p,cx,cy){for(var i=0;i<p.cells.length;i++){var x=cx+p.cells[i][0],y=cy+p.cells[i][1];if(x<0||y<0||x>=N||y>=N||grid[y*N+x])return false;}return true;}
 function fits(grid,p){for(var y=0;y<=N-p.h;y++)for(var x=0;x<=N-p.w;x++)if(canPlace(grid,p,x,y))return true;return false;}
 /* does this piece finish a row or column somewhere on the board? */
@@ -1416,7 +1418,7 @@ function placeable(grid,tr){var occ=new Uint8Array(N*N),i,budget=3000;for(i=0;i<
   return go(0);}
 function rawTray(grid){var tr=[];for(var k=0;k<3;k++){var p=null;for(var t=0;t<15;t++){var q=pickShape(Math.random);if(fits(grid,q)){p=q;break;}}tr.push(p||SH[0]);}return tr;}
 function newTray(grid){return wtTray(newTray0(grid));}
-function newTray0(grid){if(G&&G.mercy)return kindTray(grid);var tr;for(var a=0;a<8;a++){tr=rawTray(grid);if(placeable(grid,tr))return tr;}var kt=kindTray(grid);return placeable(grid,kt)?kt:tr;}
+function newTray0(grid){if(G&&G.mercy)return kindTray(grid);var b=endBoost(),tries=Math.max(1,Math.round(8-6*b)),tr;for(var a=0;a<tries;a++){tr=rawTray(grid);if(placeable(grid,tr))return tr;}if(b>=.6)return tr;var kt=kindTray(grid);return placeable(grid,kt)?kt:tr;}
 
 /* ---------- levels ---------- */
 var CAL={5:1.036,6:-1,7:2,8:1.036,9:3,10:-4,12:4,19:2,20:1.005,21:-3,23:0.979,24:-3,27:4,28:-1,29:0.96,30:4,31:-5,32:1.023,34:-2,35:0.905,36:-5,39:3,40:-8,41:1.105,42:9,44:1.007,47:0.97,50:0.926,51:-3,52:2,55:-7,56:0.962,57:-1,60:-5,61:3,62:1.043,64:-3,65:1.055,66:-5,67:2,68:1.031,70:-4,71:1.152,74:0.977,75:5,76:-12,77:1.002,78:-3,79:10,81:-5,87:7,88:-9,89:1.079,90:-4,92:1.087,93:11,94:-6,95:1.151,96:-5,97:-6,98:1.014,100:-3,101:1.133,103:-7,105:-5,107:1.071,108:-6,110:1.041,111:-2,112:-6,113:1.001,118:-5,119:1.118,120:-2};
@@ -2175,7 +2177,7 @@ function noSpace(){if(!G)return;
   var lvl=G.mode==="level";
   modal('<h2>No space left</h2><p>None of your pieces fit.'+(lvl?"":" Score: "+G.score+".")+'</p>'+
     '<button class="btn gold wide" data-act="swapfix">Swap for new pieces <span class="cnt">'+(S.swaps>0?S.swaps+" left":'<span class="coin"></span>'+PRICE.swap)+'</span></button>'+
-    '<button class="btn alt wide sm" data-act="adswap">Watch an ad for a free Swap</button>'+
+    '<button class="btn alt wide sm" data-act="adswap">Watch an ad for a free Swap</button>'+(lvl?'':(!G.adCont?'<button class="btn alt wide sm" data-act="adcont">Watch an ad: clear 3 rows</button>':'')+'<button class="btn gold wide sm" data-act="coincont">Clear 3 rows <span class="cnt"><span class="coin"></span>'+contPrice()+'</span></button>')+
     '<button class="btn alt sm" data-act="'+(lvl?"giveup":"endover")+'">'+(lvl?(G.hunt||G.daily||G.ser?"Give up":"Give up (lose 1 life)"):"End game")+'</button>');
 }
 ACT.swapfix=function(){if(!G){closeModal();return;}if(S.swaps>0)S.swaps--;else{if(S.coins<PRICE.swap){shop("You need "+PRICE.swap+" coins for a Swap.",noSpace);return;}S.coins-=PRICE.swap;}save();hud();cheer();closeModal();doSwap();if(stuck()){G.done=true;noSpace();}};
@@ -2516,6 +2518,13 @@ function hubWin(st,first){hroll();var o=[],was=S.pig,add=first?10:4;S.pig=Math.m
   var d=hSticker();o.push(d.dupe?"Extra sticker: +5 coins":"New sticker: "+HSTK[d.i][0]);save();setTimeout(lhub,50);return o.join(" · ");}
 $("lhub").addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".lhb");if(!b)return;var f=LHUBS[b.dataset.h];if(f)f();});
 setTimeout(lhub,300);setInterval(lhub,5000);
+
+/* ---------- endless: keep going ---------- */
+function contPrice(){return 60*((G&&G.conts||0)+1);}
+function clear3(){var rows=[];for(var y=0;y<N;y++){var n=0;for(var x=0;x<N;x++)if(G.grid[y*N+x])n++;rows.push([n,y]);}rows.sort(function(a,b){return b[0]-a[0];});
+  rows.slice(0,3).forEach(function(r){for(var x=0;x<N;x++)G.grid[r[1]*N+x]=null;});G.done=false;try{SFX.clear(3);}catch(e){}render();if(stuck()){G.tray=newTray(G.grid);render();}if(stuck()){G.done=true;noSpace();}}
+ACT.adcont=function(){if(!G){closeModal();return;}Ads.rewarded("endless_continue",function(){if(!G)return;G.adCont=1;closeModal();cheer();clear3();toast("3 rows cleared. Keep going!");try{Track("endless_continue",{via:"ad",score:G.score});}catch(e){}});};
+ACT.coincont=function(){if(!G){closeModal();return;}var pr=contPrice();if(S.coins<pr){shop("You need "+pr+" coins to keep going.",noSpace);return;}S.coins-=pr;G.conts=(G.conts||0)+1;save();hud();closeModal();cheer();clear3();toast("3 rows cleared. Keep going!");try{Track("endless_continue",{via:"coins",price:pr,score:G.score});}catch(e){}};
 ACT.lib=function(){openLib();};ACT.lib_lag=function(){openLib("lag");};ACT.lib_spe=function(){openLib("spe");};ACT.lib_hol=function(){openLib("hol");};ACT.lib_wt=function(){openLib("wt");};ACT.libback=function(){openLib(openLib.t);};
 setTimeout(libChip,600);setInterval(libChip,4000);
 if(!CFG.live)window.__lib={open:openLib,view:libView,counts:libCounts,lag:libLag,newc:libNew};
