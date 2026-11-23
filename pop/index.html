@@ -707,7 +707,7 @@ function drawMap(){
   $("bg").style.backgroundImage="url(art/bg"+areaOf(S.max)%BGN+".jpg)";mapVids(sc);
   var cur=sc.querySelector('.node[data-n="'+S.max+'"]');
   if(cur)requestAnimationFrame(function(){sc.scrollTop=cur.offsetTop+cur.parentNode.offsetTop-sc.clientHeight/2;});else requestAnimationFrame(function(){sc.scrollTop=sc.scrollHeight;});
-  var nv=$("mapNav"),na=drawMap.a,nh='';if(na>0)nh+='<button class="btn alt sm mnav" type="button" data-mapa="'+(na-1)+'">&#9664; Back to '+(na)+'. '+AREAS[na-1]+'</button>';if(na<CA)nh+='<button class="btn sm mnav" type="button" data-mapa="'+CA+'">Back to '+(CA+1)+'. '+AREAS[CA]+' &#9654;</button>';nh+='<button class="btn gold sm mnav wmb" type="button" data-a="worldmap">World Map</button>';nv.innerHTML=nh;nv.hidden=!nh;
+  var nv=$("mapNav"),na=drawMap.a,nh='';if(na>0)nh+='<button class="btn alt sm mnav" type="button" data-mapa="'+(na-1)+'">&#9664; Back to '+(na)+'. '+AREAS[na-1]+'</button>';if(na<CA)nh+='<button class="btn sm mnav" type="button" data-mapa="'+CA+'">Back to '+(CA+1)+'. '+AREAS[CA]+' &#9654;</button>';nv.innerHTML=nh;nv.hidden=!nh;
 }
 /* seaplane: while the map is open it flies across every 20-30 s towing a banner; tap it to go there */
 var planeN=0;
@@ -1277,10 +1277,10 @@ function hub(){var e=$("hub");if(!e)return;roll();
   var it=[["gift","Gift",giftReady()?"Ready":"Tomorrow",giftReady()],["daily","Daily level",dailyDone()?"Done":"Play",!dailyDone()],["pass","Lagoon Pass","Tier "+passTier(),passOpen()>0],
     ["event",EVN[S.ev.id%EVN.length],S.ev.pts+" pts",evOpen()>0],["race","Crew Race","Place "+myPlace(S.race.id,S.race.pts),!!S.race.won],["cards","Cards",cardCount()+"/"+CARDS.length,false],["album","Album",albCount()+"/"+STK.length,setOpen()>0],
     ["lagoon","My Lagoon",S.shells+" shells",DECO.some(function(d,i){return S.deco.indexOf(i)<0&&S.shells>=d[1];})],["piggy","Piggy Bank",""+S.pig,S.pig>=PIG_MIN]];
-  var hv=hev();if(hv)it.unshift(["hol",hv.name,hv.p+(hv.p===1?" pearl":" pearls"),hevNext(hv)>=0]);
+  it.unshift(["worldmap","World Map","All lagoons",false]);var hv=hev();if(hv)it.unshift(["hol",hv.name,hv.p+(hv.p===1?" pearl":" pearls"),hevNext(hv)>=0]);
   e.innerHTML=it.map(function(x){return '<button type="button" class="hb'+(x[3]?" hot":"")+'" data-h="'+x[0]+'"><small>'+x[1]+'</small><b>'+x[2]+'</b></button>';}).join("");}
 $("hub").addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".hb");if(!b)return;audio();HUBS[b.getAttribute("data-h")]();});
-var HUBS={gift:giftCard,daily:dailyCard,pass:passCard,event:eventCard,race:raceCard,album:albumCard,lagoon:lagoonCard,piggy:pigCard};
+var HUBS={worldmap:function(){worldMap();},gift:giftCard,daily:dailyCard,pass:passCard,event:eventCard,race:raceCard,album:albumCard,lagoon:lagoonCard,piggy:pigCard};
 var CLOSE='<button class="btn alt" data-a="closecard" type="button">Close</button>';
 /* ---- daily gift ---- */
 function giftCard(){var rd=giftReady(),k=!S.day?-1:(S.day.n===dayNum()-1||!rd?S.day.k:-1),next=rd?(k+1)%7:k,h='<span class="tag">Daily gift</span><h1>'+(rd?"Your gift is ready":"Come back tomorrow")+'</h1><div class="grid7">';
@@ -1516,7 +1516,7 @@ if(!CFG.live)window.__pop={cheer:function(x){cheer=x;},hev:hev,hevAdd:hevAdd,hol
 #mapNav{display:flex;gap:6px;margin:6px 0 0}#mapNav[hidden]{display:none}
 #mapNav .mnav{flex:1;min-width:0;font-size:14px;padding:8px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 </style><style>/* World Map */
-#mapNav .wmb{flex:0 0 auto}
+#mapNav .wmb{flex:0 0 auto}.hb[data-h="worldmap"]{background:linear-gradient(#ffe27a,#f5b229)!important;border-color:#fff!important;color:#fff;text-shadow:0 1px 0 rgba(130,60,0,.8),0 0 3px rgba(130,60,0,.6)}.hb[data-h="worldmap"] small{color:#fff}
 .worldmap .wmgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-height:56vh;overflow-y:auto;padding:4px 2px 8px;-webkit-overflow-scrolling:touch}
 .wmt{position:relative;padding:0;border:2px solid var(--line);border-radius:14px;overflow:hidden;background:#1d1150;cursor:pointer;aspect-ratio:9/13;color:#fff;font-family:inherit}
 .wmt img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
