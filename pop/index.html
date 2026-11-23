@@ -1256,7 +1256,7 @@ var DECO=[
  ["Party lights",18,24,12,52,'<svg viewBox="0 0 120 30" width="100%" height="100%" aria-hidden="true"><path d="M2 4c30 20 86 20 116 0" fill="none" stroke="#5a3a1a" stroke-width="2"/><circle cx="14" cy="13" r="5" fill="#ff4d5e"/><circle cx="34" cy="19" r="5" fill="#ffd23f"/><circle cx="60" cy="22" r="5" fill="#5fd35a"/><circle cx="86" cy="19" r="5" fill="#4aa8ff"/><circle cx="106" cy="13" r="5" fill="#ff7ac0"/></svg>'],
  ["Treasure chest",22,42,74,18,sv('<path d="M8 30h44v24H8z" fill="#a8641f"/><path d="M8 30c0-14 44-14 44 0z" fill="#c47a2a"/><path d="M8 30h44M18 18v36M42 18v36" stroke="#ffd23f" stroke-width="3" fill="none"/><rect x="26" y="26" width="8" height="10" rx="2" fill="#ffd23f"/><circle cx="24" cy="14" r="4" fill="#ffe36b"/><circle cx="36" cy="12" r="4" fill="#ffe36b"/>')],
  ["Lighthouse",30,2,18,24,sv('<path d="M22 56l3-36h10l3 36z" fill="#fff"/><path d="M23.500 44h13l-.7-9H24.200zM24.800 26h10.400l-.3-6h-9.800z" fill="#ff4d5e"/><rect x="23" y="12" width="14" height="8" fill="#ffe36b" stroke="#333" stroke-width="2"/><path d="M21 12L30 3l9 9z" fill="#ff4d5e"/><path d="M37 16l20-6v12z" fill="#ffe36b" fill-opacity=".55"/>')]
-];
+];DECO.forEach(function(d,i){var L=[[4,44,22],[22,58,22],[76,52,20],[51,24,19],[73,4,25],[30,-5,31],[49,58,21],[3,0,19]][i];d[2]=L[0];d[3]=L[1];d[4]=L[2];d[5]='<img src="art/deco/d'+i+'.webp" alt="" draggable="false" style="width:100%;height:auto;display:block;pointer-events:none">';});
 function botScore(w,i,full){var T=14+Math.floor(rng(w*31+i*977+5)()*46);if(full)return T;var f=((dayNum()+3)%7+(new Date().getHours())/24)/7;return Math.floor(T*Math.pow(f,0.85));}
 function raceBoard(w,pts,full){var b=[{me:true,name:"You",img:ART.crew[0],pts:pts}];for(var i=1;i<7;i++)b.push({name:MATES[i].name,img:ART.crew[i],pts:botScore(w,i,full)});
   b.sort(function(x,y){return y.pts-x.pts||(x.me?-1:1);});return b;}
@@ -1530,4 +1530,4 @@ if(!CFG.live)window.__pop={cheer:function(x){cheer=x;},hev:hev,hevAdd:hevAdd,hol
 </style><style>#mLives b,#mLives b *{color:#e3123f!important;text-shadow:0 1px 0 #fff,0 -1px 0 #fff,1px 0 0 #fff,-1px 0 0 #fff,0 2px 3px rgba(90,0,20,.35)!important;font-weight:900!important}
 #mLives #mLivesN{font-size:1.15em}</style><style>.hb.hot::after{width:20px!important;height:20px!important;right:-2px!important;top:0px!important;background:url(art/notif.webp) center/contain no-repeat!important;border:0!important;border-radius:0!important;filter:drop-shadow(0 2px 2px rgba(80,0,20,.35));animation:ndot 1.8s ease-in-out infinite}
 @keyframes ndot{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
-@media (prefers-reduced-motion:reduce){.hb.hot::after{animation:none}}</style></body></html>
+@media (prefers-reduced-motion:reduce){.hb.hot::after{animation:none}}</style><style>.dc img{filter:drop-shadow(0 3px 3px rgba(0,0,0,.3))}.card .x{right:0!important;top:0!important;z-index:6}.di img{width:100%;height:100%;object-fit:contain}</style></body></html>
