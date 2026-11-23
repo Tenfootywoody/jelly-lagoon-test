@@ -499,6 +499,15 @@ function wtBgVid(src){var bg=$("bg"),old=bg.querySelector("video.wtbv");if(old&&
 var NCREW=["ruby","sunny","kiwi","bloop","jinx","mango","taffy","fin","gummy","blizzard","bolt","sol"];
 function newCrew(){MATES.forEach(function(m,i){if(NCREW.indexOf(m.name.toLowerCase())<0)return;var p="art/crew/"+m.name.toLowerCase()+".webp";ld(p).then(function(x){if(!x||!x.width)return;m.art=p;img.mx=img.mx||{};img.mx[i]=x;if(m.c<img.crew.length&&i===MATES.findIndex(function(q){return q.c===m.c;}))img.crew[m.c]=x;});});}
 
+
+/* moving water map videos: only the ones on screen load and play */
+var MAPV={"51": "art/wt/map-egypt.mp4", "52": "art/wt/map-france.mp4", "54": "art/wt/map-india.mp4", "56": "art/wt/map-mexico.mp4", "57": "art/wt/map-uk.mp4", "60": "art/wt/map-canada.mp4", "62": "art/wt/map-greece.mp4", "64": "art/wt/map-spain.mp4", "66": "art/wt/map-panama.mp4", "67": "art/wt/map-jamaica.mp4"},mvObs=null;
+setInterval(function(){var m=$("map");if(!m||!m.hidden)return;[].forEach.call(document.querySelectorAll("video.mapv"),function(v){if(!v.paused)v.pause();});},1200);
+function mvSrc(src){var t=document.createElement("video");return (!t.canPlayType('video/mp4; codecs="avc1.42E01E"')&&t.canPlayType("video/webm"))?src.replace(".mp4",".webm"):src;}
+function mapVids(sc){if(mvObs)mvObs.disconnect();if(!("IntersectionObserver" in window))return;
+  mvObs=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting&&!$("map").hidden){if(!v.src){v.src=mvSrc(v.getAttribute("data-src"));v.muted=true;}var p=v.play();if(p&&p.catch)p.catch(function(){});v.parentNode.classList.add("hasv");}else if(v.src){v.pause();}});},{root:sc,rootMargin:"200px 0px"});
+  [].forEach.call(sc.querySelectorAll("video.mapv"),function(v){v.addEventListener("playing",function(){v.classList.add("on");});mvObs.observe(v);});}
+
 function buildLevel(n){
   CTRY=n>500&&!S.daily?Math.min(17,Math.floor((n-501)/10)):-1;var L=gen(n);S.lvl=n;S.grid=L.grid;S.goal=L.goal;S.whirl=L.whirl;S.tall=isTall(n);S.off=S.offT=0;S.fizz={};L.fizz.forEach(function(q){S.fizz[q]=1;});S.deep=L.deep;S.turn=0;S.limit=L.limit+helpShots(n)+(S.daily?4:0)+streakBonus();S.boss=tier(n)==="boss"&&!S.daily;S.hp0=Math.max(1,S.goal.type==="rescue"?S.goal.need:S.grid.size);S.shots=S.limit;S.adUsed=0;S.score=0;S.saved=0;S.armed=-1;S.long=0;S.rnd=L.rnd;winQ=null;S.born=performance.now();S.meter=S.daily?0:(S.fails[n]||0)>=8?NEED:(S.fails[n]||0)>=5?Math.round(NEED/2):0;S.sup=false;if(n<MATES[S.mate].at)S.mate=0;
   S.pw={};POW.forEach(function(p){if(n>=p.at)S.pw[p.k]=1;});S.lostLife=false;
@@ -663,7 +672,7 @@ var NPROP=[["sea-turtle", "pelican"], ["coconut-crab", "mango-parrot"], ["mango-
 function drawMap(){
   var sc=$("mapScroll"),h="",STEP=82,PAD=58;
   for(var a=Math.min(AREAS.length-1,areaOf(S.max)+1);a>=0;a--){
-    var ht=PAD*2+9*STEP;h+='<div class="area" style="--n1:'+NCOL[a%NCOL.length][0]+';--n2:'+NCOL[a%NCOL.length][1]+';--n3:'+NCOL[a%NCOL.length][2]+';height:'+ht+'px;background-image:url(art/bg'+a%BGN+'.jpg)"><h2>'+(a+1)+'. '+AREAS[a]+'</h2><i class="wsh" style="-webkit-mask-image:url('+WM[a%BGN]+');mask-image:url('+WM[a%BGN]+')"><b></b><b class="b2"></b></i>';
+    var ht=PAD*2+9*STEP;h+='<div class="area" style="--n1:'+NCOL[a%NCOL.length][0]+';--n2:'+NCOL[a%NCOL.length][1]+';--n3:'+NCOL[a%NCOL.length][2]+';height:'+ht+'px;background-image:url(art/bg'+a%BGN+'.jpg)"><h2>'+(a+1)+'. '+AREAS[a]+'</h2>'+(MAPV[a]?'<video class="mapv" muted loop playsinline preload="none" data-src="'+MAPV[a]+'"></video>':'')+'<i class="wsh" style="-webkit-mask-image:url('+WM[a%BGN]+');mask-image:url('+WM[a%BGN]+')"><b></b><b class="b2"></b></i>';
     for(var i=0;i<10;i++){var n=a*10+i+1,x=nodeX(n),y=ht-PAD-i*STEP;
       if(i<9){var x2=nodeX(n+1);for(var d=1;d<=7;d++){var jt=((n*7+d*13)%9-4);h+='<span class="dot'+(d%2?"":" b")+'" style="left:calc('+(x+(x2-x)*d/8)+'% + '+jt+'px);top:'+(y-STEP*d/8+((n*5+d*11)%7-3))+'px;animation-delay:-'+(d*0.23)+'s"></span>';}}
       var st=S.best[n]||0,cls=n<S.max?"done":n===S.max?"cur":"lock",ss="";for(var s=0;s<st;s++)ss+="★";
@@ -681,7 +690,7 @@ function drawMap(){
   }
   sc.innerHTML=h;wallet();$("mapPlay").textContent="Play level "+S.max;
   [].forEach.call(sc.querySelectorAll("canvas.masc"),function(c){c.getContext("2d").drawImage(mkSprite(+c.getAttribute("data-c"),92),0,0);});
-  $("bg").style.backgroundImage="url(art/bg"+areaOf(S.max)%BGN+".jpg)";
+  $("bg").style.backgroundImage="url(art/bg"+areaOf(S.max)%BGN+".jpg)";mapVids(sc);
   var cur=sc.querySelector('.node[data-n="'+S.max+'"]');
   if(cur)requestAnimationFrame(function(){sc.scrollTop=cur.offsetTop+cur.parentNode.offsetTop-sc.clientHeight/2;});
 }
@@ -1479,4 +1488,7 @@ if(!CFG.live)window.__pop={cheer:function(x){cheer=x;},hev:hev,hevAdd:hevAdd,hol
 .masc.anim.nc{width:74px;height:74px;margin:-37px 0 0 -37px;animation:bob 2.4s ease-in-out infinite}
 .me.nc{width:70px;height:70px}
 @media (prefers-reduced-motion:reduce){.masc.anim.nc{animation:none}}
+</style><style>/* map water videos */
+.area video.mapv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;opacity:0;transition:opacity .4s}
+.area video.mapv.on{opacity:1}.area.hasv .wsh{display:none}
 </style></body></html>
