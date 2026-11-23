@@ -122,6 +122,10 @@ html[data-bg="w9"] .mapbg .wsh{-webkit-mask-image:url(data:image/png;base64,iVBO
 #sheet.winart h2{color:#fff;text-shadow:0 3px 0 #b02a6a,0 0 14px rgba(255,120,200,.6)}
 #sheet.winart p{color:#e9e4ff}#sheet.winart p strong{color:#ffd84d!important}
 #sheet.winart .mile{background:rgba(255,255,255,.1);border-radius:14px}
+</style><style>/* new crew look */
+.cj.nc{background-position:center bottom!important;background-size:contain!important;background-repeat:no-repeat!important;transform-origin:50% 100%}
+.cj.nc::before{display:none!important}
+.cj.nc-ruby{background-image:url(art/crew/ruby.webp)!important}.cj.nc-sunny{background-image:url(art/crew/sunny.webp)!important}.cj.nc-kiwi{background-image:url(art/crew/kiwi.webp)!important}.cj.nc-bloop{background-image:url(art/crew/bloop.webp)!important}.cj.nc-jinx{background-image:url(art/crew/jinx.webp)!important}.cj.nc-mango{background-image:url(art/crew/mango.webp)!important}.cj.nc-taffy{background-image:url(art/crew/taffy.webp)!important}
 </style></head><body>
 <meta charset="utf-8">
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -1600,7 +1604,8 @@ var CREW={
 var CREWK=["c0","c1","c2","c3","c4","c5","c6","bomb","rain"];
 var WINL=["You did it!","Woo-hoo!","Nailed it!","Again! Again!","Look at you go!","We're so proud of you!"];
 function ckey(c){return c===7?"c3":c===9?"c0":"c"+c;}
-function cjHTML(k,extra){var cls=k==="bomb"?"c0 bomb":k==="rain"?"c6 rain":k;return '<span class="cj '+cls+(extra?" "+extra:"")+'"></span>';}
+var NCJ={c0:"ruby",c1:"sunny",c2:"kiwi",c3:"bloop",c4:"jinx",c5:"mango",c6:"taffy"};
+function cjHTML(k,extra){var cls=k==="bomb"?"c0 bomb":k==="rain"?"c6 rain":k+(NCJ[k]?" nc nc-"+NCJ[k]:"");return '<span class="cj '+cls+(extra?" "+extra:"")+'"></span>';}
 function rnd(a){return a[Math.floor(Math.random()*a.length)];}
 function babble(k){if(!S.sound)return;var v=CREW[k].v;tone(v*(.85+Math.random()*.4),.07,k==="bomb"?"square":"triangle",.045,v*(.9+Math.random()*.5));}
 /* type the words out while the jelly's mouth flaps and it babbles in its own voice */
