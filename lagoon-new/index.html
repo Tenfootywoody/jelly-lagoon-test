@@ -16,6 +16,28 @@
 .cell.fz::after{content:"3";position:absolute;inset:-6%;z-index:3;pointer-events:none;border-radius:50%;border:3px dashed #ffe94a;box-shadow:0 0 6px #fff27a;animation:fzspin 3s linear infinite;color:#fff;font:800 13px/1 "Baloo 2",system-ui,sans-serif;display:flex;align-items:flex-start;justify-content:flex-end;padding:1px 3px;text-shadow:0 1px 2px #7a5a00}
 .cell.fz.fz2::after{content:"2"}.cell.fz.fz1::after{content:"1"}@keyframes fzspin{to{transform:rotate(360deg)}}
 .vcard{text-align:center}.vcard .vpic{width:150px;height:150px;margin:6px auto 4px;background:var(--vimg) center/contain no-repeat;filter:drop-shadow(0 6px 6px rgba(20,0,50,.35))}.vcard .vtag{font:800 13px "Baloo 2",system-ui;letter-spacing:.12em;color:#ffb21f;text-transform:uppercase}.vcard h3{margin:2px 0 6px}
+</style><style>/* World Tour */html[data-bg="w0"]{--lagoon:url("art/wt/bg50.jpg")}html[data-bg="w1"]{--lagoon:url("art/wt/bg51.jpg")}html[data-bg="w2"]{--lagoon:url("art/wt/bg52.jpg")}html[data-bg="w3"]{--lagoon:url("art/wt/bg53.jpg")}html[data-bg="w4"]{--lagoon:url("art/wt/bg54.jpg")}html[data-bg="w5"]{--lagoon:url("art/wt/bg55.jpg")}html[data-bg="w6"]{--lagoon:url("art/wt/bg56.jpg")}html[data-bg="w7"]{--lagoon:url("art/wt/bg57.jpg")}html[data-bg="w8"]{--lagoon:url("art/wt/bg58.jpg")}html[data-bg="w9"]{--lagoon:url("art/wt/bg59.jpg")}html[data-bg="w10"]{--lagoon:url("art/wt/bg60.jpg")}html[data-bg="w11"]{--lagoon:url("art/wt/bg61.jpg")}html[data-bg="w12"]{--lagoon:url("art/wt/bg62.jpg")}html[data-bg="w13"]{--lagoon:url("art/wt/bg63.jpg")}html[data-bg="w14"]{--lagoon:url("art/wt/bg64.jpg")}html[data-bg="w15"]{--lagoon:url("art/wt/bg65.jpg")}html[data-bg="w16"]{--lagoon:url("art/wt/bg66.jpg")}html[data-bg="w17"]{--lagoon:url("art/wt/bg67.jpg")}
+.c9{--sp:var(--wth)}.cell.f.c9,.blk.c9,.jel.c9,.cj.c9{background-image:var(--wth)!important;--fh:var(--wth)!important;--fe:var(--wte)!important;--fw:var(--wtw)!important;--fs:var(--wts)!important}
+.wtlay{position:fixed;inset:0;z-index:9990;pointer-events:auto;overflow:hidden}
+.wtfly{position:fixed;z-index:9991;pointer-events:none;will-change:transform}
+.wthero{position:fixed;left:50%;top:40%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;pointer-events:none;z-index:9992}
+.wthero img{width:150px;height:150px;animation:wtpop .6s cubic-bezier(.3,1.6,.5,1) .25s both;filter:drop-shadow(0 10px 16px rgba(20,0,60,.45))}
+.wtban{margin-top:6px;text-align:center;animation:wtpop .5s cubic-bezier(.3,1.6,.5,1) .4s both}
+.wtban b{display:block;white-space:nowrap;font:800 34px/1 "Baloo 2",system-ui,sans-serif;color:#fff;-webkit-text-stroke:2px #7a2fc4;text-shadow:0 4px 0 #4a1590,0 0 18px #ffe36b}
+.wtban span{display:inline-block;margin-top:6px;padding:4px 12px;border-radius:99px;background:rgba(40,16,100,.82);color:#ffe36b;font:800 14px "Baloo 2",system-ui,sans-serif}
+.wtconf{position:fixed;inset:0;pointer-events:none}.wtconf i{position:absolute;top:-20px;width:9px;height:14px;border-radius:2px;animation:wtfall 1.6s linear both}
+@keyframes wtfall{to{transform:translateY(110vh) rotate(720deg)}}@keyframes wtpop{0%{transform:scale(0)}100%{transform:scale(1)}}
+.wtst{display:flex;align-items:center;justify-content:center;background:rgba(20,8,60,.45)}
+.wtpage{width:min(320px,86vw);padding:22px 16px 18px;border-radius:22px;background:url(art/wt/passport-open.webp) center/cover;text-align:center;box-shadow:0 14px 40px rgba(0,0,0,.5);animation:wtpop .35s ease-out both}
+.wtpage b{display:block;margin-top:8px;font:800 22px "Baloo 2",system-ui,sans-serif;color:#5a2a10}.wtpage span{font:700 14px "Baloo 2",system-ui,sans-serif;color:#7a4a20}
+.wtstamp{width:170px;height:170px;animation:wtslam .5s cubic-bezier(.5,0,.6,1.4) .1s both}
+@keyframes wtslam{0%{transform:scale(3) rotate(-25deg);opacity:0}70%{transform:scale(.92) rotate(-8deg);opacity:1}100%{transform:scale(1) rotate(-10deg)}}
+.wtpass{text-align:center}.wtpass .wtcover{position:relative;width:160px;margin:0 auto}.wtpass .wtcover img{width:100%;display:block}
+.wtpass .wtcover b{position:absolute;left:12%;right:12%;top:17.5%;text-align:center;font:800 15px "Baloo 2",system-ui,sans-serif;color:#7a4a00}
+.wtbook{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 6px;margin:8px 0;padding:14px 10px;border-radius:16px;background:#fdf3dc;border:4px solid #e0a72a;box-shadow:inset 0 0 0 2px #fff6dd,0 6px 0 #a8701a}
+.wtslot{display:flex;flex-direction:column;align-items:center;gap:2px}.wtslot img{width:70px;height:70px}
+.wtslot i{width:64px;height:64px;margin:3px;border-radius:50%;border:3px dashed rgba(120,80,40,.35)}
+.wtslot span{font:700 11px "Baloo 2",system-ui,sans-serif;color:#7a4a20}.wtslot:not(.got) span{opacity:.55}
 </style></head><body>
 <meta charset="utf-8">
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -1184,8 +1206,8 @@ function areaKind(w){return w<AK.length?AK[w]:1+(w-1)%6;}
 /* what a collect level asks for: the area's own treasure, with gold stars back on every fourth level; the daily puzzle and hunt levels rotate through the treasures the player has already met */
 function kindOf(lv,seed){if(seed){var seen=[0],mw=Math.floor((Math.min(S.lvl,MAXLV)-1)/AL),w;for(w=1;w<=mw;w++)if(seen.indexOf(areaKind(w))<0)seen.push(areaKind(w));return seen[(lv+seed)%seen.length];}var a=areaKind(Math.floor((lv-1)/AL));return a&&lv%4===0?0:a;}
 function kname(n){var q=G&&G.ser>100?["pearl","pearls"]:G&&G.ser?SERK[serLook()]:KINDS[(G&&G.kind)||0];return n===1?q[0]:q[1];}
-var AL=10,NAREA=50,NBG=12,BGORDER=[0,1,2,3,4,5,7,9,8,10,11,6],AREAS=["Jelly Cove", "Sunset Lagoon", "Castaway Isles", "Pirates Cove", "Turtle Cay", "Moonlit Cove", "Treehouse Grove", "Pearl Gardens", "Volcano Springs", "Lantern Festival", "Sea Glass Bay", "Glow Reef", "Lime Beach", "Mango Beach", "Crystal Falls", "Starfish Sands", "Bubble Deep", "Coconut Key", "Rainbow Reef", "Mermaid Rock", "Thunder Isle", "Sugar Dunes", "Golden Atoll", "Whale Song Bay", "Frost Fjord", "Ember Coast", "Orchid Isle", "Shipwreck Shoals", "Dragon Reef", "Crown Island", "Coral Caves", "Moonlit Reef", "Starfall Bay", "Mermaid Shallows", "Bamboo Bend", "Lotus Creek", "Aurora Bay", "Midnight Isles", "Lost Temple", "Jungle Falls", "Seahorse Shore", "Alligator Pond", "Jelly Reef", "Cruise Cove", "Kelp Forest", "Seashell Cove", "Sunset Shallows", "Tidepool Terrace", "Golden Shell Shore", "Treasure Atoll"];
-var MAXLV=500, LIFE_MS=20*60*1000, MAXLIVES=5;
+var AL=10,NAREA=50,NMAP=68,NBG=12,BGORDER=[0,1,2,3,4,5,7,9,8,10,11,6],AREAS=["Jelly Cove", "Sunset Lagoon", "Castaway Isles", "Pirates Cove", "Turtle Cay", "Moonlit Cove", "Treehouse Grove", "Pearl Gardens", "Volcano Springs", "Lantern Festival", "Sea Glass Bay", "Glow Reef", "Lime Beach", "Mango Beach", "Crystal Falls", "Starfish Sands", "Bubble Deep", "Coconut Key", "Rainbow Reef", "Mermaid Rock", "Thunder Isle", "Sugar Dunes", "Golden Atoll", "Whale Song Bay", "Frost Fjord", "Ember Coast", "Orchid Isle", "Shipwreck Shoals", "Dragon Reef", "Crown Island", "Coral Caves", "Moonlit Reef", "Starfall Bay", "Mermaid Shallows", "Bamboo Bend", "Lotus Creek", "Aurora Bay", "Midnight Isles", "Lost Temple", "Jungle Falls", "Seahorse Shore", "Alligator Pond", "Jelly Reef", "Cruise Cove", "Kelp Forest", "Seashell Cove", "Sunset Shallows", "Tidepool Terrace", "Golden Shell Shore", "Treasure Atoll","Japan","Egypt","France","Brazil","India","China","Mexico","United Kingdom","Switzerland","Ireland","Canada","Russia","Greece","UAE","Spain","Cuba","Panama","Jamaica"];
+var MAXLV=680, LIFE_MS=20*60*1000, MAXLIVES=5;
 var PRICE={swap:40,blast:60,moves:60,refill:100,undo:30,crab:40,dolph:70};
 
 /* ---------- saved progress (this phone only) ---------- */
@@ -1271,7 +1293,8 @@ function placeable(grid,tr){var occ=new Uint8Array(N*N),i,budget=3000;for(i=0;i<
     return false;}
   return go(0);}
 function rawTray(grid){var tr=[];for(var k=0;k<3;k++){var p=null;for(var t=0;t<15;t++){var q=pickShape(Math.random);if(fits(grid,q)){p=q;break;}}tr.push(p||SH[0]);}return tr;}
-function newTray(grid){if(G&&G.mercy)return kindTray(grid);var tr;for(var a=0;a<8;a++){tr=rawTray(grid);if(placeable(grid,tr))return tr;}var kt=kindTray(grid);return placeable(grid,kt)?kt:tr;}
+function newTray(grid){return wtTray(newTray0(grid));}
+function newTray0(grid){if(G&&G.mercy)return kindTray(grid);var tr;for(var a=0;a<8;a++){tr=rawTray(grid);if(placeable(grid,tr))return tr;}var kt=kindTray(grid);return placeable(grid,kt)?kt:tr;}
 
 /* ---------- levels ---------- */
 var CAL={5:1.036,6:-1,7:2,8:1.036,9:3,10:-4,12:4,19:2,20:1.005,21:-3,23:0.979,24:-3,27:4,28:-1,29:0.96,30:4,31:-5,32:1.023,34:-2,35:0.905,36:-5,39:3,40:-8,41:1.105,42:9,44:1.007,47:0.97,50:0.926,51:-3,52:2,55:-7,56:0.962,57:-1,60:-5,61:3,62:1.043,64:-3,65:1.055,66:-5,67:2,68:1.031,70:-4,71:1.152,74:0.977,75:5,76:-12,77:1.002,78:-3,79:10,81:-5,87:7,88:-9,89:1.079,90:-4,92:1.087,93:11,94:-6,95:1.151,96:-5,97:-6,98:1.014,100:-3,101:1.133,103:-7,105:-5,107:1.071,108:-6,110:1.041,111:-2,112:-6,113:1.001,118:-5,119:1.118,120:-2};
@@ -1341,7 +1364,7 @@ function hud(){tickLives();$("lives").textContent=S.lives;$("lifeTimer").textCon
   $("swapCnt").innerHTML=G&&G.freeSwap?"Free":S.swaps>0?S.swaps:'<span class="coin"></span>'+PRICE.swap;$("blastCnt").innerHTML=S.blasts>0?S.blasts:'<span class="coin"></span>'+PRICE.blast;toolsHud();
   $("playTxt").textContent=S.lvl>MAXLV?"Replay levels":"Play Level "+S.lvl;$("sndPath").setAttribute("opacity",(S.sound||S.music)?1:.35);$("bestLine").textContent=S.best?"Endless best: "+S.best:"";var nm=nextMile();$("mileLine").textContent=nm?"Next trophy: level "+nm+" ("+(nm-S.lvl+1)+" to go)":"All trophies earned";chips();}
 function show(id){["home","map","game"].forEach(function(s){$(s).hidden=s!==id;});if(id!=="game")delete document.body.dataset.ws;hud();}
-var BGNEW={"4": "p25", "5": "p46", "9": "p29", "11": "p33", "13": "p27", "15": "p28", "16": "p31", "17": "p26", "18": "p30", "19": "p32", "20": "p40", "21": "p35", "22": "p43", "23": "p34", "24": "p41", "25": "p42", "26": "p39", "28": "p44", "29": "p49", "30": "p6", "31": "p8", "32": "p9", "33": "p10", "34": "p11", "35": "p15", "36": "p18", "37": "p19", "38": "p20", "39": "p21", "40": "p22", "41": "p23", "42": "p24", "43": "p36", "44": "p37", "45": "p38", "46": "p45", "47": "p47", "48": "p13", "49": "p48"};function setWorld(w){var de=document.documentElement;if(BGNEW[w]){de.dataset.bg=BGNEW[w];de.dataset.tint=0;}else{de.dataset.bg=BGORDER[w%NBG];de.dataset.tint=Math.floor(w/NBG)%4;}var p=PAL[w%PAL.length],st=de.style;["--sky1","--sky2","--sea","--sand","--sun1","--sun2"].forEach(function(k,i){st.setProperty(k,p[i]);});}
+var BGNEW={"4": "p25", "5": "p46", "9": "p29", "11": "p33", "13": "p27", "15": "p28", "16": "p31", "17": "p26", "18": "p30", "19": "p32", "20": "p40", "21": "p35", "22": "p43", "23": "p34", "24": "p41", "25": "p42", "26": "p39", "28": "p44", "29": "p49", "30": "p6", "31": "p8", "32": "p9", "33": "p10", "34": "p11", "35": "p15", "36": "p18", "37": "p19", "38": "p20", "39": "p21", "40": "p22", "41": "p23", "42": "p24", "43": "p36", "44": "p37", "45": "p38", "46": "p45", "47": "p47", "48": "p13", "49": "p48"};function setWorld(w){var de=document.documentElement;if(w>=50){de.dataset.bg="w"+(w-50);de.dataset.tint=0;var p0=PAL[w%PAL.length],st0=de.style;["--sky1","--sky2","--sea","--sand","--sun1","--sun2"].forEach(function(k,i){st0.setProperty(k,p0[i]);});return;}if(BGNEW[w]){de.dataset.bg=BGNEW[w];de.dataset.tint=0;}else{de.dataset.bg=BGORDER[w%NBG];de.dataset.tint=Math.floor(w/NBG)%4;}var p=PAL[w%PAL.length],st=de.style;["--sky1","--sky2","--sea","--sand","--sun1","--sun2"].forEach(function(k,i){st.setProperty(k,p[i]);});}
 function toast(t){var el=$("toast");el.textContent=t;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(function(){el.hidden=true;},1600);}
 function reduced(){return window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;}
 
@@ -1492,7 +1515,7 @@ var CREW={
  rain:{n:"Prism",col:"#b04fe0",d:"Rare and magical. Counts as any color, and knows it.",v:520,l:["Dazzling!","Every color at once!","Ta-daa!"]}};
 var CREWK=["c0","c1","c2","c3","c4","c5","c6","bomb","rain"];
 var WINL=["You did it!","Woo-hoo!","Nailed it!","Again! Again!","Look at you go!","We're so proud of you!"];
-function ckey(c){return c===7?"c3":"c"+c;}
+function ckey(c){return c===7?"c3":c===9?"c0":"c"+c;}
 function cjHTML(k,extra){var cls=k==="bomb"?"c0 bomb":k==="rain"?"c6 rain":k;return '<span class="cj '+cls+(extra?" "+extra:"")+'"></span>';}
 function rnd(a){return a[Math.floor(Math.random()*a.length)];}
 function babble(k){if(!S.sound)return;var v=CREW[k].v;tone(v*(.85+Math.random()*.4),.07,k==="bomb"?"square":"triangle",.045,v*(.9+Math.random()*.5));}
@@ -1598,7 +1621,7 @@ function drawMap(hopFrom){
   var h='<div class="trail" style="height:'+H+'px">'+sv+ov,curI=-1;
   for(i=0;i<AL;i++){var lv=mapW*AL+i+1,st=S.stars[lv]||0,lock=lv>S.lvl,cur=lv===S.lvl;if(cur)curI=i;
     h+='<button class="lv'+(lock?" lock":cur?" cur":" done")+(i===AL-1?" boss":"")+'" data-lv="'+lv+'" style="left:'+pts[i][0]+'px;top:'+pts[i][1]+'px"'+(lock?' disabled aria-label="Level '+lv+', locked"':' aria-label="Level '+lv+', '+st+' stars'+(lv%5===0&&!st?', treasure chest':'')+'"')+'>'+lv+(st?'<i>'+"★★★".slice(0,st)+'</i>':'')+(lv%10===0&&!st&&!cur?'<span class="md"><span class="medal"></span></span>':lv%5===0&&!st&&!cur?'<span class="ch">'+CHEST+'</span>':'')+'</button>';}
-  if(mapW<NAREA-1)h+='<div class="gate" style="left:'+pts[AL-1][0]+'px;top:'+(pts[AL-1][1]-92)+'px">Next: '+AREAS[mapW+1]+' &#187;</div>';
+  if(mapW<NMAP-1)h+='<div class="gate" style="left:'+pts[AL-1][0]+'px;top:'+(pts[AL-1][1]-92)+'px">Next: '+AREAS[mapW+1]+' &#187;</div>';
   var roff=function(k){return pts[k][0]>W/2?-84:84;};
   if(curI>=0)h+='<div class="hero onraft" id="hero" style="left:'+(pts[curI][0]+roff(curI))+'px;top:'+pts[curI][1]+'px"><div class="rock"><span class="jel c0"></span>'+RAFT+'</div></div>';
   box.innerHTML=h+'</div>';
@@ -1613,12 +1636,39 @@ function drawMap(hopFrom){
 }
 
 /* ---------- game ---------- */
+
+/* ===================== World Tour (levels 501-680) ===================== */
+var WT=-1,WTC=["japan", "egypt", "france", "brazil", "india", "china", "mexico", "uk", "switzerland", "ireland", "canada", "russia", "greece", "uae", "spain", "cuba", "panama", "jamaica"],WTN=["Japan", "Egypt", "France", "Brazil", "India", "China", "Mexico", "United Kingdom", "Switzerland", "Ireland", "Canada", "Russia", "Greece", "UAE", "Spain", "Cuba", "Panama", "Jamaica"],WTF=[["#ffffff", "#e0103a"], ["#ce1126", "#ffffff", "#111111", "#c09300"], ["#0055a4", "#ffffff", "#ef4135"], ["#009c3b", "#ffdf00", "#002776"], ["#ff9933", "#ffffff", "#138808", "#000080"], ["#de2910", "#ffde00"], ["#006847", "#ffffff", "#ce1126"], ["#012169", "#ffffff", "#c8102e"], ["#ff0000", "#ffffff"], ["#169b62", "#ffffff", "#ff883e"], ["#ff0000", "#ffffff"], ["#ffffff", "#0039a6", "#d52b1e"], ["#0d5eaf", "#ffffff"], ["#00732f", "#ffffff", "#000000", "#ff0000"], ["#aa151b", "#f1bf00"], ["#002a8f", "#ffffff", "#cf142b"], ["#da121a", "#ffffff", "#072357"], ["#009b3a", "#fed100", "#000000"]],WTSH=null;
+function wtSet(){if(WT<0)return;var de=document.documentElement.style,c=WTC[WT];["happy","excited","worried","sad"].forEach(function(m){de.setProperty("--wt"+m.charAt(0),'url("art/wt/'+c+'-'+m+'.webp")');});}
+function wtPiece(p){if(!p)return p;WTSH=WTSH||{};var i=SH.indexOf(p.base||p);if(!WTSH[i])WTSH[i]=Object.assign({},SH[i],{c:9,base:SH[i]});return WTSH[i];}
+function wtTray(tr){if(WT<0||!G||G.mode!=="level"||!tr)return tr;return tr.map(function(p){return p&&Math.random()<0.34?wtPiece(p):p;});}
+function wtIntro(){S.met=S.met||{};var k="wt"+WT;if(S.met[k])return;if(!$("modal").hidden){setTimeout(wtIntro,900);return;}S.met[k]=1;save();
+  modal('<div class="vcard"><span class="vtag">World Tour</span><div class="vpic" style="--vimg:url(art/wt/'+WTC[WT]+'-excited.webp)"></div><h3>Welcome to '+WTN[WT]+'!</h3><p>'+WTN[WT]+' jellies join your pieces in this lagoon. Fill a whole row or column with them for a Country Match: bonus points, coins and a stamp in your World Tour passport.</p></div><button class="btn wide" data-act="close">Got it</button>');}
+function wtMatch(rects){var ci=WT;G.score+=300;S.coins+=10;S.stamps=S.stamps||{};var first=!S.stamps[ci];if(first)S.stamps[ci]=1;var all=first&&Object.keys(S.stamps).length>=18;if(all)S.coins+=500;save();hud();Track("country_match",{country:WTC[ci],first:first});
+  var lay=document.createElement("div"),done=false,vw=window.innerWidth,vh=window.innerHeight;lay.className="wtlay";document.body.appendChild(lay);
+  function end(){if(done)return;done=true;lay.remove();if(first)wtStamp(ci,all);}lay.addEventListener("pointerdown",end);
+  rects.slice(0,16).forEach(function(rc,i){var e=document.createElement("img"),sz=rc.width;e.src="art/wt/"+WTC[ci]+"-excited.webp";e.className="wtfly";e.style.width=e.style.height=sz+"px";e.style.left=rc.left+"px";e.style.top=rc.top+"px";lay.appendChild(e);
+    var x=rc.left+sz/2,side=(x<vw/2?-1:1)*(i%2?1:-1),wx=side<0?-rc.left:vw-rc.left-sz,up=-(90+Math.random()*90),spin=(side<0?-1:1)*(540+Math.random()*360);
+    if(e.animate)e.animate([{transform:"scale(1)",filter:"brightness(1)"},{transform:"scale(1.3)",filter:"brightness(1.5) drop-shadow(0 0 10px #fff)",offset:.14},{transform:"translate(0,-70px) scale(1.15) rotate("+spin*.25+"deg)",offset:.34},{transform:"translate("+wx+"px,"+(up+20)+"px) rotate("+spin*.7+"deg)",offset:.68},{transform:"translate("+(wx-side*vw*0.55)+"px,"+(-vh)+"px) scale(.8) rotate("+spin+"deg)"}],{duration:1250,delay:i*60,easing:"cubic-bezier(.3,.7,.4,1)",fill:"forwards"});
+    tone(620,.2,"sine",.13,170,0.18+i*0.06);});
+  var bd=$("board");if(bd&&bd.animate)bd.animate([{transform:"none"},{transform:"translateY(-12px)"},{transform:"none"},{transform:"translateY(-6px)"},{transform:"none"}],{duration:620,delay:120});
+  if(bd)[].forEach.call(bd.querySelectorAll(".cell.f"),function(c){c.classList.add("hype");setTimeout(function(){c.classList.remove("hype");},1500);});
+  var cols=WTF[ci],cf="";for(var k=0;k<44;k++)cf+='<i style="left:'+(Math.random()*100)+'%;background:'+cols[k%cols.length]+';animation-delay:'+(Math.random()*0.5)+'s;animation-duration:'+(1.2+Math.random()*0.8)+'s"></i>';
+  var hero=document.createElement("div");hero.className="wthero";hero.innerHTML='<div class="wtconf">'+cf+'</div><img alt="" src="art/wt/'+WTC[ci]+'-excited.webp"><div class="wtban"><b>Country Match!</b><span>'+WTN[ci]+' · +300 points · +10 coins</span></div>';lay.appendChild(hero);
+  [523,659,784,1047,1319].forEach(function(f,i){tone(f,.22,"triangle",.14,0,0.25+i*0.09);});setTimeout(end,2100);}
+function wtStamp(ci,all){var lay=document.createElement("div");lay.className="wtlay wtst";
+  lay.innerHTML='<div class="wtpage"><img class="wtstamp" alt="" src="art/wt/stamp-'+WTC[ci]+'.webp"><b>Passport stamp: '+WTN[ci]+'!</b><span>'+Object.keys(S.stamps).length+' of 18 stamps'+(all?' · World traveler! +500 coins':'')+'</span></div>';
+  document.body.appendChild(lay);tone(90,.18,"square",.16,0,0.22);tone(140,.12,"sine",.14,0,0.22);var close=function(){lay.remove();};lay.addEventListener("pointerdown",close);setTimeout(close,all?2600:1700);}
+function wtPassport(){S.stamps=S.stamps||{};var n=Object.keys(S.stamps).length,g="";
+  WTC.forEach(function(c,i){var got=S.stamps[i];g+='<div class="wtslot'+(got?" got":"")+'">'+(got?'<img alt="" style="transform:rotate('+((i*37)%24-12)+'deg)" src="art/wt/stamp-'+c+'.webp">':'<i></i>')+'<span>'+WTN[i]+'</span></div>';});
+  modal('<div class="wtpass"><div class="wtcover"><img alt="" src="art/wt/passport-cover.webp"><b>World Tour</b></div><h2>'+n+' of 18 stamps</h2><p class="libnote">Get a Country Match in each World Tour lagoon (levels 501 to 680) to earn its stamp. Collect all 18 for 500 coins.</p><div class="wtbook">'+g+'</div></div><button class="btn wide" data-act="lib">Back to my cards</button><button class="btn sm" data-act="close">Close</button>');$("sheet").scrollTop=0;}
+
 var G=null,cells=[],CELL=40;
 function start(mode,lv,hunt,daily,saved,ser){
   tickLives();ser=ser||(saved&&saved.ser)||0;
   if(mode==="level"&&!hunt&&!daily&&!ser&&!saved&&S.lives<=0){noLives();return;}
   var i;
-  if(mode==="level"){lv=Math.min(lv,MAXLV);var d=levelDef(lv,hunt?huntState().wk%997+hunt:daily?daily%9973+500:ser?(ser>100?7100+ser:serState().wk%991*7+ser+2000):0);G={mode:mode,lv:lv,grid:d.grid,type:d.type,kind:d.kind||0,n:d.n,moves:d.moves,M:d.moves,score:0,gems:0,done:false,blast:false,streak:0};G.pools=d.pools||null;G.ps=poolSetOf(G.pools);G.wt=0;setWorld(Math.floor((lv-1)/AL));$("gTitle").textContent="Level "+lv;}
+  WT=-1;if(mode==="level"){lv=Math.min(lv,MAXLV);WT=lv>500&&!hunt&&!daily&&!ser?Math.min(17,Math.floor((lv-501)/AL)):-1;wtSet();var d=levelDef(lv,hunt?huntState().wk%997+hunt:daily?daily%9973+500:ser?(ser>100?7100+ser:serState().wk%991*7+ser+2000):0);G={mode:mode,lv:lv,grid:d.grid,type:d.type,kind:d.kind||0,n:d.n,moves:d.moves,M:d.moves,score:0,gems:0,done:false,blast:false,streak:0};G.pools=d.pools||null;G.ps=poolSetOf(G.pools);G.wt=0;setWorld(Math.floor((lv-1)/AL));$("gTitle").textContent="Level "+lv;}
   else{var g=[];for(i=0;i<N*N;i++)g.push(null);G={mode:mode,lv:0,grid:g,type:"endless",n:0,moves:0,M:0,score:0,gems:0,done:false,blast:false,streak:0};$("gTitle").textContent="Endless";}
   var sl=mode==="level"?lv:S.lvl;document.body.classList.toggle("sym",!!S.sym);
   if(saved){var sg=saved.g;G.grid=sg.grid;G.type=sg.type;G.kind=sg.kind||0;G.n=sg.n;G.moves=sg.moves;G.M=sg.M;G.score=sg.score;G.gems=sg.gems;G.streak=sg.streak;G.mercy=sg.mercy;G.freeSwap=sg.freeSwap;G.pools=sg.pools||null;G.ps=poolSetOf(G.pools);G.wt=sg.wt;}
@@ -1631,13 +1681,13 @@ function start(mode,lv,hunt,daily,saved,ser){
     else if(lv>=S.lvl&&ws>=3){G.moves+=2;G.M+=2;perk="Win streak "+ws+": +2 moves.";}
     if(fl>=2){G.mercy=true;G.moves+=2;G.M+=2;Track("mercy_on",{level:lv,fails:fl});}if(fl>=8){G.moves+=6;G.M+=6;G.freeSwap=1;var bk=[];for(var bi2=0;bi2<G.grid.length;bi2++){var bq=G.grid[bi2];if(bq&&(bq.rock||bq.stone||bq.weed||bq.goo))bk.push(bi2);}if(bk.length){var bkk=bk[Math.floor(bk.length/2)];if(G.grid[bkk].goo)G.grid[bkk].goo=false;else G.grid[bkk]=null;}perk="Extra help this time: +8 moves, a free Swap and one less blocker.";Track("mercy_big",{level:lv,fails:fl});}else if(fl>=5){G.moves+=3;G.M+=3;G.freeSwap=1;perk="Extra help this time: +5 moves and a free Swap.";Track("mercy_big",{level:lv,fails:fl});}else if(fl>=2&&!perk)perk="Extra help this time: +2 moves and friendlier pieces.";}
   if(mode==="level"&&!hunt&&!daily&&!ser&&lv<=3){G.mercy=true;G.easy=true;} /* first three levels: helpful pieces, generous moves, so a new player can hardly fail */
-  G.tray=saved?saved.tray.map(function(i){return i<0?null:SH[i];}):(mode==="level"&&d.tray?d.tray.slice():newTray(G.grid));G.hint=mode==="level"&&!saved&&d.hint?d.hint:null;
+  G.tray=saved?saved.tray.map(function(i){return i<0?null:i>=1000?wtPiece(SH[i-1000]):SH[i];}):(mode==="level"&&d.tray?d.tray.slice():newTray(G.grid));G.hint=mode==="level"&&!saved&&d.hint?d.hint:null;
   $("movesPill").hidden=mode!=="level";
   show("game");
   var b=$("board");b.classList.remove("blast");b.classList.remove("sad");b.dataset.kind=G.kind||0;if(ser)document.body.dataset.ws=ser>100?holLook():serLook();else delete document.body.dataset.ws;
   if(!cells.length){var h="";for(i=0;i<N*N;i++)h+='<div class="cell" data-i="'+i+'"></div>';b.innerHTML=h;cells=[].slice.call(b.children);}
-  layout();render();if(mode==="level"&&!saved&&VCARD[lv])setTimeout(function(){if(G&&G.lv===lv)vIntro(lv);},700);
-  $("tip").textContent=mode==="level"&&!saved&&VTIP[lv]?VTIP[lv]:mode==="level"&&d.tip&&!saved?d.tip:mode==="level"&&lv===5?"New goal: reach the score before you run out of moves.":mode==="level"&&lv===4?"Bonus: clear a line that is all one color for extra points and coins.":mode==="level"&&lv===11?"New: ice blocks. Clear their line once to crack the ice, then again to remove them.":mode==="level"&&lv===16?"New: bomb jelly. Clear its line and it blasts everything around it.":mode==="level"&&lv===21?"New: crates. They never clear, but lines still clear around them. A bomb jelly can break them.":mode==="level"&&lv===31?"New: seaweed. It spreads every 4 moves. Clear it all to stop it.":mode==="level"&&lv===51?"New: tide pools. Fill all 9 squares inside the glowing frame to clear it for +30 points.":mode==="level"&&lv===41?"New: rainbow jelly counts as any color.":"";
+  layout();render();if(WT>=0&&!saved)setTimeout(function(){if(G&&G.lv===lv)wtIntro();},800);if(mode==="level"&&!saved&&VCARD[lv])setTimeout(function(){if(G&&G.lv===lv)vIntro(lv);},700);
+  $("tip").textContent=mode==="level"&&!saved&&WT>=0&&lv%AL===1?"World Tour: "+WTN[WT]+"! Fill a whole row or column with "+WTN[WT]+" jellies for a Country Match.":mode==="level"&&!saved&&VTIP[lv]?VTIP[lv]:mode==="level"&&d.tip&&!saved?d.tip:mode==="level"&&lv===5?"New goal: reach the score before you run out of moves.":mode==="level"&&lv===4?"Bonus: clear a line that is all one color for extra points and coins.":mode==="level"&&lv===11?"New: ice blocks. Clear their line once to crack the ice, then again to remove them.":mode==="level"&&lv===16?"New: bomb jelly. Clear its line and it blasts everything around it.":mode==="level"&&lv===21?"New: crates. They never clear, but lines still clear around them. A bomb jelly can break them.":mode==="level"&&lv===31?"New: seaweed. It spreads every 4 moves. Clear it all to stop it.":mode==="level"&&lv===51?"New: tide pools. Fill all 9 squares inside the glowing frame to clear it for +30 points.":mode==="level"&&lv===41?"New: rainbow jelly counts as any color.":"";
   if(mode==="level"&&!saved&&G.type==="gems"&&G.kind&&!$("tip").textContent){S.ks=S.ks||{};if(!S.ks[G.kind]){S.ks[G.kind]=1;save();$("tip").textContent="New treasure: "+KINDS[G.kind][1]+". Clear their row or column to collect them, just like stars.";}}
   if(mode==="level"&&G.pools&&!saved&&!$("tip").textContent&&(S.ptip||0)<3){S.ptip=(S.ptip||0)+1;$("tip").textContent="Tide pool: fill all 9 squares inside the glowing frame to clear it for +30 points.";}
   if(mode==="level"&&!hunt&&!daily&&!ser&&!saved&&(lv>=41||lv>=16)&&S.cmSeen){S.met=S.met||{};var who=lv>=16&&!S.met.bomb?"bomb":lv>=41&&!S.met.rain?"rain":"";if(who)setTimeout(function(){if(G&&!G.done&&$("modal").hidden)crewIntro(who,who==="bomb"?"Bomb jellies like Boomer blast everything around them when you clear their line.":"Rainbow jellies like Prism count as any color, perfect for a Color Match.");},700);}
@@ -1666,7 +1716,7 @@ function render(){
   moods();snap();
 }
 /* the board is saved after every move, so closing the app or an ad break never loses a level */
-function snap(){if(!G||G.done)return;S.cur={mode:G.mode,lv:G.lv,hunt:G.hunt||0,daily:G.daily||0,ser:G.ser||0,tray:G.tray.map(function(t){return t?SH.indexOf(t):-1;}),g:{grid:G.grid,type:G.type,kind:G.kind||0,n:G.n,moves:G.moves,M:G.M,score:G.score,gems:G.gems,streak:G.streak,mercy:!!G.mercy,freeSwap:G.freeSwap||0,pools:G.pools||null,wt:G.wt||0}};save();}
+function snap(){if(!G||G.done)return;S.cur={mode:G.mode,lv:G.lv,hunt:G.hunt||0,daily:G.daily||0,ser:G.ser||0,tray:G.tray.map(function(t){return t?(t.c===9?1000+SH.indexOf(t.base):SH.indexOf(t)):-1;}),g:{grid:G.grid,type:G.type,kind:G.kind||0,n:G.n,moves:G.moves,M:G.M,score:G.score,gems:G.gems,streak:G.streak,mercy:!!G.mercy,freeSwap:G.freeSwap||0,pools:G.pools||null,wt:G.wt||0}};save();}
 var CMTIP="One-color line! Finish it for +40 points and 5 coins.";
 function cmDemo(){var h='<div class="cmdemo">';for(var i=0;i<8;i++)h+='<i class="c3"></i>';return h+'</div><div class="chips"><span class="chip">+40 points</span><span class="chip"><span class="coin"></span>+5 coins</span></div>';}
 function colorIntro(){modal('<h2>Color Match</h2>'+cmDemo()+'<p style="font-size:17px;color:var(--navy)">Fill a whole row or column with jellies of <strong>one color</strong> and you score a Color Match.</p><p>Stars, treasures and rainbow jellies count as any color. A line that is building toward a match glows gold.</p><button class="btn wide" data-act="close">Got it</button>');Track("color_intro",{});}
@@ -1730,12 +1780,13 @@ function clearLines(){
   /* color match: a cleared line whose blocks are all one color (gold stars count as any color) */
   var colorN=0,same=function(get){var c=-1;for(var j=0;j<N;j++){var q=G.grid[get(j)];if(q.g||q.rain||q.bomb||q.rock||q.weed||q.stone||q.goo||q.ice)continue;if(c<0)c=q.c;else if(q.c!==c)return 0;}return c>=0?1:0;};
   var cm={},cmLines=[];rows.forEach(function(r){if(same(function(j){return r*N+j;})){colorN++;cmLines.push(["r",r]);for(var j=0;j<N;j++)cm[r*N+j]=1+j;}});cols.forEach(function(c){if(same(function(j){return j*N+c;})){colorN++;cmLines.push(["c",c]);for(var j=0;j<N;j++)if(!cm[j*N+c])cm[j*N+c]=1+j;}});
+  var wtR=[];if(WT>=0)cmLines.forEach(function(l){var kk=[],ct=0;for(var j=0;j<N;j++)kk.push(l[0]==="r"?l[1]*N+j:j*N+l[1]);kk.forEach(function(k){var q=G.grid[k];if(q&&q.c===9&&!q.g)ct++;});if(ct>=N-2)kk.forEach(function(k){var q=G.grid[k];if(q&&q.c===9&&!q.g&&cells[k])wtR.push(cells[k].getBoundingClientRect());});});
   var ks=Object.keys(hit).map(Number),boom=false,blown={};
   for(var bi=0;bi<ks.length;bi++){var bq=G.grid[ks[bi]];if(bq&&bq.bomb&&!bq.done){bq.done=true;boom=true;var bx=ks[bi]%N,by=(ks[bi]-bx)/N;for(var yy=by-1;yy<=by+1;yy++)for(var xx=bx-1;xx<=bx+1;xx++){if(xx<0||yy<0||xx>=N||yy>=N)continue;var nk=yy*N+xx;if(G.grid[nk]){blown[nk]=1;if(!hit[nk]){hit[nk]=1;ks.push(nk);}}}}}
   ks.forEach(function(k,idx){var q=G.grid[k];if(!q)return;if(q.rock&&!blown[k]){cells[k].classList.remove("thud");void cells[k].offsetWidth;cells[k].classList.add("thud");return;}if(q.stone&&!blown[k]){q.hp=(q.hp==null?3:q.hp)-1;if(q.hp>0){cells[k].className=cls(q);sparks(cells[k],0);SFX.crack();return;}}if(q.goo){q.goo=false;cells[k].className=cls(q);sparks(cells[k],2);SFX.crack();return;}if(q.ice){q.ice=false;cells[k].className=cls(q);sparks(cells[k],3);SFX.crack();return;}if(q.g)got++;if(cm[k]&&!reduced()){G.grid[k]=null;cells[k].style.animationDelay=((cm[k]-1)*22)+"ms";cells[k].classList.add("cmpop");return;}if(idx%2===0)sparks(cells[k],q.g?1:q.c%7);G.grid[k]=null;cells[k].classList.add("pop");});
-  return{n:rows.length+cols.length,gems:got,color:colorN,boom:boom,lines:cmLines};
+  return{n:rows.length+cols.length,gems:got,color:colorN,boom:boom,lines:cmLines,wt:wtR};
 }
-var KCOL=["#ff5d6c","#ffc531","#2fd39a","#3fb2ff","#a97bff","#ff9a3d","#ff74c2","#ffc531"],WORDS=["Wobble!","Jiggly!","Splash!","Sweet!","Smooth!"];
+var KCOL=["#ff5d6c","#ffc531","#2fd39a","#3fb2ff","#a97bff","#ff9a3d","#ff74c2","#ffc531","#ffc531","#ffd84d"],WORDS=["Wobble!","Jiggly!","Splash!","Sweet!","Smooth!"];
 function sparks(el,c){if(reduced())return;var r=el.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;for(var i=0;i<3;i++){(function(){var e=document.createElement("div");e.className="spark";e.style.background=KCOL[c];e.style.left=x-6+"px";e.style.top=y-6+"px";document.body.appendChild(e);var a=Math.random()*6.28,d=30+Math.random()*50;var an=e.animate([{transform:"translate(0,0) scale(1)",opacity:1},{transform:"translate("+Math.cos(a)*d+"px,"+(Math.sin(a)*d+30)+"px) scale(.2)",opacity:0}],{duration:450+Math.random()*250,easing:"ease-out"});an.onfinish=function(){e.remove();};})();}}
 function praise(txt,c){var e=$("praise");e.textContent=txt;e.style.setProperty("--pc",KCOL[c%7]);e.hidden=false;if(e.animate&&!reduced())e.animate([{transform:"translate(-50%,-50%) scale(.3) rotate(-8deg)",opacity:0},{transform:"translate(-50%,-50%) scale(1.15) rotate(-4deg)",opacity:1,offset:.3},{transform:"translate(-50%,-70%) scale(1) rotate(-4deg)",opacity:1,offset:.75},{transform:"translate(-50%,-110%) scale(.9)",opacity:0}],{duration:900,easing:"ease-out"});clearTimeout(praise.t);praise.t=setTimeout(function(){e.hidden=true;},880);}
 function placePiece(i,cx,cy){FZ.ev="placed a piece";
@@ -1746,6 +1797,7 @@ function placePiece(i,cx,cy){FZ.ev="placed a piece";
   var r=clearLines();
   if(r.n){G.streak++;var pts=r.n*10+(r.n-1)*10+(G.streak>1?5*(G.streak-1):0);G.score+=pts;G.gems+=r.gems;SFX.drop();SFX.clear(r.n);if(r.gems)SFX.star();if(r.color){if(!$("talker")&&Math.random()<.75)(function(k){setTimeout(function(){if(G&&!$("game").hidden)talk(k,rnd(CREW[k].l));},750);})(ckey(p.c));G.score+=40*r.color;S.coins+=5*r.color;save();Track("color_match",{lines:r.color});cmAction(r.lines,p.c);}if(r.boom){SFX.boom();var bd2=$("board");bd2.classList.remove("shake");void bd2.offsetWidth;bd2.classList.add("shake");}praise(r.color?"Color Match! +"+(40*r.color)+" and "+(5*r.color)+" coins":r.boom?"Boom!":r.n>1||G.streak>1?WORDS[(r.n+G.streak)%WORDS.length]:"+"+pts,p.c);if(r.n>1&&!reduced()){var bd=$("board");bd.classList.remove("shake");void bd.offsetWidth;bd.classList.add("shake");}}
   else{G.streak=0;SFX.drop();}
+  if(r.wt&&r.wt.length)wtMatch(r.wt);
   var pz=poolClear();if(pz.n){G.score+=30*pz.n;G.gems+=pz.gems;SFX.sparkle();SFX.clear(2);praise("Tide pool! +"+30*pz.n,3);Track("tide_pool",{n:pz.n});}
   if(G.mode==="level"){G.wt=(G.wt||0)+1;if(G.wt%4===0)growWeed();if(G.wt%3===0)growGoo();fizzTick();}
   if(!G.tray[0]&&!G.tray[1]&&!G.tray[2])G.tray=newTray(G.grid);
@@ -2101,8 +2153,8 @@ $("mapBtn").onclick=function(){openMap();};
 function openMap(hop){mapW=Math.floor((Math.min(S.lvl,MAXLV)-1)/AL);show("map");drawMap(hop);setTimeout(notifyOffer,900);clearTimeout(flyPlane.t);flyPlane.t=setTimeout(flyPlane,3500);planeLoop();}
 $("mapPlay").onclick=function(){if(S.lvl<=MAXLV)start("level",S.lvl);};
 $("mapBack").onclick=function(){ACT.home();};
-$("wPrev").onclick=function(){mapW=(mapW+NAREA-1)%NAREA;drawMap();};
-$("wNext").onclick=function(){mapW=(mapW+1)%NAREA;drawMap();};
+$("wPrev").onclick=function(){mapW=(mapW+NMAP-1)%NMAP;drawMap();};
+$("wNext").onclick=function(){mapW=(mapW+1)%NMAP;drawMap();};
 $("gBack").onclick=function(){if(G&&G.mode==="endless"&&G.score>S.best){S.best=G.score;save();}ACT.home();};
 $("swapBtn").onclick=function(){if(G&&!G.done)useSwap();};$("blastBtn").onclick=useBlast;$("undoBtn").onclick=useUndo;$("crabBtn").onclick=function(){useTool("crab");};$("dolphBtn").onclick=function(){useTool("dolph");};
 $("shopBtn").onclick=$("coinsBtn").onclick=function(){shop("");};
@@ -2202,7 +2254,7 @@ function libChip(){var el=$("libn");if(el){var c=libCounts();el.textContent=(c.l
 function libTile(o,own,hint,tag){var inner;if(!own)inner='<span class="lq">?</span><small>'+hint+'</small>';
   else inner=libArt(o)+'<b>'+o.n+'</b>';
   return '<button class="lcard'+(own?" own":" lock")+'" type="button"'+(own?' data-lc="'+tag+'"':'')+'>'+inner+'</button>';}
-function openLib(t){t=t||openLib.t||"lag";openLib.t=t;var c=libCounts(),tabs=[["lag","Lagoon",c.lag,NAREA],["spe","Special Events",c.spe,c.speN],["hol","Holiday",c.hol,c.holN]];
+function openLib(t){ACT.passport=wtPassport;t=t||openLib.t||"lag";openLib.t=t;var c=libCounts(),tabs=[["lag","Lagoon",c.lag,NAREA],["spe","Special Events",c.spe,c.speN],["hol","Holiday",c.hol,c.holN]];
   var h='<p class="libtag">Card library</p><h2>'+(c.lag+c.hol)+' of '+(NAREA+c.holN)+' cards</h2><div class="libtabs">'+tabs.map(function(x){return '<button class="libtab'+(x[0]===t?" on":"")+'" type="button" data-act="lib_'+x[0]+'">'+x[1]+'<small>'+x[2]+'/'+x[3]+'</small></button>';}).join("")+'</div>';
   if(t==="lag"){h+='<p class="libnote">Beat the last level of a lagoon to win its card. Tap a card you own to look at it.</p>'+(function(){var out="",i=0;while(i<NAREA){var g=libLag(i).g,j=i,n=0;while(j<NAREA&&libLag(j).g===g){if(libOwnLag(j))n++;j++;}
       out+='<div class="lset"><div class="lsh"><b>'+g+' '+n+'/'+(j-i)+'</b><span>'+(j-i>1?"Lagoons "+(i+1)+" to "+j:"Lagoon "+j)+'</span></div><div class="lgrid">';for(var q=i;q<j;q++)out+=libTile(libLag(q),libOwnLag(q),"Lagoon "+(q+1),"L"+q);out+='</div></div>';i=j;}return out;})();}
@@ -2210,7 +2262,7 @@ function openLib(t){t=t||openLib.t||"lag";openLib.t=t;var c=libCounts(),tabs=[["
     [["xmas","Christmas","Dec 18 to Dec 27"],["newyear","New Year's","Dec 28 to Jan 2"]].forEach(function(g){var L=H.filter(function(x){return x.h===g[0];});if(!L.length)return;var n=L.filter(function(x){return x.got;}).length;
       h+='<div class="lset"><div class="lsh"><b>'+g[1]+' '+n+'/'+L.length+'</b><span>Holiday event · '+g[2]+'</span></div><div class="lgrid">'+L.map(function(x){return libTile(x,x.got,"Holiday event","H"+x.id);}).join("")+'</div></div>';});}
   else h+='<p class="libnote">Cards from special events during the year. Watch for the next one.</p><div class="lset lempty"><b>No special events yet</b><span>Special events pop up during the year for things like a lunar eclipse. Their cards will be kept here.</span></div>';
-  modal(h+'<button class="btn sm" data-act="close">Close</button>');var sh=$("sheet");sh.scrollTop=0;
+  modal(h+'<button class="btn wide gold" data-act="passport">World Tour passport</button><button class="btn sm" data-act="close">Close</button>');var sh=$("sheet");sh.scrollTop=0;
   [].forEach.call(sh.querySelectorAll("[data-lc]"),function(b){b.onclick=function(ev){ev.stopPropagation();libView(b.dataset.lc);};});Track("cards_opened",{tab:t});}
 function libBig(o,label){var art=libArt(o,true);
   return '<div class="lbig"><div class="lbtop"><b>'+o.n+'</b><span>'+label+'</span></div>'+art+'<p>'+o.d+'</p></div>';}

@@ -360,8 +360,8 @@ var ART={sp:["data:image/webp;base64,UklGRi4oAABXRUJQVlA4WAoAAAAQAAAApwAApwAAQUx
 var TINT=["#ff4d5e","#ffd23f","#5fd35a","#4aa8ff","#a56bff","#ff9838","#ff7ac0"];
 var BOMB=7,RAIN=8,ROCK=9,BABY=10,MANGO=11,JINX=12,KIWI=13,HUB=14,GOO=15,CHEST=16,FROZ=100;
 var AREAS=["Jelly Cove","Sunset Lagoon","Castaway Isles","Pirates Cove","Pearl Gardens","Sea Glass Bay","Coral Caves","Volcano Springs","Moonlit Reef","Starfall Bay","Mermaid Shallows","Bamboo Bend","Shipwreck Sound","Golden Shell Shore","Crystal Falls","Lotus Creek","Moonflower Marsh","Lava Rock Reef","Aurora Bay","Midnight Isles","Lost Temple","Jungle Falls","Seahorse Shore","Alligator Pond","Jelly Reef",
- "Turtle Cay","Coconut Key","Mango Beach","Starfish Sands","Lantern Festival","Rainbow Reef","Bubble Deep","Mermaid Rock","Glow Reef","Whale Song Bay","Sugar Dunes","Cruise Cove","Kelp Forest","Seashell Cove","Orchid Isle","Thunder Isle","Frost Fjord","Ember Coast","Golden Atoll","Dragon Reef","Sunset Shallows","Moonlit Cove","Tidepool Terrace","Treasure Atoll","Crown Island"];
-var BGN=50,LEVELS=500,LIM=[23,25,19,15,14,20,21,19,21,34,25,18,18,25,19,36,17,15,17,13,56,31,25,15,15,27,28,33,23,27,40,29,63,38,21,37,29,41,24,34,15,71,42,35,26,36,44,47,51,20,80,19,28,39,19,69,37,55,40,55,39,62,64,28,58,43,53,16,66,39,72,63,64,49,25,47,24,47,74,47,41,62,75,74,29,68,57,49,75,62,63,44,65,75,92,75,64,56,75,47,95,86,59,95,95,88,86,95,71,67,95,84,95,95,93,40,95,95,95,95,95,95,50,52,67,52,95,71,95,59,42,95,65,42,67,94,48,69,94,26,95,52,86,16,60,48,95,92,71,95,95,78,95,65,95,90,52,95,95,69,60,95,59,61,95,48,95,95,57,72,95,31,95,84,62,59,94,80,65,67,67,80,95,65,70,95,95,80,95,95,77,95,71,84,84,95,50,95,92,89,95,61,63,95,44,95,95,76,78,95,95,86,19,31,82,95,95,69,95,56,80,95,71,54,84,76,95,95,59,41,95,65,95,95,62,95,95,88,52,95,95,25,95,63,79,95,95,80,17,63,57,95,68,57,82,95,81,95,55,95,95,70,95,95,69,91,95,66,38,62,95,57,95,61,95,59,89,89,74,47,95,95,95,59,59,33,95,95,91,77,95,33,95,87,95,63,91,55,95,95,95,95,95,46,66,87,74,68,61,66,95,89,35,95,95,78,95,95,78,77,95,68,81,95,66,59,93,12,70,95,95,89,95,42,95,95,50,53,95,69,95,95,95,74,95,53,78,95,74,66,95,95,95,95,95,95,91,50,59,33,95,63,95,95,75,95,95,89,74,62,95,95,81,40,78,95,78,95,95,92,49,44,87,95,78,95,95,61,87,95,95,91,50,63,77,95,35,95,95,48,85,95,74,14,95,95,95,95,93,52,95,78,95,95,15,89,95,85,95,60,95,35,42,95,64,95,55,35,95,77,95,95,95,95,95,83,61,95,78,24,95,50,44,61,87,70,95,95,59,73,95,95,95,74,95,95,68,33,93,81,75,95,95,95,55,91,91,72,40,94,95,44,38,95,95,55,89,59,95,95,95,59,95,61,86,95,70,55,95,95,95,72,85,53,95,93,53,95,83,37],ALT=[54,60,84,87,89,96,99,255,270,318,336,357,375,381,391,447,483];
+ "Turtle Cay","Coconut Key","Mango Beach","Starfish Sands","Lantern Festival","Rainbow Reef","Bubble Deep","Mermaid Rock","Glow Reef","Whale Song Bay","Sugar Dunes","Cruise Cove","Kelp Forest","Seashell Cove","Orchid Isle","Thunder Isle","Frost Fjord","Ember Coast","Golden Atoll","Dragon Reef","Sunset Shallows","Moonlit Cove","Tidepool Terrace","Treasure Atoll","Crown Island","Japan","Egypt","France","Brazil","India","China","Mexico","United Kingdom","Switzerland","Ireland","Canada","Russia","Greece","UAE","Spain","Cuba","Panama","Jamaica"];
+var BGN=68,LEVELS=680,LIM=[23,25,19,15,14,20,21,19,21,34,25,18,18,25,19,36,17,15,17,13,56,31,25,15,15,27,28,33,23,27,40,29,63,38,21,37,29,41,24,34,15,71,42,35,26,36,44,47,51,20,80,19,28,39,19,69,37,55,40,55,39,62,64,28,58,43,53,16,66,39,72,63,64,49,25,47,24,47,74,47,41,62,75,74,29,68,57,49,75,62,63,44,65,75,92,75,64,56,75,47,95,86,59,95,95,88,86,95,71,67,95,84,95,95,93,40,95,95,95,95,95,95,50,52,67,52,95,71,95,59,42,95,65,42,67,94,48,69,94,26,95,52,86,16,60,48,95,92,71,95,95,78,95,65,95,90,52,95,95,69,60,95,59,61,95,48,95,95,57,72,95,31,95,84,62,59,94,80,65,67,67,80,95,65,70,95,95,80,95,95,77,95,71,84,84,95,50,95,92,89,95,61,63,95,44,95,95,76,78,95,95,86,19,31,82,95,95,69,95,56,80,95,71,54,84,76,95,95,59,41,95,65,95,95,62,95,95,88,52,95,95,25,95,63,79,95,95,80,17,63,57,95,68,57,82,95,81,95,55,95,95,70,95,95,69,91,95,66,38,62,95,57,95,61,95,59,89,89,74,47,95,95,95,59,59,33,95,95,91,77,95,33,95,87,95,63,91,55,95,95,95,95,95,46,66,87,74,68,61,66,95,89,35,95,95,78,95,95,78,77,95,68,81,95,66,59,93,12,70,95,95,89,95,42,95,95,50,53,95,69,95,95,95,74,95,53,78,95,74,66,95,95,95,95,95,95,91,50,59,33,95,63,95,95,75,95,95,89,74,62,95,95,81,40,78,95,78,95,95,92,49,44,87,95,78,95,95,61,87,95,95,91,50,63,77,95,35,95,95,48,85,95,74,14,95,95,95,95,93,52,95,78,95,95,15,89,95,85,95,60,95,35,42,95,64,95,55,35,95,77,95,95,95,95,95,83,61,95,78,24,95,50,44,61,87,70,95,95,59,73,95,95,95,74,95,95,68,33,93,81,75,95,95,95,55,91,91,72,40,94,95,44,38,95,95,55,89,59,95,95,95,59,95,61,86,95,70,55,95,95,95,72,85,53,95,93,53,95,83,37],ALT=[54,60,84,87,89,96,99,255,270,318,336,357,375,381,391,447,483];
 var POW=[
   {k:BOMB,name:"Boomer",at:1,what:"Boomer blasts every bubble around the spot he lands."},
   {k:RAIN,name:"Prism",at:3,what:"Prism matches any color. Aim at the biggest group."},
@@ -395,7 +395,7 @@ var fx=[],ball=null,aim=null,lastT=0,sayT=0,cheer=0,amb=[];
 
 /* ---------- save ---------- */
 function load(){try{var j=JSON.parse(localStorage.getItem("jellyPop2")||"{}");KEEP.forEach(function(k){if(j[k]!==undefined)S[k]=j[k];});if(j.max)S.max=j.max;if(j.best)S.best=j.best;if(j.seen)S.seen=j.seen;if(j.sound===false)S.sound=false;if(j.music===false)S.music=false;if(typeof j.mvol==="number")S.mvol=j.mvol;if(j.fails)S.fails=j.fails;if(typeof j.svol==="number")S.svol=j.svol;if(j.mate)S.mate=j.mate;}catch(e){}}
-var KEEP=["coins","lives","lifeTs","noAds","paid","starter","tx","sinceInter","att","inv","firstWin","day","dly","pig","streak","pass","ev","race","alb","albDone","shells","deco","hc","hv","cseen","cv"];
+var KEEP=["stamps","coins","lives","lifeTs","noAds","paid","starter","tx","sinceInter","att","inv","firstWin","day","dly","pig","streak","pass","ev","race","alb","albDone","shells","deco","hc","hv","cseen","cv"];
 function save(){try{var o={max:S.max,best:S.best,seen:S.seen,sound:S.sound,music:S.music,mvol:S.mvol,svol:S.svol,fails:S.fails,mate:S.mate};KEEP.forEach(function(k){o[k]=S[k];});localStorage.setItem("jellyPop2",JSON.stringify(o));}catch(e){}}
 
 /* ---------- grid helpers ---------- */
@@ -427,7 +427,7 @@ function gen(n){
     }
     var col,nb=nbrs(r,c).filter(function(p){return g.has(key(p[0],p[1]));});
     if(nb.length&&rnd()<0.56){var p=nb[Math.floor(rnd()*nb.length)];col=g.get(key(p[0],p[1]));}
-    else col=Math.floor(rnd()*k);
+    else{col=Math.floor(rnd()*k);if(CTRY>=0&&col===5)col=6;}
     g.set(key(r,c),col);
   }
   var keep=reach(g);g.forEach(function(v,kk){if(!keep[kk])g.delete(kk);});
@@ -450,12 +450,43 @@ function gen(n){
   if(n>=51)putN(Math.min(4+Math.floor((n-51)/12),8),function(q){fizz.push(q);});
   if(n>=71&&n%4===3){deep=true;g.forEach(function(v,k){var r=k>>4,c=k&15;if(r<1||v>=7)return;if((r*2+c)%3===0&&nbrs(r,c).some(function(p){return p[0]>r&&g.has(key(p[0],p[1]));}))g.set(k,v+FROZ);});}
   var cells=0;g.forEach(function(v){if(colOf(v)>=0)cells++;});
-  return {grid:g,goal:goal,whirl:whirl,fizz:fizz,deep:deep,limit:LIM[n-1]||Math.round(cells*0.5)+8,rnd:rnd};
+  return {grid:g,goal:goal,whirl:whirl,fizz:fizz,deep:deep,limit:(n>500?LIM[n-181]:LIM[n-1])||Math.round(cells*0.5)+8,rnd:rnd};
 }
 function reach(g){var seen={},st=[];for(var c=0;c<9;c++)if(g.has(key(0,c))){seen[key(0,c)]=1;st.push([0,c]);}
   while(st.length){var p=st.pop(),n=nbrs(p[0],p[1]);for(var i=0;i<n.length;i++){var k=key(n[i][0],n[i][1]);if(!seen[k]&&g.has(k)){seen[k]=1;st.push(n[i]);}}}return seen;}
+
+/* ===================== World Tour (levels 501-680) ===================== */
+var CTRY=-1,WTC=["japan", "egypt", "france", "brazil", "india", "china", "mexico", "uk", "switzerland", "ireland", "canada", "russia", "greece", "uae", "spain", "cuba", "panama", "jamaica"],WTN=["Japan", "Egypt", "France", "Brazil", "India", "China", "Mexico", "United Kingdom", "Switzerland", "Ireland", "Canada", "Russia", "Greece", "UAE", "Spain", "Cuba", "Panama", "Jamaica"],WTF=[["#ffffff", "#e0103a"], ["#ce1126", "#ffffff", "#111111", "#c09300"], ["#0055a4", "#ffffff", "#ef4135"], ["#009c3b", "#ffdf00", "#002776"], ["#ff9933", "#ffffff", "#138808", "#000080"], ["#de2910", "#ffde00"], ["#006847", "#ffffff", "#ce1126"], ["#012169", "#ffffff", "#c8102e"], ["#ff0000", "#ffffff"], ["#169b62", "#ffffff", "#ff883e"], ["#ff0000", "#ffffff"], ["#ffffff", "#0039a6", "#d52b1e"], ["#0d5eaf", "#ffffff"], ["#00732f", "#ffffff", "#000000", "#ff0000"], ["#aa151b", "#f1bf00"], ["#002a8f", "#ffffff", "#cf142b"], ["#da121a", "#ffffff", "#072357"], ["#009b3a", "#fed100", "#000000"]],WTM={h:"happy",e:"excited",w:"worried",s:"sad"};
+function wtLoad(){ACT.passport=wtPassport;img.ct=[];WTC.forEach(function(c,i){img.ct[i]={};Object.keys(WTM).forEach(function(m){ld("art/wt/"+c+"-"+WTM[m]+".webp").then(function(x){img.ct[i][m]=x;spr={};});});});}
+function wtSrc(i,m){return "art/wt/"+WTC[i]+"-"+(m||"excited")+".webp";}
+function boing(t0){if(!S.sound||!AC)return;var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime+t0;o.type="sine";o.frequency.setValueAtTime(620,t);o.frequency.exponentialRampToValueAtTime(170,t+0.2);g.gain.setValueAtTime(0.13,t);g.gain.exponentialRampToValueAtTime(0.001,t+0.24);o.connect(g);g.connect(sfxOut());o.start(t);o.stop(t+0.26);}
+function wtMatch(res){var hits=res.pop.filter(function(p){return p[2]===6||p[2]===6+FROZ;});if(hits.length<3)return;
+  S.score+=300;S.coins+=10;S.stamps=S.stamps||{};var first=!S.stamps[CTRY];if(first)S.stamps[CTRY]=1;var all=first&&Object.keys(S.stamps).length>=18;if(all)S.coins+=500;
+  save();hud();Track("country_match",{country:WTC[CTRY],first:first});wtParty(hits,first,all);}
+function wtParty(hits,first,all){
+  var b=cv.getBoundingClientRect(),ci=CTRY,lay=document.createElement("div"),done=false,vw=window.innerWidth,vh=window.innerHeight;lay.className="wtlay";document.body.appendChild(lay);
+  function end(){if(done)return;done=true;lay.remove();if(first)wtStamp(ci,all);}
+  lay.addEventListener("pointerdown",end);
+  cheer=2.2;var sz=Math.max(28,D*0.92);
+  hits.slice(0,14).forEach(function(p,i){var q=cxy(p[0],p[1]),x=b.left+q.x*(b.width/W),y=b.top+q.y*(b.height/H),e=document.createElement("img");e.src=wtSrc(ci);e.className="wtfly";e.style.width=e.style.height=sz+"px";e.style.left=(x-sz/2)+"px";e.style.top=(y-sz/2)+"px";lay.appendChild(e);
+    var side=(x<vw/2?-1:1)*(i%2?1:-1),wx=side<0?-x+sz/2:vw-x-sz/2,up=-(90+Math.random()*90),spin=(side<0?-1:1)*(540+Math.random()*360);
+    if(e.animate)e.animate([{transform:"scale(1) rotate(0)",filter:"brightness(1)"},{transform:"scale(1.3) rotate(0)",filter:"brightness(1.5) drop-shadow(0 0 10px #fff)",offset:.14},{transform:"translate(0,-70px) scale(1.15) rotate("+spin*.25+"deg)",offset:.34},{transform:"translate("+wx+"px,"+(up+20)+"px) scale(1) rotate("+spin*.7+"deg)",offset:.68},{transform:"translate("+(wx-side*vw*0.55)+"px,"+(-vh)+"px) scale(.8) rotate("+spin+"deg)"}],{duration:1250,delay:i*70,easing:"cubic-bezier(.3,.7,.4,1)",fill:"forwards"});
+    boing(0.18+i*0.07);});
+  if(cv.animate)cv.animate([{transform:"none"},{transform:"translateY(-12px)"},{transform:"none"},{transform:"translateY(-6px)"},{transform:"none"}],{duration:620,delay:120});
+  var cols=WTF[ci],cf="";for(var k=0;k<44;k++)cf+='<i style="left:'+(Math.random()*100)+'%;background:'+cols[k%cols.length]+';animation-delay:'+(Math.random()*0.5)+'s;animation-duration:'+(1.2+Math.random()*0.8)+'s"></i>';
+  var hero=document.createElement("div");hero.className="wthero";hero.innerHTML='<div class="wtconf">'+cf+'</div><img alt="" src="'+wtSrc(ci)+'"><div class="wtban"><b>Country Match!</b><span>'+WTN[ci]+' · +300 points · +10 coins</span></div>';lay.appendChild(hero);
+  if(S.sound&&AC){[523,659,784,1047,1319].forEach(function(f,i){tone(f,0.25+i*0.09,0.22,"triangle",0.12);});}
+  say(WTN[ci]+" Country Match!");setTimeout(end,2100);}
+function wtStamp(ci,all){var lay=document.createElement("div");lay.className="wtlay wtst";
+  lay.innerHTML='<div class="wtpage"><img class="wtstamp" alt="" src="art/wt/stamp-'+WTC[ci]+'.webp"><b>Passport stamp: '+WTN[ci]+'!</b><span>'+Object.keys(S.stamps).length+' of 18 stamps'+(all?' · World traveler! +500 coins':'')+'</span></div>';
+  document.body.appendChild(lay);if(S.sound&&AC){tone(90,0.22,0.18,"square",0.14);tone(140,0.22,0.12,"sine",0.12);}
+  var close=function(){lay.remove();};lay.addEventListener("pointerdown",close);setTimeout(close,all?2600:1700);}
+function wtPassport(){S.stamps=S.stamps||{};var n=Object.keys(S.stamps).length,g="";
+  WTC.forEach(function(c,i){var got=S.stamps[i];g+='<div class="wtslot'+(got?" got":"")+'">'+(got?'<img alt="" style="transform:rotate('+((i*37)%24-12)+'deg)" src="art/wt/stamp-'+c+'.webp">':'<i></i>')+'<span>'+WTN[i]+'</span></div>';});
+  card('<div class="wtcover"><img alt="" src="art/wt/passport-cover.webp"><b>World Tour</b></div><h1>'+n+' of 18 stamps</h1><p class="note">Get a Country Match in each World Tour lagoon (levels 501 to 680) to earn its stamp. Collect all 18 for 500 coins.</p><div class="wtbook">'+g+'</div><button class="btn alt" data-a="cardsback" type="button">Back to my cards</button>'+CLOSE,"tall wtpass");}
+
 function buildLevel(n){
-  var L=gen(n);S.lvl=n;S.grid=L.grid;S.goal=L.goal;S.whirl=L.whirl;S.tall=isTall(n);S.off=S.offT=0;S.fizz={};L.fizz.forEach(function(q){S.fizz[q]=1;});S.deep=L.deep;S.turn=0;S.limit=L.limit+helpShots(n)+(S.daily?4:0)+streakBonus();S.boss=tier(n)==="boss"&&!S.daily;S.hp0=Math.max(1,S.goal.type==="rescue"?S.goal.need:S.grid.size);S.shots=S.limit;S.adUsed=0;S.score=0;S.saved=0;S.armed=-1;S.long=0;S.rnd=L.rnd;winQ=null;S.born=performance.now();S.meter=S.daily?0:(S.fails[n]||0)>=8?NEED:(S.fails[n]||0)>=5?Math.round(NEED/2):0;S.sup=false;if(n<MATES[S.mate].at)S.mate=0;
+  CTRY=n>500&&!S.daily?Math.min(17,Math.floor((n-501)/10)):-1;var L=gen(n);S.lvl=n;S.grid=L.grid;S.goal=L.goal;S.whirl=L.whirl;S.tall=isTall(n);S.off=S.offT=0;S.fizz={};L.fizz.forEach(function(q){S.fizz[q]=1;});S.deep=L.deep;S.turn=0;S.limit=L.limit+helpShots(n)+(S.daily?4:0)+streakBonus();S.boss=tier(n)==="boss"&&!S.daily;S.hp0=Math.max(1,S.goal.type==="rescue"?S.goal.need:S.grid.size);S.shots=S.limit;S.adUsed=0;S.score=0;S.saved=0;S.armed=-1;S.long=0;S.rnd=L.rnd;winQ=null;S.born=performance.now();S.meter=S.daily?0:(S.fails[n]||0)>=8?NEED:(S.fails[n]||0)>=5?Math.round(NEED/2):0;S.sup=false;if(n<MATES[S.mate].at)S.mate=0;
   S.pw={};POW.forEach(function(p){if(n>=p.at)S.pw[p.k]=1;});S.lostLife=false;
   scroll();S.cur=pickColor(S.rnd);S.next=pickColor(S.rnd);S.state="play";ball=null;fx=[];aim=null;
   $("bg").style.backgroundImage="url(art/bg"+areaOf(n)%BGN+".jpg)";dock();hud();
@@ -555,7 +586,7 @@ function fire(ang){
   ball={pts:t.pts,cell:t.cell,col:col,len:len,d:0};aim=null;snd("shoot");hud();return true;
 }
 function land(){
-  var b=ball;ball=null;var res=place(b.cell,b.col,b.pts),n=res.pop.length,m=res.drop.length;
+  var b=ball;ball=null;var res=place(b.cell,b.col,b.pts),n=res.pop.length,m=res.drop.length;if(CTRY>=0)wtMatch(res);
   res.conv.forEach(function(p){var q=cxy(p[0],p[1]);fx.push({t:"ring",x:q.x,y:q.y,a:0});});
   res.spin.forEach(function(k){var q=cxy(k>>4,k&15);fx.push({t:"spin",x:q.x,y:q.y,a:0});});if(res.spin.length){snd("stick");if(!n)say("The wheel turns!");}
   if(!n&&m){res.drop.forEach(function(p){var q=cxy(p[0],p[1]);fx.push({t:"fall",x:q.x,y:q.y,v:p[2],vx:(Math.random()-.5)*120,vy:-80-Math.random()*120,a:0});});S.score+=m*20;}
@@ -880,6 +911,7 @@ var introQ=[];
 function intro(n){introQ=[];
   function once(id,o){if(!S.seen[id]){S.seen[id]=1;introQ.push(o);}}
   if(n===1)once("how",{tag:"How to play",title:"Pop the bubbles",text:"Drag to aim and let go to shoot. Match 3 of one color to pop them. Clear the top row and everything falls. Tap the shooter to swap bubbles.",spr:0});
+  if(CTRY>=0)once("wt",{tag:"World Tour",title:"Welcome to "+AREAS[50+CTRY]+"!",text:"Every World Tour lagoon has its own country jelly. Pop 3 or more country bubbles at once for a Country Match: bonus points, coins and a stamp in your World Tour passport.",img:img.ct&&img.ct[CTRY]&&img.ct[CTRY].e});
   if(n===1)once("mate",{tag:"Your crew mate",title:"Fill the power bar",text:"Every pop fills your crew mate's power bar. Bubbles of their own color fill it twice as fast. When it is full, your next shot is their special power.",spr:SUP});
   POW.forEach(function(p){if(n>=p.at)once("p"+p.k,{tag:"New crew power",title:"Meet "+p.name,text:p.what,spr:p.k});});
   if(S.goal.type==="rescue")once("resc",{tag:"New goal",title:"Save the babies",text:"Baby jellies are stuck in gold bubbles. They can't be matched. Pop the bubbles holding them up and they float free.",spr:BABY});
@@ -973,13 +1005,13 @@ function mkSprite(v,sz,md){
     g.fillStyle="#fff";[[.24,.3],[.78,.26],[.74,.78]].forEach(function(p){star(g,sz*p[0],sz*p[1],sz*0.06);});}
   else if(v===MANGO||v===JINX||v===KIWI){var ci=v===MANGO?5:v===JINX?4:2;body(g,sz,TINT[ci],.55);g.drawImage((img.spx&&img.spx[ci]&&img.spx[ci].width?img.spx[ci]:img.sp[ci]),o,o,s,s);shell(g,sz,TINT[ci],"#ffe36b");
     g.fillStyle="#fff";star(g,sz*0.8,sz*0.24,sz*0.09);}
-  else{var col=v>=FROZ?v-FROZ:v;body(g,sz,TINT[col]);g.drawImage(MI(v>=FROZ&&md==="e"?null:md,col,v>=FROZ&&img.spw&&img.spw[col]&&img.spw[col].width?img.spw[col]:img.sp[col]),o,o,s,s);shell(g,sz,TINT[col]);
+  else{var col=v>=FROZ?v-FROZ:v;body(g,sz,TINT[col]);var ctI=CTRY>=0&&col===6&&img.ct&&img.ct[CTRY]?img.ct[CTRY][v>=FROZ&&md!=="s"?"w":(md||"h")]:null;if(ctI&&ctI.width)g.drawImage(ctI,o-s*0.04,o-s*0.04,s*1.08,s*1.08);else g.drawImage(MI(v>=FROZ&&md==="e"?null:md,col,v>=FROZ&&img.spw&&img.spw[col]&&img.spw[col].width?img.spw[col]:img.sp[col]),o,o,s,s);shell(g,sz,TINT[col]);
     if(v>=FROZ){g.globalAlpha=.62;g.fillStyle="#cfeeff";g.beginPath();g.arc(r,r,r*0.94,0,7);g.fill();g.globalAlpha=1;
       g.strokeStyle="#fff";g.lineWidth=sz*0.035;g.lineCap="round";for(var a=0;a<3;a++){var an=a*1.047+0.3;g.beginPath();g.moveTo(r-Math.cos(an)*r*0.5,r-Math.sin(an)*r*0.5);g.lineTo(r+Math.cos(an)*r*0.5,r+Math.sin(an)*r*0.5);g.stroke();}
       g.lineWidth=sz*0.05;g.strokeStyle="#8fd4ff";g.beginPath();g.arc(r,r,r*0.93,0,7);g.stroke();}}
   return c;
 }
-function sprite(v){var t=performance.now();if(t-moodT>150){moodT=t;MOOD=moodNow();}var kk=MOOD+v,s=spr[kk];if(!s){s=spr[kk]=mkSprite(v,Math.max(16,Math.round(D*DPR*1.1)),MOOD);}return s;}
+function sprite(v){var t=performance.now();if(t-moodT>150){moodT=t;MOOD=moodNow();}var kk=MOOD+v+"_"+CTRY,s=spr[kk];if(!s){s=spr[kk]=mkSprite(v,Math.max(16,Math.round(D*DPR*1.1)),MOOD);}return s;}
 function bub(v,x,y,sc){var s=D*0.98*(sc||1);cx.drawImage(sprite(v),x-s/2,y-s/2,s,s);}
 
 /* ---------- drawing ---------- */
@@ -1154,7 +1186,7 @@ if(window.ResizeObserver)new ResizeObserver(function(){var b=$("stage").getBound
 /* ---------- boot ---------- */
 function ld(src){return new Promise(function(res){var i=new Image();i.onload=function(){res(i);};i.onerror=function(){res(i);};i.src=src;});}
 load();$("sndHome").textContent="Sound: "+((S.sound||S.music)?"on":"off");Promise.all(ART.sp.map(ld).concat([ld(ART.bomb),ld(ART.fh),ld(ART.fe),ld(ART.grudge),ld(ART.frost),ld(ART.sludge),ld(ART.fizz)].concat(ART.crew.map(ld)).concat([ld(ART.rain)]).concat(ART.spx.map(ld)).concat(ART.spw.map(ld)).concat(ART.mood.e.map(ld)).concat(ART.mood.w.map(ld)).concat(ART.mood.s.map(ld)))).then(function(a){
-  img.sp=a.slice(0,7);img.bomb=a[7];img.fh=a[8];img.fe=a[9];img.grudge=a[10];img.frost=a[11];img.sludge=a[12];img.fizz=a[13];img.crew=a.slice(14,21);img.rain=a[21];img.spx=a.slice(22,29);img.spw=a.slice(29,36);img.mood={e:a.slice(36,49),w:a.slice(49,62),s:a.slice(62,75)};img.mx={};MATES.forEach(function(m,i){if(m.art)ld(m.art).then(function(x){img.mx[i]=x;});});ready=true;fxSize();homeInfo();show("home");
+  img.sp=a.slice(0,7);img.bomb=a[7];img.fh=a[8];img.fe=a[9];img.grudge=a[10];img.frost=a[11];img.sludge=a[12];img.fizz=a[13];img.crew=a.slice(14,21);img.rain=a[21];img.spx=a.slice(22,29);img.spw=a.slice(29,36);img.mood={e:a.slice(36,49),w:a.slice(49,62),s:a.slice(62,75)};wtLoad();img.mx={};MATES.forEach(function(m,i){if(m.art)ld(m.art).then(function(x){img.mx[i]=x;});});ready=true;fxSize();homeInfo();show("home");
 });
 /* ===================== daily gift, daily level, piggy, streak, pass, event, crew race, album, my lagoon ===================== */
 function dayNum(){var d=new Date();return Math.floor((d.getTime()-d.getTimezoneOffset()*60000)/864e5);}
@@ -1367,7 +1399,7 @@ function cardsCard(t){t=t||cardsCard.t||"reg";cardsCard.t=t;
   function hend(k){var n=NOW(),y=n.getFullYear(),t0=new Date(y,n.getMonth(),n.getDate()).getTime(),d=k==="xmas"?new Date(y,11,27):k==="newyear"?new Date(y+(n.getMonth()===0&&n.getDate()<=2?0:1),0,2):holDay(k,y);if(d.getTime()<t0)d=k==="xmas"?new Date(y+1,11,27):holDay(k,y+1);return d.getTime()-t0;}
   if(t==="hol")HOLS.slice().sort(function(a,b){return hend(a[0])-hend(b[0]);}).forEach(function(g){var ids=g[1].map(function(m){return CIDX["H"+m[1]];});ids.push(CIDX["G"+g[0]]);sec(CTYPE[g[0]][0],"Holiday event · "+holWhen(g[0]),ids,function(i){return CARDS[i].grp?"All "+g[1].length:"Holiday event";});});
   if(t==="spe"){if(SPE.length)sec("Special events","Special event",SPE,function(){return "Special event";});else h+='<div class="set cempty"><strong>No special events yet</strong><span>Special events pop up during the year for things like a lunar eclipse. Their cards will be kept here.</span></div>';}
-  card(h+CLOSE,"tall cardsv");var sv=$("sheet").querySelector(".card");if(sv)sv.scrollTop=0;}
+  card(h+'<button class="btn gold" data-a="passport" type="button">World Tour passport</button>'+CLOSE,"tall cardsv");var sv=$("sheet").querySelector(".card");if(sv)sv.scrollTop=0;}
 ACT.ctab=function(b){cardsCard(b.getAttribute("data-t"));};
 ACT.cardview=function(b){var i=+b.getAttribute("data-i");card('<span class="tag">Collector card</span>'+cardHTML(i)+'<button class="btn alt" data-a="cardsback" type="button">Back to my cards</button>',"tall");};
 ACT.cardsback=function(){cardsCard(cardsCard.t);};
@@ -1392,4 +1424,26 @@ if(!CFG.live)window.__pop={cheer:function(x){cheer=x;},hev:hev,hevAdd:hevAdd,hol
 })();
 </script>
 
-</body></html>
+<style>/* World Tour */
+.wtlay{position:fixed;inset:0;z-index:9990;pointer-events:auto;overflow:hidden}
+.wtfly{position:fixed;z-index:9991;pointer-events:none;will-change:transform}
+.wthero{position:fixed;left:50%;top:40%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;pointer-events:none;z-index:9992}
+.wthero img{width:150px;height:150px;animation:wtpop .6s cubic-bezier(.3,1.6,.5,1) .25s both;filter:drop-shadow(0 10px 16px rgba(20,0,60,.45))}
+.wtban{margin-top:6px;text-align:center;animation:wtpop .5s cubic-bezier(.3,1.6,.5,1) .4s both}
+.wtban b{display:block;white-space:nowrap;font:800 34px/1 "Baloo 2",system-ui,sans-serif;color:#fff;-webkit-text-stroke:2px #7a2fc4;text-shadow:0 4px 0 #4a1590,0 0 18px #ffe36b}
+.wtban span{display:inline-block;margin-top:6px;padding:4px 12px;border-radius:99px;background:rgba(40,16,100,.82);color:#ffe36b;font:800 14px "Baloo 2",system-ui,sans-serif}
+.wtconf{position:fixed;inset:0;pointer-events:none}.wtconf i{position:absolute;top:-20px;width:9px;height:14px;border-radius:2px;animation:wtfall 1.6s linear both}
+@keyframes wtfall{to{transform:translateY(110vh) rotate(720deg)}}
+@keyframes wtpop{0%{transform:scale(0)}100%{transform:scale(1)}}
+.wtst{display:flex;align-items:center;justify-content:center;background:rgba(20,8,60,.45)}
+.wtpage{width:min(320px,86vw);padding:22px 16px 18px;border-radius:22px;background:url(art/wt/passport-open.webp) center/cover;text-align:center;box-shadow:0 14px 40px rgba(0,0,0,.5);animation:wtpop .35s ease-out both}
+.wtpage b{display:block;margin-top:8px;font:800 22px "Baloo 2",system-ui,sans-serif;color:#5a2a10}.wtpage span{font:700 14px "Baloo 2",system-ui,sans-serif;color:#7a4a20}
+.wtstamp{width:170px;height:170px;animation:wtslam .5s cubic-bezier(.5,0,.6,1.4) .1s both}
+@keyframes wtslam{0%{transform:scale(3) rotate(-25deg);opacity:0}70%{transform:scale(.92) rotate(-8deg);opacity:1}100%{transform:scale(1) rotate(-10deg)}}
+.wtpass .wtcover{position:relative;width:170px;margin:0 auto}.wtpass .wtcover img{width:100%;display:block}
+.wtpass .wtcover b{position:absolute;left:12%;right:12%;top:17.5%;text-align:center;font:800 15px "Baloo 2",system-ui,sans-serif;color:#7a4a00}
+.wtbook{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 6px;padding:14px 10px;border-radius:16px;background:radial-gradient(circle at 50% 50%,rgba(230,190,120,.18),transparent 60%),#fdf3dc;border:4px solid #e0a72a;box-shadow:inset 0 0 0 2px #fff6dd,0 6px 0 #a8701a}
+.wtslot{display:flex;flex-direction:column;align-items:center;gap:2px}.wtslot img{width:72px;height:72px}
+.wtslot i{width:66px;height:66px;margin:3px;border-radius:50%;border:3px dashed rgba(120,80,40,.35)}
+.wtslot span{font:700 11px "Baloo 2",system-ui,sans-serif;color:#7a4a20}.wtslot:not(.got) span{opacity:.55}
+</style></body></html>
