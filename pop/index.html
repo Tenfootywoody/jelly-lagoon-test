@@ -715,7 +715,7 @@ function flyPlane(){if($("map").hidden||$("plane")||(window.matchMedia&&matchMed
   e.onclick=function(){audio();if(m[1]){an.cancel();e.remove();m[1]();}else e.querySelector(".pl").animate([{transform:rtl?"scaleX(-1) rotate(0)":"rotate(0)"},{transform:rtl?"scaleX(-1) rotate(-18deg)":"rotate(-18deg)"},{transform:rtl?"scaleX(-1) rotate(0)":"rotate(0)"}],{duration:600});};
   tone(220,0,.25,"sawtooth",.025);return m[0];}
 /* the pirate rows down through the map every so often and out the bottom */
-function rowPirate(){if($("map").hidden||$("pirate")||(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))return false;
+function rowPirate(){return false;if($("map").hidden||$("pirate")||(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))return false;
   var sc=$("mapScroll").getBoundingClientRect(),e=document.createElement("img");e.id="pirate";e.alt="";e.src="art/anim/pirate.webp";$("map").appendChild(e);
   var w=Math.min(190,sc.width*0.5),x=sc.left+sc.width*(0.08+Math.random()*0.5),y0=sc.top-w*1.2,y1=sc.bottom+10;e.style.width=w+"px";
   if(!e.animate){e.remove();return false;}
