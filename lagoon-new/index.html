@@ -1629,7 +1629,7 @@ function start(mode,lv,hunt,daily,saved,ser){
   else if(mode==="level"&&!saved){var ws=S.wstreak||0,fl=(S.fails&&S.fails[lv])||0;
     if(lv>=S.lvl&&ws>=5){G.moves+=3;G.M+=3;G.freeSwap=1;perk="Win streak "+ws+": +3 moves and a free Swap.";}
     else if(lv>=S.lvl&&ws>=3){G.moves+=2;G.M+=2;perk="Win streak "+ws+": +2 moves.";}
-    if(fl>=2){G.mercy=true;G.moves+=2;G.M+=2;Track("mercy_on",{level:lv,fails:fl});}}
+    if(fl>=2){G.mercy=true;G.moves+=2;G.M+=2;Track("mercy_on",{level:lv,fails:fl});}if(fl>=8){G.moves+=6;G.M+=6;G.freeSwap=1;var bk=[];for(var bi2=0;bi2<G.grid.length;bi2++){var bq=G.grid[bi2];if(bq&&(bq.rock||bq.stone||bq.weed||bq.goo))bk.push(bi2);}if(bk.length){var bkk=bk[Math.floor(bk.length/2)];if(G.grid[bkk].goo)G.grid[bkk].goo=false;else G.grid[bkk]=null;}perk="Extra help this time: +8 moves, a free Swap and one less blocker.";Track("mercy_big",{level:lv,fails:fl});}else if(fl>=5){G.moves+=3;G.M+=3;G.freeSwap=1;perk="Extra help this time: +5 moves and a free Swap.";Track("mercy_big",{level:lv,fails:fl});}else if(fl>=2&&!perk)perk="Extra help this time: +2 moves and friendlier pieces.";}
   if(mode==="level"&&!hunt&&!daily&&!ser&&lv<=3){G.mercy=true;G.easy=true;} /* first three levels: helpful pieces, generous moves, so a new player can hardly fail */
   G.tray=saved?saved.tray.map(function(i){return i<0?null:SH[i];}):(mode==="level"&&d.tray?d.tray.slice():newTray(G.grid));G.hint=mode==="level"&&!saved&&d.hint?d.hint:null;
   $("movesPill").hidden=mode!=="level";
@@ -1643,7 +1643,7 @@ function start(mode,lv,hunt,daily,saved,ser){
   if(mode==="level"&&!hunt&&!daily&&!ser&&!saved&&(lv>=41||lv>=16)&&S.cmSeen){S.met=S.met||{};var who=lv>=16&&!S.met.bomb?"bomb":lv>=41&&!S.met.rain?"rain":"";if(who)setTimeout(function(){if(G&&!G.done&&$("modal").hidden)crewIntro(who,who==="bomb"?"Bomb jellies like Boomer blast everything around them when you clear their line.":"Rainbow jellies like Prism count as any color, perfect for a Color Match.");},700);}
   if(mode==="level"&&!hunt&&!daily&&!ser&&!saved&&lv>=4&&!S.cmSeen){S.cmSeen=1;save();setTimeout(function(){if(G&&!G.done&&$("modal").hidden)colorIntro();},600);}
   var gift=mode==="level"&&!hunt&&!daily&&!ser?grantTools():"";
-  if(saved)$("tip").textContent="Welcome back. Your board is just as you left it.";else if(daily)$("tip").textContent="Daily Tide: today's puzzle does not cost lives.";else if(hunt)$("tip").textContent="Treasure Hunt: these levels do not cost lives.";else if(gift)$("tip").textContent=gift;else if(perk&&!$("tip").textContent)$("tip").textContent=perk;
+  if(saved)$("tip").textContent="Welcome back. Your board is just as you left it.";else if(daily)$("tip").textContent="Daily Tide: today's puzzle does not cost lives.";else if(hunt)$("tip").textContent="Treasure Hunt: these levels do not cost lives.";else if(gift)$("tip").textContent=gift;else if(perk&&(!$("tip").textContent||/^Extra help/.test(perk)))$("tip").textContent=perk;
   hud();
 }
 function layout(){
