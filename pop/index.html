@@ -497,7 +497,7 @@ function wtBgVid(src){var bg=$("bg"),old=bg.querySelector("video.wtbv");if(old&&
 
 /* new crew look (gloves + sneakers), owner art Nov 23 */
 var NCREW=["ruby","sunny","kiwi","bloop","jinx","mango","taffy","fin","gummy","blizzard","bolt","sol"];
-function newCrew(){MATES.forEach(function(m,i){if(NCREW.indexOf(m.name.toLowerCase())<0)return;var p="art/crew/"+m.name.toLowerCase()+".webp";ld(p).then(function(x){if(!x||!x.width)return;m.art=p;img.mx=img.mx||{};img.mx[i]=x;if(m.c<img.crew.length&&i===MATES.findIndex(function(q){return q.c===m.c;}))img.crew[m.c]=x;});});}
+function newCrew(){MATES.forEach(function(m,i){if(NCREW.indexOf(m.name.toLowerCase())<0)return;var p="art/crew/"+m.name.toLowerCase()+".webp";m.art=p;ld(p).then(function(x){if(!x||!x.width)return;img.mx=img.mx||{};img.mx[i]=x;if(m.c<img.crew.length&&i===MATES.findIndex(function(q){return q.c===m.c;}))img.crew[m.c]=x;});});}
 
 
 /* moving water map videos: only the ones on screen load and play */
@@ -1491,4 +1491,7 @@ if(!CFG.live)window.__pop={cheer:function(x){cheer=x;},hev:hev,hevAdd:hevAdd,hol
 </style><style>/* map water videos */
 .area video.mapv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;opacity:0;transition:opacity .4s}
 .area video.mapv.on{opacity:1}.area.hasv .wsh{display:none}
+</style><style>/* owner's gold crew tile */
+.chip.on{background:url(art/gold-tile-solid.webp) center/128% 122% no-repeat;border-color:transparent;box-shadow:0 0 12px rgba(255,214,90,.75)}
+.chip.on span{color:#5a3a00}
 </style></body></html>
