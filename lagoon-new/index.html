@@ -1668,7 +1668,7 @@ function start(mode,lv,hunt,daily,saved,ser){
   tickLives();ser=ser||(saved&&saved.ser)||0;
   if(mode==="level"&&!hunt&&!daily&&!ser&&!saved&&S.lives<=0){noLives();return;}
   var i;
-  WT=-1;if(mode==="level"){lv=Math.min(lv,MAXLV);WT=lv>500&&!hunt&&!daily&&!ser?Math.min(17,Math.floor((lv-501)/AL)):-1;wtSet();var d=levelDef(lv,hunt?huntState().wk%997+hunt:daily?daily%9973+500:ser?(ser>100?7100+ser:serState().wk%991*7+ser+2000):0);G={mode:mode,lv:lv,grid:d.grid,type:d.type,kind:d.kind||0,n:d.n,moves:d.moves,M:d.moves,score:0,gems:0,done:false,blast:false,streak:0};G.pools=d.pools||null;G.ps=poolSetOf(G.pools);G.wt=0;setWorld(Math.floor((lv-1)/AL));$("gTitle").textContent="Level "+lv;}
+  WT=-1;if(mode==="level"){lv=Math.min(lv,MAXLV);WT=lv>500&&!hunt&&!daily&&!ser?Math.min(17,Math.floor((lv-501)/AL)):-1;wtSet();var d=levelDef(lv,hunt?huntState().wk%997+hunt:daily?daily%9973+500:ser?(ser>100?7100+ser:serState().wk%991*7+ser+2000):0);G={mode:mode,lv:lv,grid:d.grid,type:d.type,kind:d.kind||0,n:d.n,moves:d.moves+(WT>=0?3:0),M:d.moves+(WT>=0?3:0),score:0,gems:0,done:false,blast:false,streak:0};G.pools=d.pools||null;G.ps=poolSetOf(G.pools);G.wt=0;setWorld(Math.floor((lv-1)/AL));$("gTitle").textContent="Level "+lv;}
   else{var g=[];for(i=0;i<N*N;i++)g.push(null);G={mode:mode,lv:0,grid:g,type:"endless",n:0,moves:0,M:0,score:0,gems:0,done:false,blast:false,streak:0};$("gTitle").textContent="Endless";}
   var sl=mode==="level"?lv:S.lvl;document.body.classList.toggle("sym",!!S.sym);
   if(saved){var sg=saved.g;G.grid=sg.grid;G.type=sg.type;G.kind=sg.kind||0;G.n=sg.n;G.moves=sg.moves;G.M=sg.M;G.score=sg.score;G.gems=sg.gems;G.streak=sg.streak;G.mercy=sg.mercy;G.freeSwap=sg.freeSwap;G.pools=sg.pools||null;G.ps=poolSetOf(G.pools);G.wt=sg.wt;}

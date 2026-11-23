@@ -450,7 +450,7 @@ function gen(n){
   if(n>=51)putN(Math.min(4+Math.floor((n-51)/12),8),function(q){fizz.push(q);});
   if(n>=71&&n%4===3){deep=true;g.forEach(function(v,k){var r=k>>4,c=k&15;if(r<1||v>=7)return;if((r*2+c)%3===0&&nbrs(r,c).some(function(p){return p[0]>r&&g.has(key(p[0],p[1]));}))g.set(k,v+FROZ);});}
   var cells=0;g.forEach(function(v){if(colOf(v)>=0)cells++;});
-  return {grid:g,goal:goal,whirl:whirl,fizz:fizz,deep:deep,limit:(n>500?LIM[n-181]:LIM[n-1])||Math.round(cells*0.5)+8,rnd:rnd};
+  return {grid:g,goal:goal,whirl:whirl,fizz:fizz,deep:deep,limit:(n>500?Math.round(LIM[n-181]*1.15)+1:LIM[n-1])||Math.round(cells*0.5)+8,rnd:rnd};
 }
 function reach(g){var seen={},st=[];for(var c=0;c<9;c++)if(g.has(key(0,c))){seen[key(0,c)]=1;st.push([0,c]);}
   while(st.length){var p=st.pop(),n=nbrs(p[0],p[1]);for(var i=0;i<n.length;i++){var k=key(n[i][0],n[i][1]);if(!seen[k]&&g.has(k)){seen[k]=1;st.push(n[i]);}}}return seen;}
