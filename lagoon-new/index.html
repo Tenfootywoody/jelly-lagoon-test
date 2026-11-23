@@ -142,6 +142,16 @@ html[data-bg="w9"] .mapbg .wsh{-webkit-mask-image:url(data:image/png;base64,iVBO
 .mapfoot{flex-direction:column;align-items:center;gap:8px}
 #mapNav{display:flex;gap:6px;width:min(94vw,420px)}#mapNav[hidden]{display:none}
 #mapNav .mnav{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15px;padding:9px 10px}
+</style><style>/* World Map */
+#mapNav .wmb{flex:0 0 auto}
+.wmgrid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:150px;gap:8px;max-height:56vh;flex:0 0 auto;overflow-y:auto;padding:4px 2px 8px;-webkit-overflow-scrolling:touch}
+.wmt{position:relative;display:block;height:150px!important;min-height:0!important;margin:0!important;width:auto!important;box-shadow:none;padding:0!important;border:3px solid #ffe7b0;border-radius:14px;overflow:hidden;background:#2a6aa0;cursor:pointer;aspect-ratio:9/13;color:#fff;font-family:inherit}
+.wmt img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.wmt b{position:absolute;left:6px;top:5px;font-weight:900;font-size:15px;line-height:1;background:rgba(40,16,100,.8);border-radius:99px;padding:3px 7px}
+.wmt span{position:absolute;left:0;right:0;bottom:20px;padding:0 4px;font-weight:800;font-size:11.5px;line-height:1.1;text-shadow:0 1px 3px #000,0 0 2px #000}
+.wmt i{position:absolute;left:0;right:0;bottom:3px;font-style:normal;font-weight:800;font-size:11px;color:#ffe27a;text-shadow:0 1px 2px #000}
+.wmt.here{border-color:#ffb21f;box-shadow:0 0 0 3px rgba(255,178,31,.5)}
+.wmt.lock img{filter:grayscale(1) brightness(.45)}.wmt.lock{cursor:default}.wmt.lock i{color:#ddd}
 </style></head><body>
 <meta charset="utf-8">
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -1682,7 +1692,10 @@ function erupt(){var v=$("volcano");if(!v||$("map").hidden||document.documentEle
 function volcano(){clearTimeout(VT);var v=$("volcano");if(!v){$("mapbg").insertAdjacentHTML("beforeend",'<div class="volcano" id="volcano"><div class="vglow"></div><div class="vjet"></div>'+VSVG+'<div class="vsm"></div><div class="vsm"></div><div class="vsm"></div><div class="vsm"></div><div class="vsm"></div></div>');}
   if(document.documentElement.dataset.bg!=="8")return;(function loop(first){VT=setTimeout(function(){if($("map").hidden||document.documentElement.dataset.bg!=="8")return;erupt();loop();},first?1500:11000+Math.random()*4000);})(1);}
 function curW(){return Math.min(NMAP-1,Math.floor((Math.min(S.lvl,MAXLV)-1)/AL));}
-function mapNav(){var n=$("mapNav"),cw=curW(),h="";if(mapW>cw)mapW=cw;if(mapW<0)mapW=0;if(mapW>0)h+='<button class="btn alt sm mnav" data-mapw="'+(mapW-1)+'">&#9664; Back to '+mapW+". "+AREAS[mapW-1]+'</button>';if(mapW<cw)h+='<button class="btn gold sm mnav" data-mapw="'+cw+'">Back to '+(cw+1)+". "+AREAS[cw]+' &#9654;</button>';n.innerHTML=h;n.hidden=!h;}
+function mapNav(){var n=$("mapNav"),cw=curW(),h="";if(mapW>cw)mapW=cw;if(mapW<0)mapW=0;if(mapW>0)h+='<button class="btn alt sm mnav" data-mapw="'+(mapW-1)+'">&#9664; Back to '+mapW+". "+AREAS[mapW-1]+'</button>';if(mapW<cw)h+='<button class="btn gold sm mnav" data-mapw="'+cw+'">Back to '+(cw+1)+". "+AREAS[cw]+' &#9654;</button>';h+='<button class="btn gold sm mnav wmb" data-act="worldmap">World Map</button>';n.innerHTML=h;n.hidden=!h;}
+function wKey(w){return w>=50?"w"+(w-50):BGNEW[w]?BGNEW[w]:String(BGORDER[w%NBG]);}
+function worldMap(){var cw=curW(),h='<div class="wmgrid">';for(var a=0;a<NMAP;a++){var open=a<=cw,st=0,n;for(n=a*AL+1;n<=a*AL+AL;n++)st+=(S.stars&&S.stars[n])||0;h+='<button class="wmt'+(open?'':' lock')+(a===mapW?' here':'')+'"'+(open?' data-wm="'+a+'"':' disabled')+'><img loading="lazy" alt="" src="art/thumb/t-'+wKey(a)+'.webp"><b>'+(a+1)+'</b><span>'+AREAS[a]+'</span><i>'+(open?(st?st+'/'+(AL*3)+' \u2605':'New!'):'\uD83D\uDD12 Lv '+(a*AL+1))+'</i></button>';}modal('<h2>World Map</h2><p>Tap any lagoon you have reached to go there.</p>'+h+'</div><button class="btn alt sm" data-act="close">Close</button>');setTimeout(function(){var e=document.querySelector('.wmt.here');if(e)e.scrollIntoView({block:'center'});},60);}
+setTimeout(function(){ACT.worldmap=worldMap;},0);document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('#mapNav [data-act=worldmap]')){worldMap();return;}var t=e.target.closest&&e.target.closest('[data-wm]');if(!t)return;mapW=+t.getAttribute('data-wm');closeModal();drawMap();});
 function drawMap(hopFrom){
   mapNav();setWorld(mapW);volcano();$("wName").textContent=(mapW+1)+". "+AREAS[mapW];
   var box=$("levels"),W=box.clientWidth-8,STEP=96,H=AL*STEP+150,pts=[],i,R=rng(mapW*101+7),JC=["c3","c1","c2","c4","c5","c6"];

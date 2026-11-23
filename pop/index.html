@@ -512,6 +512,16 @@ function mapVids(sc){if(mvObs)mvObs.disconnect();if(!("IntersectionObserver" in 
 
 document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-mapa]");if(!b)return;try{audio();}catch(x){}drawMap.a=+b.getAttribute("data-mapa");drawMap();});
 
+
+/* World Map: all lagoons at a glance */
+function worldMap(){var CA=Math.min(AREAS.length-1,areaOf(S.max)),h='<div class="wmgrid">';
+  for(var a=0;a<AREAS.length;a++){var open=a<=CA,st=0,n;for(n=a*10+1;n<=a*10+10;n++)st+=(S.best&&S.best[n])||0;
+    h+='<button type="button" class="wmt'+(open?"":" lock")+(a===drawMap.a?" here":"")+'"'+(open?' data-wm="'+a+'"':' disabled')+'><img loading="lazy" alt="" src="art/thumb/t'+(a%BGN)+'.webp"><b>'+(a+1)+'</b><span>'+AREAS[a]+'</span><i>'+(open?(st?st+"/30 ★":"New!"):"🔒 Lv "+(a*10+1))+'</i></button>';}
+  card('<span class="tag">All lagoons</span><h1>World Map</h1><p class="note">Tap any lagoon you have reached to go there.</p>'+h+'</div>'+CLOSE,"tall worldmap");
+  setTimeout(function(){var here=document.querySelector(".wmt.here");if(here)here.scrollIntoView({block:"center"});},60);}
+setTimeout(function(){ACT.worldmap=worldMap;},0);
+document.addEventListener("click",function(e){var w=e.target.closest&&e.target.closest("#mapNav [data-a=worldmap]");if(w){try{audio();}catch(x){}worldMap();return;}var t=e.target.closest&&e.target.closest("[data-wm]");if(!t)return;try{audio();}catch(x){}drawMap.a=+t.getAttribute("data-wm");closeCard();drawMap();});
+
 function buildLevel(n){
   if(!S.daily)buildLevel.last=n;CTRY=n>500&&!S.daily?Math.min(17,Math.floor((n-501)/10)):-1;var L=gen(n);S.lvl=n;S.grid=L.grid;S.goal=L.goal;S.whirl=L.whirl;S.tall=isTall(n);S.off=S.offT=0;S.fizz={};L.fizz.forEach(function(q){S.fizz[q]=1;});S.deep=L.deep;S.turn=0;S.limit=L.limit+helpShots(n)+(S.daily?4:0)+streakBonus();S.boss=tier(n)==="boss"&&!S.daily;S.hp0=Math.max(1,S.goal.type==="rescue"?S.goal.need:S.grid.size);S.shots=S.limit;S.adUsed=0;S.score=0;S.saved=0;S.armed=-1;S.long=0;S.rnd=L.rnd;winQ=null;S.born=performance.now();S.meter=S.daily?0:(S.fails[n]||0)>=8?NEED:(S.fails[n]||0)>=5?Math.round(NEED/2):0;S.sup=false;if(n<MATES[S.mate].at)S.mate=0;
   S.pw={};POW.forEach(function(p){if(n>=p.at)S.pw[p.k]=1;});S.lostLife=false;
@@ -697,7 +707,7 @@ function drawMap(){
   $("bg").style.backgroundImage="url(art/bg"+areaOf(S.max)%BGN+".jpg)";mapVids(sc);
   var cur=sc.querySelector('.node[data-n="'+S.max+'"]');
   if(cur)requestAnimationFrame(function(){sc.scrollTop=cur.offsetTop+cur.parentNode.offsetTop-sc.clientHeight/2;});else requestAnimationFrame(function(){sc.scrollTop=sc.scrollHeight;});
-  var nv=$("mapNav"),na=drawMap.a,nh='';if(na>0)nh+='<button class="btn alt sm mnav" type="button" data-mapa="'+(na-1)+'">&#9664; Back to '+(na)+'. '+AREAS[na-1]+'</button>';if(na<CA)nh+='<button class="btn sm mnav" type="button" data-mapa="'+CA+'">Back to '+(CA+1)+'. '+AREAS[CA]+' &#9654;</button>';nv.innerHTML=nh;nv.hidden=!nh;
+  var nv=$("mapNav"),na=drawMap.a,nh='';if(na>0)nh+='<button class="btn alt sm mnav" type="button" data-mapa="'+(na-1)+'">&#9664; Back to '+(na)+'. '+AREAS[na-1]+'</button>';if(na<CA)nh+='<button class="btn sm mnav" type="button" data-mapa="'+CA+'">Back to '+(CA+1)+'. '+AREAS[CA]+' &#9654;</button>';nh+='<button class="btn gold sm mnav wmb" type="button" data-a="worldmap">World Map</button>';nv.innerHTML=nh;nv.hidden=!nh;
 }
 /* seaplane: while the map is open it flies across every 20-30 s towing a banner; tap it to go there */
 var planeN=0;
@@ -1503,4 +1513,14 @@ if(!CFG.live)window.__pop={cheer:function(x){cheer=x;},hev:hev,hevAdd:hevAdd,hol
 .allbeat b{display:block;font:800 22px/1.1 var(--display,"Baloo 2",system-ui);margin-bottom:4px}.allbeat span{font-weight:700;font-size:14.5px;line-height:1.3}</style><style>/* one lagoon at a time */
 #mapNav{display:flex;gap:6px;margin:6px 0 0}#mapNav[hidden]{display:none}
 #mapNav .mnav{flex:1;min-width:0;font-size:14px;padding:8px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+</style><style>/* World Map */
+#mapNav .wmb{flex:0 0 auto}
+.worldmap .wmgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-height:56vh;overflow-y:auto;padding:4px 2px 8px;-webkit-overflow-scrolling:touch}
+.wmt{position:relative;padding:0;border:2px solid var(--line);border-radius:14px;overflow:hidden;background:#1d1150;cursor:pointer;aspect-ratio:9/13;color:#fff;font-family:inherit}
+.wmt img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.wmt b{position:absolute;left:6px;top:5px;font:800 15px/1 var(--display,"Baloo 2",system-ui);background:rgba(30,12,80,.8);border-radius:99px;padding:3px 7px}
+.wmt span{position:absolute;left:0;right:0;bottom:20px;padding:0 4px;font-weight:800;font-size:11.5px;line-height:1.1;text-shadow:0 1px 3px #000,0 0 2px #000}
+.wmt i{position:absolute;left:0;right:0;bottom:3px;font-style:normal;font-weight:800;font-size:11px;color:#ffe27a;text-shadow:0 1px 2px #000}
+.wmt.here{border-color:#ffd84d;box-shadow:0 0 0 3px rgba(255,216,77,.55)}
+.wmt.lock img{filter:grayscale(1) brightness(.45)}.wmt.lock{cursor:default}.wmt.lock i{color:#ddd}
 </style></body></html>
