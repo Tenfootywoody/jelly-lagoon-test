@@ -135,6 +135,13 @@ html[data-bg="w9"] .mapbg .wsh{-webkit-mask-image:url(data:image/png;base64,iVBO
 .crewgrid button:focus,.crewgrid button:focus-visible{outline:none;background:url(art/gold-tile.webp) center/112% 110% no-repeat;box-shadow:none;transform:scale(1.04)}
 #sheet:has(.crewcard){background:url(art/gc-top.webp) center top/100% auto no-repeat,url(art/gc-bot.webp) center bottom/100% auto no-repeat,url(art/gc-mid.webp) 0 60px/100% calc(100% - 120px) no-repeat;box-shadow:none;border:0;border-radius:0;padding:40px 34px 38px;filter:drop-shadow(0 10px 22px rgba(60,30,0,.35))}
 #sheet .crewcard h3{text-shadow:0 2px 0 #fff,0 0 1px #5a3a00,1px 1px 0 #5a3a00,-1px -1px 0 #5a3a00,1px -1px 0 #5a3a00,-1px 1px 0 #5a3a00}#sheet .crewcard p{color:#6b4a12}
+</style><style>.allbeat{margin:2px 0;padding:12px 12px 10px;border-radius:16px;background:linear-gradient(#ffe27a,#f5b229);box-shadow:0 4px 0 #a86a00;color:#5a2a00;text-align:center}
+.allbeat b{display:block;font-weight:900;font-size:22px;line-height:1.1;margin-bottom:4px}.allbeat span{font-weight:700;font-size:14.5px;line-height:1.3}
+#sheet.winart .mile{border:2px solid #ffd84d}#sheet.winart .mile strong{color:#ffe27a!important}#sheet.winart .mile span{color:#fff!important}</style><style>/* one lagoon at a time */
+#wPrev,#wNext{visibility:hidden}
+.mapfoot{flex-direction:column;align-items:center;gap:8px}
+#mapNav{display:flex;gap:6px;width:min(94vw,420px)}#mapNav[hidden]{display:none}
+#mapNav .mnav{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15px;padding:9px 10px}
 </style></head><body>
 <meta charset="utf-8">
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -1263,7 +1270,7 @@ html[data-bg="p48"]{--lagoon:url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQA
       <button class="round" id="wNext" aria-label="Next world">&#187;</button>
     </div>
     <div class="levels" id="levels"></div>
-    <div class="mapfoot"><button class="jb big" id="mapPlay" style="font-size:26px;padding:12px 26px 18px"><span class="face"></span><span id="mapPlayTxt">Play</span></button></div>
+    <div class="mapfoot"><div id="mapNav"></div><button class="jb big" id="mapPlay" style="font-size:26px;padding:12px 26px 18px"><span class="face"></span><span id="mapPlayTxt">Play</span></button></div>
   </section>
 
   <section id="game" hidden>
@@ -1459,7 +1466,7 @@ function lifeLeft(){var ms=Math.max(0,LIFE_MS-(Date.now()-S.lifeTs)),m=Math.floo
 /* ---------- screens ---------- */
 function hud(){tickLives();$("lives").textContent=S.lives;$("lifeTimer").textContent=S.lives<MAXLIVES?lifeLeft():"full";$("coins").textContent=S.coins;
   $("swapCnt").innerHTML=G&&G.freeSwap?"Free":S.swaps>0?S.swaps:'<span class="coin"></span>'+PRICE.swap;$("blastCnt").innerHTML=S.blasts>0?S.blasts:'<span class="coin"></span>'+PRICE.blast;toolsHud();
-  $("playTxt").textContent=S.lvl>MAXLV?"Replay levels":"Play Level "+S.lvl;$("sndPath").setAttribute("opacity",(S.sound||S.music)?1:.35);$("bestLine").textContent=S.best?"Endless best: "+S.best:"";var nm=nextMile();$("mileLine").textContent=nm?"Next trophy: level "+nm+" ("+(nm-S.lvl+1)+" to go)":"All trophies earned";chips();}
+  $("playTxt").textContent=S.lvl>MAXLV?"Replay levels":"Play Level "+S.lvl;if(S.lvl>MAXLV&&!hud.told){hud.told=1;setTimeout(function(){toast("You beat every level! More lagoons coming soon.");},1200);}$("sndPath").setAttribute("opacity",(S.sound||S.music)?1:.35);$("bestLine").textContent=S.best?"Endless best: "+S.best:"";var nm=nextMile();$("mileLine").textContent=nm?"Next trophy: level "+nm+" ("+(nm-S.lvl+1)+" to go)":"All trophies earned";chips();}
 function show(id){["home","map","game"].forEach(function(s){$(s).hidden=s!==id;});if(id!=="game")delete document.body.dataset.ws;hud();}
 var BGNEW={"4": "p25", "5": "p46", "9": "p29", "11": "p33", "13": "p27", "15": "p28", "16": "p31", "17": "p26", "18": "p30", "19": "p32", "20": "p40", "21": "p35", "22": "p43", "23": "p34", "24": "p41", "25": "p42", "26": "p39", "28": "p44", "29": "p49", "30": "p6", "31": "p8", "32": "p9", "33": "p10", "34": "p11", "35": "p15", "36": "p18", "37": "p19", "38": "p20", "39": "p21", "40": "p22", "41": "p23", "42": "p24", "43": "p36", "44": "p37", "45": "p38", "46": "p45", "47": "p47", "48": "p13", "49": "p48"};function setWorld(w){var de=document.documentElement;lagMapVid(w);if(w>=50){de.dataset.bg="w"+(w-50);de.dataset.tint=0;var p0=PAL[w%PAL.length],st0=de.style;["--sky1","--sky2","--sea","--sand","--sun1","--sun2"].forEach(function(k,i){st0.setProperty(k,p0[i]);});return;}if(BGNEW[w]){de.dataset.bg=BGNEW[w];de.dataset.tint=0;}else{de.dataset.bg=BGORDER[w%NBG];de.dataset.tint=Math.floor(w/NBG)%4;}var p=PAL[w%PAL.length],st=de.style;["--sky1","--sky2","--sea","--sand","--sun1","--sun2"].forEach(function(k,i){st.setProperty(k,p[i]);});}
 function toast(t){var el=$("toast");el.textContent=t;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(function(){el.hidden=true;},1600);}
@@ -1674,8 +1681,10 @@ function erupt(){var v=$("volcano");if(!v||$("map").hidden||document.documentEle
     setTimeout(function(){v.classList.remove("erupting");},6600);},750);return true;}
 function volcano(){clearTimeout(VT);var v=$("volcano");if(!v){$("mapbg").insertAdjacentHTML("beforeend",'<div class="volcano" id="volcano"><div class="vglow"></div><div class="vjet"></div>'+VSVG+'<div class="vsm"></div><div class="vsm"></div><div class="vsm"></div><div class="vsm"></div><div class="vsm"></div></div>');}
   if(document.documentElement.dataset.bg!=="8")return;(function loop(first){VT=setTimeout(function(){if($("map").hidden||document.documentElement.dataset.bg!=="8")return;erupt();loop();},first?1500:11000+Math.random()*4000);})(1);}
+function curW(){return Math.min(NMAP-1,Math.floor((Math.min(S.lvl,MAXLV)-1)/AL));}
+function mapNav(){var n=$("mapNav"),cw=curW(),h="";if(mapW>cw)mapW=cw;if(mapW<0)mapW=0;if(mapW>0)h+='<button class="btn alt sm mnav" data-mapw="'+(mapW-1)+'">&#9664; Back to '+mapW+". "+AREAS[mapW-1]+'</button>';if(mapW<cw)h+='<button class="btn gold sm mnav" data-mapw="'+cw+'">Back to '+(cw+1)+". "+AREAS[cw]+' &#9654;</button>';n.innerHTML=h;n.hidden=!h;}
 function drawMap(hopFrom){
-  setWorld(mapW);volcano();$("wName").textContent=(mapW+1)+". "+AREAS[mapW];
+  mapNav();setWorld(mapW);volcano();$("wName").textContent=(mapW+1)+". "+AREAS[mapW];
   var box=$("levels"),W=box.clientWidth-8,STEP=96,H=AL*STEP+150,pts=[],i,R=rng(mapW*101+7),JC=["c3","c1","c2","c4","c5","c6"];
   for(i=0;i<AL;i++)pts.push([W/2+Math.sin(i*1.05+mapW)*W*.2,H-76-i*STEP]);
   var d="M"+pts[0][0]+" "+pts[0][1];
@@ -1726,7 +1735,7 @@ function drawMap(hopFrom){
   var bt=$("bottle");if(bt)bt.onclick=function(){S.bottle=today;S.coins+=15;save();hud();SFX.sparkle();SFX.coin();Track("bottle_opened",{coins:15});sparks(bt,8);bt.remove();
     modal('<h2>Message in a bottle</h2><p style="font-size:18px">&ldquo;'+TIPS[Math.floor(Math.random()*TIPS.length)]+'&rdquo;</p><div class="chips"><span class="chip"><span class="coin"></span>+15 coins</span></div><p class="note">A new bottle washes up every day.</p><button class="btn wide" data-act="close">Thanks!</button>');};
   var focus=curI>=0?curI:(mapW*AL<S.lvl?AL-1:0);box.scrollTop=pts[focus][1]-box.clientHeight/2;
-  mapPar();var inW=S.lvl>mapW*AL&&S.lvl<=mapW*AL+AL;$("mapPlayTxt").textContent=S.lvl>MAXLV?"All levels done":"Play Level "+S.lvl;$("mapPlay").hidden=!inW;
+  mapPar();var inW=S.lvl>mapW*AL&&S.lvl<=mapW*AL+AL;$("mapPlayTxt").textContent=S.lvl>MAXLV?"All done! More coming soon":"Play Level "+S.lvl;$("mapPlay").hidden=!inW;
   if(hopFrom&&curI>0&&hopFrom===mapW*AL+curI){var he=$("hero"),dx=pts[curI-1][0]+roff(curI-1)-pts[curI][0]-roff(curI),dy=pts[curI-1][1]-pts[curI][1];
     if(he.animate&&!reduced())he.animate([{transform:"translate("+dx+"px,"+dy+"px)"},{transform:"translate(0,0)"}],{duration:1500,delay:450,fill:"backwards",easing:"ease-in-out"});
     setTimeout(function(){beep(520,.12);},1300);setTimeout(function(){var h2=$("hero");if(h2){sparks(h2,12);SFX.sparkle();}},1950);}
@@ -2063,7 +2072,7 @@ function attExplain(next){
 }
 
 /* ---------- milestones: a trophy and a reward every 10 levels ---------- */
-var MNAMES=["Fruit Picker","Bomb Squad","Bear Hugger","Rainbow Chaser","Island Hopper","Frost Breaker","Wave Rider","Reef Ranger","Storm Chaser","Lava Walker","Jelly Captain","Coral Champ","Tide Turner","Star Collector","Lagoon Legend","Sun Seeker","Palm Climber","Shell Seeker","Treasure Hunter","Deep Diver","Volcano Tamer","Moon Sailor","Pearl Finder","Jelly Admiral","Sky Skipper","Gold Finder","Crown Chaser","Island Royal","Lagoon Master","Jelly Legend","Coral Diver","Moon Chaser","Star Catcher","Mermaid Friend","Bamboo Climber","Lotus Keeper","Aurora Watcher","Night Explorer","Temple Seeker","Jungle Runner","Seahorse Rider","Pond Hopper","Reef Royal","Cruise Captain","Kelp Swimmer","Shell Master","Sunset Sailor","Tide Master","Golden Jelly","Jelly Champion"];
+var MNAMES=["Fruit Picker","Bomb Squad","Bear Hugger","Rainbow Chaser","Island Hopper","Frost Breaker","Wave Rider","Reef Ranger","Storm Chaser","Lava Walker","Jelly Captain","Coral Champ","Tide Turner","Star Collector","Lagoon Legend","Sun Seeker","Palm Climber","Shell Seeker","Treasure Hunter","Deep Diver","Volcano Tamer","Moon Sailor","Pearl Finder","Jelly Admiral","Sky Skipper","Gold Finder","Crown Chaser","Island Royal","Lagoon Master","Jelly Legend","Coral Diver","Moon Chaser","Star Catcher","Mermaid Friend","Bamboo Climber","Lotus Keeper","Aurora Watcher","Night Explorer","Temple Seeker","Jungle Runner","Seahorse Rider","Pond Hopper","Reef Royal","Cruise Captain","Kelp Swimmer","Shell Master","Sunset Sailor","Tide Master","Golden Jelly","Jelly Champion","Japan Explorer","Egypt Explorer","France Explorer","Brazil Explorer","India Explorer","China Explorer","Mexico Explorer","UK Explorer","Switzerland Explorer","Ireland Explorer","Canada Explorer","Russia Explorer","Greece Explorer","UAE Explorer","Spain Explorer","Cuba Explorer","Panama Explorer","Jamaica Explorer"];
 function mileReward(m){return{coins:m%5===0?300:100,swaps:1,blasts:1};}
 function mileText(m){var r=mileReward(m);return r.coins+" coins, 1 Swap, 1 Blast";}
 function mileDone(lv){return !!S.miles[lv]||S.lvl>lv;}
@@ -2114,7 +2123,7 @@ function won(){if(!G)return;
   if(chest)S.coins+=50;var mi=G.lv%10===0&&!S.miles[G.lv]&&G.lv>=S.lvl?G.lv/10:0;if(mi){var mr=mileReward(mi);S.miles[G.lv]=1;S.coins+=mr.coins;S.swaps+=mr.swaps;S.blasts+=mr.blasts;Track("milestone",{level:G.lv,name:MNAMES[mi-1]});}S.coins+=gain;S.played++;S.sinceInter++;won.card=(G.lv>=S.lvl&&G.lv%AL===0&&G.lv/AL<=NAREA)?G.lv/AL-1:-1;if(G.lv>=S.lvl)S.lvl=G.lv+1;save();hud();confetti();won.gain=gain;won.st=st;Track("level_completed",{level:G.lv,stars:st,moves_left:G.moves});SFX.win();
   var last=G.lv>=MAXLV;
   won.html=function(dbl){return libNew(won.card)+(mi?'<div class="mile"><span class="medal"></span><div><strong>Trophy: '+MNAMES[mi-1]+'</strong><span>Milestone reward: '+mileText(mi)+'</span></div></div>':'')+'<h2>'+(st===3?"Perfect!":st===2?"Nice one!":"Cleared!")+'</h2><div class="stars" aria-label="'+st+' of 3 stars">'+"★★★".slice(0,st)+'<b>'+"★★★".slice(st)+'</b></div><p>Level '+G.lv+' done with '+G.moves+' moves left. You earned <strong style="color:var(--gold)">'+gain+' coins</strong>.</p>'+(chest?'<p><strong style="color:#e09a00">Treasure chest: +50 coins!</strong></p>':'')+(firstWin&&ws>=2?'<p class="streakline">'+FLAME+'<span><strong>Win streak: '+ws+'.</strong> '+(ws>=5?"Next level: +3 moves and a free Swap.":ws>=3?"Next level starts with +2 moves."+(ws===4?" One more for a free Swap too.":""):"One more win for a head start.")+'</span></p>':'')+
-    (last?'<p>You finished all '+MAXLV+' levels. More worlds are coming.</p><button class="btn wide" data-act="home">Home</button>':'<button class="btn wide" data-act="next">Continue</button>'+(dbl?'<button class="btn gold wide sm" data-act="double" id="dblBtn">Watch an ad: double coins (+'+gain+')</button>':'<p>Coins doubled!</p>')+'<button class="btn alt sm" data-act="home">Home</button>');};
+    (last?'<div class="allbeat"><b>You beat every level!</b><span>All '+MAXLV+' levels of Jelly Lagoon are done. New lagoons are coming soon, so watch for the next update!</span></div><button class="btn wide" data-act="home">Home</button>':'<button class="btn wide" data-act="next">Continue</button>'+(dbl?'<button class="btn gold wide sm" data-act="double" id="dblBtn">Watch an ad: double coins (+'+gain+')</button>':'<p>Coins doubled!</p>')+'<button class="btn alt sm" data-act="home">Home</button>');};
   if(mi)celebrate(mi,function(){modal(won.html(true));winArt(st);if(WT>=0&&WTV[WT])wtVidModal(WTV[WT]);});else{modal(won.html(true));winArt(st);if(WT>=0&&WTV[WT])wtVidModal(WTV[WT]);}askReview(st);setTimeout(function(){if(!$("modal").hidden)talk(rnd(CREWK.slice(0,7)),rnd(WINL));},550);
 }
 ACT.double=function(){Ads.rewarded("double_coins",function(){S.coins+=won.gain;save();hud();modal(won.html(false));winArt(won.st);});};
@@ -2259,6 +2268,7 @@ function lagMapVid(w){var b=$("mapbg");if(!b)return;var old=b.querySelector("vid
   var v=mkVid(src,"mapv");v.dataset.k=src;v.addEventListener("playing",function(){v.classList.add("on");b.classList.add("hasv");});b.insertBefore(v,b.firstChild);
   var t=setInterval(function(){if(!v.parentNode){clearInterval(t);b.classList.remove("hasv");return;}var hid=$("map").hidden;if(hid&&!v.paused)v.pause();else if(!hid&&v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){});}},1000);}
 function openMap(hop){wtBgVid(null);mapW=Math.floor((Math.min(S.lvl,MAXLV)-1)/AL);show("map");drawMap(hop);setTimeout(notifyOffer,900);clearTimeout(flyPlane.t);flyPlane.t=setTimeout(flyPlane,3500);planeLoop();}
+$("mapNav").addEventListener("click",function(e){var b=e.target.closest("[data-mapw]");if(!b)return;mapW=+b.getAttribute("data-mapw");drawMap();});
 $("mapPlay").onclick=function(){if(S.lvl<=MAXLV)start("level",S.lvl);};
 $("mapBack").onclick=function(){ACT.home();};
 $("wPrev").onclick=function(){mapW=(mapW+NMAP-1)%NMAP;drawMap();};

@@ -329,6 +329,7 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
     </div>
     <div id="hub"></div>
     <div id="mapScroll"></div>
+    <div id="mapNav"></div>
     <button class="btn" id="mapPlay" type="button">Play</button>
     <button class="ib" id="mapUnlock" type="button" style="text-align:center">Test mode: unlock all levels</button>
   </div>
@@ -508,8 +509,11 @@ function mapVids(sc){if(mvObs)mvObs.disconnect();if(!("IntersectionObserver" in 
   mvObs=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting&&!$("map").hidden){if(!v.src){v.src=mvSrc(v.getAttribute("data-src"));v.muted=true;}var p=v.play();if(p&&p.catch)p.catch(function(){});v.parentNode.classList.add("hasv");}else if(v.src){v.pause();}});},{root:sc,rootMargin:"200px 0px"});
   [].forEach.call(sc.querySelectorAll("video.mapv"),function(v){v.addEventListener("playing",function(){v.classList.add("on");});mvObs.observe(v);});}
 
+
+document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-mapa]");if(!b)return;try{audio();}catch(x){}drawMap.a=+b.getAttribute("data-mapa");drawMap();});
+
 function buildLevel(n){
-  CTRY=n>500&&!S.daily?Math.min(17,Math.floor((n-501)/10)):-1;var L=gen(n);S.lvl=n;S.grid=L.grid;S.goal=L.goal;S.whirl=L.whirl;S.tall=isTall(n);S.off=S.offT=0;S.fizz={};L.fizz.forEach(function(q){S.fizz[q]=1;});S.deep=L.deep;S.turn=0;S.limit=L.limit+helpShots(n)+(S.daily?4:0)+streakBonus();S.boss=tier(n)==="boss"&&!S.daily;S.hp0=Math.max(1,S.goal.type==="rescue"?S.goal.need:S.grid.size);S.shots=S.limit;S.adUsed=0;S.score=0;S.saved=0;S.armed=-1;S.long=0;S.rnd=L.rnd;winQ=null;S.born=performance.now();S.meter=S.daily?0:(S.fails[n]||0)>=8?NEED:(S.fails[n]||0)>=5?Math.round(NEED/2):0;S.sup=false;if(n<MATES[S.mate].at)S.mate=0;
+  if(!S.daily)buildLevel.last=n;CTRY=n>500&&!S.daily?Math.min(17,Math.floor((n-501)/10)):-1;var L=gen(n);S.lvl=n;S.grid=L.grid;S.goal=L.goal;S.whirl=L.whirl;S.tall=isTall(n);S.off=S.offT=0;S.fizz={};L.fizz.forEach(function(q){S.fizz[q]=1;});S.deep=L.deep;S.turn=0;S.limit=L.limit+helpShots(n)+(S.daily?4:0)+streakBonus();S.boss=tier(n)==="boss"&&!S.daily;S.hp0=Math.max(1,S.goal.type==="rescue"?S.goal.need:S.grid.size);S.shots=S.limit;S.adUsed=0;S.score=0;S.saved=0;S.armed=-1;S.long=0;S.rnd=L.rnd;winQ=null;S.born=performance.now();S.meter=S.daily?0:(S.fails[n]||0)>=8?NEED:(S.fails[n]||0)>=5?Math.round(NEED/2):0;S.sup=false;if(n<MATES[S.mate].at)S.mate=0;
   S.pw={};POW.forEach(function(p){if(n>=p.at)S.pw[p.k]=1;});S.lostLife=false;
   scroll();S.cur=pickColor(S.rnd);S.next=pickColor(S.rnd);S.state="play";ball=null;fx=[];aim=null;
   $("bg").style.backgroundImage="url(art/bg"+areaOf(n)%BGN+".jpg)";wtBgVid(CTRY>=0&&n%10===0&&WTV[CTRY]);dock();hud();
@@ -600,7 +604,7 @@ function place(cell,kind,pts){
 
 /* ---------- turn flow ---------- */
 function fire(ang){
-  if(S.state!=="play"||ball||S.shots<=0)return false;if(S.tall&&Math.abs(S.off-S.offT)>0.03)return false;
+  if(S.state!=="play"||ball||S.shots<=0)return false;if(S.tall&&Math.abs(S.off-S.offT)>0.03)S.off=S.offT;
   var t=trace(ang);if(!t.cell)return false;
   var col=S.armed>=0?S.armed:S.sup?SUP+S.mate:S.cur;
   if(S.armed>=0)usePower(S.armed);else if(S.sup){S.sup=false;S.meter=0;}else{S.cur=S.next;S.next=pickColor(S.rnd);}
@@ -671,7 +675,7 @@ var NCOL=[["#ff9be0","#d936b0","#8f1d7a"],["#ffc27a","#f5752a","#a8400e"],["#8ff
 var NPROP=[["sea-turtle", "pelican"], ["coconut-crab", "mango-parrot"], ["mango-parrot", "butterfly"], ["starfish", "pelican"], ["firefly", "glow-jellyfish"], ["bubble-fish", "seahorse"], ["bubble-fish", "sea-turtle"], ["seahorse", "glow-jellyfish"], ["glow-jellyfish", "firefly"], ["baby-whale", "pelican"], ["butterfly", "mango-parrot"], ["pelican", "baby-whale"], ["sea-otter", "bubble-fish"], ["coconut-crab", "sea-turtle"], ["butterfly", "firefly"], ["pelican", "glow-jellyfish"], ["penguin", "baby-whale"], ["lava-newt", "coconut-crab"], ["sea-turtle", "mango-parrot"], ["sea-dragon", "seahorse"], ["coconut-crab", "pelican"], ["firefly", "glow-jellyfish"], ["coconut-crab", "bubble-fish"], ["starfish", "mango-parrot"], ["sea-dragon", "butterfly"]];
 function drawMap(){
   var sc=$("mapScroll"),h="",STEP=82,PAD=58;
-  for(var a=Math.min(AREAS.length-1,areaOf(S.max)+1);a>=0;a--){
+  var CA=Math.min(AREAS.length-1,areaOf(S.max));if(drawMap.a==null||drawMap.a>CA||drawMap.a<0)drawMap.a=CA;for(var a=drawMap.a;a>=drawMap.a;a--){
     var ht=PAD*2+9*STEP;h+='<div class="area" style="--n1:'+NCOL[a%NCOL.length][0]+';--n2:'+NCOL[a%NCOL.length][1]+';--n3:'+NCOL[a%NCOL.length][2]+';height:'+ht+'px;background-image:url(art/bg'+a%BGN+'.jpg)"><h2>'+(a+1)+'. '+AREAS[a]+'</h2>'+(MAPV[a]?'<video class="mapv" muted loop playsinline preload="none" data-src="'+MAPV[a]+'"></video>':'')+'<i class="wsh" style="-webkit-mask-image:url('+WM[a%BGN]+');mask-image:url('+WM[a%BGN]+')"><b></b><b class="b2"></b></i>';
     for(var i=0;i<10;i++){var n=a*10+i+1,x=nodeX(n),y=ht-PAD-i*STEP;
       if(i<9){var x2=nodeX(n+1);for(var d=1;d<=7;d++){var jt=((n*7+d*13)%9-4);h+='<span class="dot'+(d%2?"":" b")+'" style="left:calc('+(x+(x2-x)*d/8)+'% + '+jt+'px);top:'+(y-STEP*d/8+((n*5+d*11)%7-3))+'px;animation-delay:-'+(d*0.23)+'s"></span>';}}
@@ -692,7 +696,8 @@ function drawMap(){
   [].forEach.call(sc.querySelectorAll("canvas.masc"),function(c){c.getContext("2d").drawImage(mkSprite(+c.getAttribute("data-c"),92),0,0);});
   $("bg").style.backgroundImage="url(art/bg"+areaOf(S.max)%BGN+".jpg)";mapVids(sc);
   var cur=sc.querySelector('.node[data-n="'+S.max+'"]');
-  if(cur)requestAnimationFrame(function(){sc.scrollTop=cur.offsetTop+cur.parentNode.offsetTop-sc.clientHeight/2;});
+  if(cur)requestAnimationFrame(function(){sc.scrollTop=cur.offsetTop+cur.parentNode.offsetTop-sc.clientHeight/2;});else requestAnimationFrame(function(){sc.scrollTop=sc.scrollHeight;});
+  var nv=$("mapNav"),na=drawMap.a,nh='';if(na>0)nh+='<button class="btn alt sm mnav" type="button" data-mapa="'+(na-1)+'">&#9664; Back to '+(na)+'. '+AREAS[na-1]+'</button>';if(na<CA)nh+='<button class="btn sm mnav" type="button" data-mapa="'+CA+'">Back to '+(CA+1)+'. '+AREAS[CA]+' &#9654;</button>';nv.innerHTML=nh;nv.hidden=!nh;
 }
 /* seaplane: while the map is open it flies across every 20-30 s towing a banner; tap it to go there */
 var planeN=0;
@@ -723,7 +728,7 @@ function rowPirate(){return false;if($("map").hidden||$("pirate")||(window.match
   an.onfinish=function(){e.remove();};return true;}
 function pirateLoop(first){clearTimeout(pirateLoop.t);pirateLoop.t=setTimeout(function(){if(!$("map").hidden){rowPirate();pirateLoop();}},first?11000:30000+Math.random()*15000);}
 function planeLoop(first){clearTimeout(planeLoop.t);planeLoop.t=setTimeout(function(){if(!$("map").hidden){flyPlane();planeLoop();}},first?4000:20000+Math.random()*10000);}
-function goMap(){try{Ads.flush();}catch(e){}planeLoop(true);pirateLoop(true);wallet();if(CFG.live)$("mapUnlock").hidden=true;$("mapUnlock").hidden=S.max>=LEVELS;S.state="map";S.daily=false;if(S.best&&S.best[LEVELS]&&!goMap.told){goMap.told=1;setTimeout(function(){toast("You beat every level! More lagoons coming soon.");},900);}wtBgVid(null);$("sheet").hidden=true;show("map");drawMap();metaOpen();}
+function goMap(){try{Ads.flush();}catch(e){}planeLoop(true);pirateLoop(true);wallet();if(CFG.live)$("mapUnlock").hidden=true;$("mapUnlock").hidden=S.max>=LEVELS;S.state="map";S.daily=false;(function(){var ca=areaOf(S.max),lp=buildLevel.last,la=lp?areaOf(Math.min(lp,S.max)):ca;drawMap.a=(lp&&lp%10===0&&ca>la)?ca:la;})();if(S.best&&S.best[LEVELS]&&!goMap.told){goMap.told=1;setTimeout(function(){toast("You beat every level! More lagoons coming soon.");},900);}wtBgVid(null);$("sheet").hidden=true;show("map");drawMap();metaOpen();}
 function helpShots(n){var f=S.daily?0:(S.fails[n]||0);return f>=8?10:f>=5?6:f>=3?3:0;}
 function helpNote(n){var f=S.daily?0:(S.fails[n]||0);return f>=8?"Extra help this time: +10 shots and a full power bar.":f>=5?"Extra help this time: +6 shots and a half-full power bar.":f>=3?"Extra help this time: +3 shots.":"";}
 function startLevel(n){tickLives();$("boss").hidden=!(tier(n)==="boss"&&!S.daily);if(S.lives<=0&&n>NOLIFE&&!S.daily){show("map");livesCard(n);return;}var pe=$("plane");if(pe)pe.remove();var pr=$("pirate");if(pr)pr.remove();clearTimeout(planeLoop.t);clearTimeout(pirateLoop.t);show("game");size();buildLevel(n);sheet("pick");}
@@ -1495,4 +1500,7 @@ if(!CFG.live)window.__pop={cheer:function(x){cheer=x;},hev:hev,hevAdd:hevAdd,hol
 .chip.on{background:url(art/gold-tile-solid.webp) center/128% 122% no-repeat;border-color:transparent;box-shadow:0 0 12px rgba(255,214,90,.75)}
 .chip.on span{color:#5a3a00}
 </style><style>.allbeat{margin:4px 0 2px;padding:12px 12px 10px;border-radius:16px;background:linear-gradient(#ffe27a,#f5b229);box-shadow:0 4px 0 #a86a00;color:#5a2a00;text-align:center}
-.allbeat b{display:block;font:800 22px/1.1 var(--display,"Baloo 2",system-ui);margin-bottom:4px}.allbeat span{font-weight:700;font-size:14.5px;line-height:1.3}</style></body></html>
+.allbeat b{display:block;font:800 22px/1.1 var(--display,"Baloo 2",system-ui);margin-bottom:4px}.allbeat span{font-weight:700;font-size:14.5px;line-height:1.3}</style><style>/* one lagoon at a time */
+#mapNav{display:flex;gap:6px;margin:6px 0 0}#mapNav[hidden]{display:none}
+#mapNav .mnav{flex:1;min-width:0;font-size:14px;padding:8px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+</style></body></html>
