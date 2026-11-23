@@ -494,6 +494,11 @@ function wtVidSheet(src){var el=$("sheet");if(el.hidden)return;var v=mkVid(src,"
   var t=setInterval(function(){if(el.hidden||!v.parentNode){clearInterval(t);v.pause();v.removeAttribute("src");v.load();if(v.parentNode)v.remove();el.classList.remove("wtv");}},800);}
 function wtBgVid(src){var bg=$("bg"),old=bg.querySelector("video.wtbv");if(old&&(!src||old.dataset.k!==src)){old.pause();old.removeAttribute("src");old.load();old.remove();old=null;}if(src&&!old){var nv=mkVid(src,"wtbv");nv.dataset.k=src;bg.appendChild(nv);}}
 
+
+/* new crew look (gloves + sneakers), owner art Nov 23 */
+var NCREW=["ruby","sunny","kiwi","bloop","jinx","mango","taffy","fin","gummy","blizzard","bolt","sol"];
+function newCrew(){MATES.forEach(function(m,i){if(NCREW.indexOf(m.name.toLowerCase())<0)return;var p="art/crew/"+m.name.toLowerCase()+".webp";ld(p).then(function(x){if(!x||!x.width)return;m.art=p;img.mx=img.mx||{};img.mx[i]=x;if(m.c<img.crew.length&&i===MATES.findIndex(function(q){return q.c===m.c;}))img.crew[m.c]=x;});});}
+
 function buildLevel(n){
   CTRY=n>500&&!S.daily?Math.min(17,Math.floor((n-501)/10)):-1;var L=gen(n);S.lvl=n;S.grid=L.grid;S.goal=L.goal;S.whirl=L.whirl;S.tall=isTall(n);S.off=S.offT=0;S.fizz={};L.fizz.forEach(function(q){S.fizz[q]=1;});S.deep=L.deep;S.turn=0;S.limit=L.limit+helpShots(n)+(S.daily?4:0)+streakBonus();S.boss=tier(n)==="boss"&&!S.daily;S.hp0=Math.max(1,S.goal.type==="rescue"?S.goal.need:S.grid.size);S.shots=S.limit;S.adUsed=0;S.score=0;S.saved=0;S.armed=-1;S.long=0;S.rnd=L.rnd;winQ=null;S.born=performance.now();S.meter=S.daily?0:(S.fails[n]||0)>=8?NEED:(S.fails[n]||0)>=5?Math.round(NEED/2):0;S.sup=false;if(n<MATES[S.mate].at)S.mate=0;
   S.pw={};POW.forEach(function(p){if(n>=p.at)S.pw[p.k]=1;});S.lostLife=false;
@@ -664,8 +669,8 @@ function drawMap(){
       var st=S.best[n]||0,cls=n<S.max?"done":n===S.max?"cur":"lock",ss="";for(var s=0;s<st;s++)ss+="★";
       var boss=i===9,vn=["grudge","frost","sludge","fizz"][a%4];
       h+='<button type="button" class="node '+cls+(isRescue(n)?" resc":"")+(boss?" boss":"")+'" data-n="'+n+'" style="left:'+x+'%;top:'+y+'px"'+(n>S.max?" disabled":"")+' aria-label="Level '+n+'">'+n+(boss?'<img alt="" src="'+ART[vn]+'">':'')+(ss?'<i>'+ss+'</i>':'')+(tier(n)==="hard"?'<b class="tb hard">HARD</b>':tier(n)==="boss"?'<b class="tb boss">BOSS</b>':'')+'</button>';
-      if(i===4)h+='<img class="masc anim" alt="" src="art/anim/'+["ruby","sunny","bloop"][(a+i)%3]+'.webp" style="left:'+(x<50?90:10)+'%;top:'+(y+2)+'px">';
-      if(n===S.max)h+='<img class="me" alt="" src="art/anim/ruby-muse.webp" style="left:'+(x<50?x+20:x-20)+'%;top:'+y+'px">';}
+      if(i===4)h+='<img class="masc anim nc" alt="" src="art/crew/'+NCREW[(a*5+i)%NCREW.length]+'.webp" style="left:'+(x<50?90:10)+'%;top:'+(y+2)+'px">';
+      if(n===S.max)h+='<img class="me nc" alt="" src="art/crew/'+(NCREW.indexOf(((MATES[S.mate]||MATES[0]).name||"").toLowerCase())>=0?(MATES[S.mate]||MATES[0]).name.toLowerCase():"ruby")+'.webp" style="left:'+(x<50?x+20:x-20)+'%;top:'+y+'px">';}
     var pn=a*10+5.5,px=nodeX(pn)>50?3:70;if(a%2===0)h+='<img class="prop" alt="" src="art/anim/castaway.webp" style="left:'+px+'%;top:'+(ht-PAD-4.6*STEP-50)+'px">';
     (AREAS[a]==="Frost Fjord"?[]:[6]).forEach(function(i,j){var xx=nodeX(a*10+i+1.5);h+='<span class="spl s3" style="left:'+(xx>50?xx-34:xx+34)+'%;top:'+(ht-PAD-(i+0.5)*STEP+34)+'px"></span><img class="jf" alt="" src="art/anim/jf-'+["blue","pink","purple","yellow","green"][(a+j*2)%5]+'.webp" style="left:'+(xx>50?xx-34:xx+34)+'%;top:'+(ht-PAD-(i+0.5)*STEP)+'px;animation-delay:-'+(j*1.3)+'s">';});
     if(a%3===0)h+='<img class="guy" alt="" src="art/anim/guy.webp" style="'+(nodeX(a*10+2)>50?"left:3%":"right:3%")+';top:'+(ht-PAD-1.2*STEP)+'px">';
@@ -1195,7 +1200,7 @@ if(window.ResizeObserver)new ResizeObserver(function(){var b=$("stage").getBound
 /* ---------- boot ---------- */
 function ld(src){return new Promise(function(res){var i=new Image();i.onload=function(){res(i);};i.onerror=function(){res(i);};i.src=src;});}
 load();$("sndHome").textContent="Sound: "+((S.sound||S.music)?"on":"off");Promise.all(ART.sp.map(ld).concat([ld(ART.bomb),ld(ART.fh),ld(ART.fe),ld(ART.grudge),ld(ART.frost),ld(ART.sludge),ld(ART.fizz)].concat(ART.crew.map(ld)).concat([ld(ART.rain)]).concat(ART.spx.map(ld)).concat(ART.spw.map(ld)).concat(ART.mood.e.map(ld)).concat(ART.mood.w.map(ld)).concat(ART.mood.s.map(ld)))).then(function(a){
-  img.sp=a.slice(0,7);img.bomb=a[7];img.fh=a[8];img.fe=a[9];img.grudge=a[10];img.frost=a[11];img.sludge=a[12];img.fizz=a[13];img.crew=a.slice(14,21);img.rain=a[21];img.spx=a.slice(22,29);img.spw=a.slice(29,36);img.mood={e:a.slice(36,49),w:a.slice(49,62),s:a.slice(62,75)};wtLoad();img.mx={};MATES.forEach(function(m,i){if(m.art)ld(m.art).then(function(x){img.mx[i]=x;});});ready=true;fxSize();homeInfo();show("home");
+  img.sp=a.slice(0,7);img.bomb=a[7];img.fh=a[8];img.fe=a[9];img.grudge=a[10];img.frost=a[11];img.sludge=a[12];img.fizz=a[13];img.crew=a.slice(14,21);newCrew();img.rain=a[21];img.spx=a.slice(22,29);img.spw=a.slice(29,36);img.mood={e:a.slice(36,49),w:a.slice(49,62),s:a.slice(62,75)};wtLoad();img.mx={};MATES.forEach(function(m,i){if(m.art)ld(m.art).then(function(x){img.mx[i]=x;});});ready=true;fxSize();homeInfo();show("home");
 });
 /* ===================== daily gift, daily level, piggy, streak, pass, event, crew race, album, my lagoon ===================== */
 function dayNum(){var d=new Date();return Math.floor((d.getTime()-d.getTimezoneOffset()*60000)/864e5);}
@@ -1470,4 +1475,8 @@ if(!CFG.live)window.__pop={cheer:function(x){cheer=x;},hev:hev,hevAdd:hevAdd,hol
 .card.winart .stars{display:none}
 .card.winart .tag{margin-top:-2px}
 .card.winart canvas.big{width:88px;height:88px}
+</style><style>/* new crew look */
+.masc.anim.nc{width:74px;height:74px;margin:-37px 0 0 -37px;animation:bob 2.4s ease-in-out infinite}
+.me.nc{width:70px;height:70px}
+@media (prefers-reduced-motion:reduce){.masc.anim.nc{animation:none}}
 </style></body></html>
