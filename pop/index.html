@@ -1326,8 +1326,8 @@ function albumCard(){var h='<span class="tag">Sticker album</span><h1>'+albCount
 ACT.setget=function(b){var si=+b.getAttribute("data-i"),s=SETS[si];if(S.albDone.indexOf(si)>=0)return;for(var i=s[1];i<s[2];i++)if(!S.alb[i])return;S.albDone.push(si);give(s[3]);snd("win");toast("+"+rwText(s[3]));albumCard();};
 /* ---- my lagoon ---- */
 function lagoonCard(){var sc="",ls="";DECO.forEach(function(d,i){var own=S.deco.indexOf(i)>=0;if(own)sc+='<div class="dc" style="left:'+d[2]+'%;top:'+d[3]+'%;width:'+d[4]+'%">'+d[5]+'</div>';
-    ls+='<div class="row"><div class="di">'+d[5]+'</div><div><strong>'+d[0]+'</strong><span>'+(own?"In your lagoon":d[1]+" shells")+'</span></div><button class="btn '+(own||S.shells<d[1]?"alt":"gold")+'" data-a="decobuy" data-i="'+i+'" type="button"'+(own||S.shells<d[1]?" disabled":"")+'>'+(own?"Placed":"Place")+'</button></div>';});
-  var all=S.deco.length>=DECO.length;card('<span class="tag">My Lagoon · '+S.shells+' shells</span><h1>'+(all?"Your lagoon is complete!":"Build your lagoon")+'</h1><div class="scene" style="background-image:url(art/bg0.jpg)">'+sc+'</div><p class="note">Every star you win is 1 shell. Place all '+DECO.length+' for a 300 coin bonus.</p><div class="list">'+ls+'</div>'+CLOSE,"tall shop");}
+    ls+='<div class="row"><div class="di">'+d[5]+'</div><div><strong>'+d[0]+'</strong><span>'+(own?"In your lagoon":d[1]+" shells")+'</span></div><button class="btn '+(own?"alt placed":S.shells<d[1]?"alt need":"gold")+'" data-a="decobuy" data-i="'+i+'" type="button"'+(own||S.shells<d[1]?" disabled":"")+'>'+(own?"Placed \u2713":S.shells<d[1]?"Need "+(d[1]-S.shells)+" more":"Place")+'</button></div>';});
+  var all=S.deco.length>=DECO.length;card('<button class="x" data-a="closecard" type="button" aria-label="Close">X</button><span class="tag">My Lagoon · '+S.shells+' shells</span><h1>'+(all?"Your lagoon is complete!":"Build your lagoon")+'</h1><div class="scene" style="background-image:url(art/bg0.jpg)">'+sc+'</div><p class="note">Every star you win is 1 shell. Place all '+DECO.length+' for a 300 coin bonus.</p><div class="list">'+ls+'</div>'+CLOSE,"tall shop");}
 ACT.decobuy=function(b){var i=+b.getAttribute("data-i"),d=DECO[i];if(S.deco.indexOf(i)>=0||S.shells<d[1])return;S.shells-=d[1];S.deco.push(i);snd("win");if(S.deco.length===DECO.length){S.coins+=300;toast("Lagoon complete! +300 coins");}else toast(d[0]+" placed!");save();wallet();hub();lagoonCard();};
 /* ---- what a win or a loss feeds ---- */
 function metaWin(stars,first){roll();var boss=tier(S.lvl)==="boss",add=first?10:4,st=first?stars:1,o=[];
@@ -1523,4 +1523,5 @@ if(!CFG.live)window.__pop={cheer:function(x){cheer=x;},hev:hev,hevAdd:hevAdd,hol
 .wmt i{position:absolute;left:0;right:0;bottom:3px;font-style:normal;font-weight:800;font-size:11px;color:#ffe27a;text-shadow:0 1px 2px #000}
 .wmt.here{border-color:#ffd84d;box-shadow:0 0 0 3px rgba(255,216,77,.55)}
 .wmt.lock img{filter:grayscale(1) brightness(.45)}.wmt.lock{cursor:default}.wmt.lock i{color:#ddd}
-</style></body></html>
+</style><style>.shop .btn.need{filter:grayscale(1) brightness(.9);font-size:13px!important;white-space:nowrap;opacity:1}
+.shop .btn.placed{filter:hue-rotate(-95deg) saturate(1.15);font-size:15px!important;white-space:nowrap;opacity:1}</style></body></html>
