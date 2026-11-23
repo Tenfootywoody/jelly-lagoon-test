@@ -501,7 +501,7 @@ function newCrew(){MATES.forEach(function(m,i){if(NCREW.indexOf(m.name.toLowerCa
 
 
 /* moving water map videos: only the ones on screen load and play */
-var MAPV={"51": "art/wt/map-egypt.mp4", "52": "art/wt/map-france.mp4", "54": "art/wt/map-india.mp4", "56": "art/wt/map-mexico.mp4", "57": "art/wt/map-uk.mp4", "60": "art/wt/map-canada.mp4", "62": "art/wt/map-greece.mp4", "64": "art/wt/map-spain.mp4", "66": "art/wt/map-panama.mp4", "67": "art/wt/map-jamaica.mp4", "53": "art/wt/map-brazil.mp4", "50": "art/wt/map-japan.mp4", "55": "art/wt/map-china.mp4"},mvObs=null;
+var MAPV={"51": "art/wt/map-egypt.mp4", "52": "art/wt/map-france.mp4", "54": "art/wt/map-india.mp4", "56": "art/wt/map-mexico.mp4", "57": "art/wt/map-uk.mp4", "60": "art/wt/map-canada.mp4", "62": "art/wt/map-greece.mp4", "64": "art/wt/map-spain.mp4", "66": "art/wt/map-panama.mp4", "67": "art/wt/map-jamaica.mp4", "53": "art/wt/map-brazil.mp4", "50": "art/wt/map-japan.mp4", "55": "art/wt/map-china.mp4", "58": "art/wt/map-switzerland.mp4"},mvObs=null;
 setInterval(function(){var m=$("map");if(!m||!m.hidden)return;[].forEach.call(document.querySelectorAll("video.mapv"),function(v){if(!v.paused)v.pause();});},1200);
 function mvSrc(src){var t=document.createElement("video");return (!t.canPlayType('video/mp4; codecs="avc1.42E01E"')&&t.canPlayType("video/webm"))?src.replace(".mp4",".webm"):src;}
 function mapVids(sc){if(mvObs)mvObs.disconnect();if(!("IntersectionObserver" in window))return;
