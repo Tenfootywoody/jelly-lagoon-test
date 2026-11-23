@@ -1260,7 +1260,7 @@ html[data-bg="p48"]{--lagoon:url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQA
 
   <section id="home">
     <div class="homeart" role="img" aria-label="Jelly Lagoon. Drop the blocks. Fill a row or column to clear it away.">
-      <h1 class="logo">Jelly Lagoon</h1>
+      <div id="lhub" aria-label="Events and rewards"></div><h1 class="logo">Jelly Lagoon</h1>
       <button class="jb big" id="playBtn"><span class="face"></span><span id="playTxt">Play Level 1</span></button>
       <button class="hit" id="mapBtn">Levels</button>
       <button class="hit" id="endBtn">Endless</button>
@@ -2140,9 +2140,9 @@ function won(){if(!G)return;
   var firstWin=G.lv>=S.lvl;if(firstWin)S.wstreak=(S.wstreak||0)+1;if(S.fails)delete S.fails[G.lv];var ws=S.wstreak||0;
   var left=G.moves/G.M,st=left>=.3?3:left>=.1?2:1,gain=10+st*5;
   var chest=!S.stars[G.lv]&&G.lv%5===0;if(st>(S.stars[G.lv]||0))S.stars[G.lv]=st;
-  if(chest)S.coins+=50;var mi=G.lv%10===0&&!S.miles[G.lv]&&G.lv>=S.lvl?G.lv/10:0;if(mi){var mr=mileReward(mi);S.miles[G.lv]=1;S.coins+=mr.coins;S.swaps+=mr.swaps;S.blasts+=mr.blasts;Track("milestone",{level:G.lv,name:MNAMES[mi-1]});}won.sh=G.lv>=S.lvl?st:1;S.shells=(S.shells||0)+won.sh;S.coins+=gain;S.played++;S.sinceInter++;won.card=(G.lv>=S.lvl&&G.lv%AL===0&&G.lv/AL<=NAREA)?G.lv/AL-1:-1;won.wt=(WT>=0&&G.lv>=S.lvl&&G.lv%AL===0)?WT:-1;if(G.lv>=S.lvl)S.lvl=G.lv+1;save();hud();confetti();won.gain=gain;won.st=st;Track("level_completed",{level:G.lv,stars:st,moves_left:G.moves});SFX.win();
+  if(chest)S.coins+=50;var mi=G.lv%10===0&&!S.miles[G.lv]&&G.lv>=S.lvl?G.lv/10:0;if(mi){var mr=mileReward(mi);S.miles[G.lv]=1;S.coins+=mr.coins;S.swaps+=mr.swaps;S.blasts+=mr.blasts;Track("milestone",{level:G.lv,name:MNAMES[mi-1]});}won.rep=G.lv<S.lvl;won.sh=G.lv>=S.lvl?st:1;S.shells=(S.shells||0)+won.sh;S.coins+=gain;S.played++;S.sinceInter++;won.card=(G.lv>=S.lvl&&G.lv%AL===0&&G.lv/AL<=NAREA)?G.lv/AL-1:-1;won.wt=(WT>=0&&G.lv>=S.lvl&&G.lv%AL===0)?WT:-1;if(G.lv>=S.lvl)S.lvl=G.lv+1;save();hud();confetti();won.gain=gain;won.st=st;Track("level_completed",{level:G.lv,stars:st,moves_left:G.moves});SFX.win();
   var last=G.lv>=MAXLV;
-  won.html=function(dbl){return '<p class="mylwin">+'+won.sh+(won.sh===1?' shell':' shells')+' for My Lagoon</p>'+libNew(won.card)+(won.wt>=0?(function(o){return '<div class="lnew lnwt"><div class="lmini">'+libCC(o,"mini")+'</div><div><small>New World Tour card</small><b>'+o.n+'</b><span>Special edition. It is in your card library.</span></div></div>';})(libWT(won.wt)):'')+(mi?'<div class="mile"><span class="medal"></span><div><strong>Trophy: '+MNAMES[mi-1]+'</strong><span>Milestone reward: '+mileText(mi)+'</span></div></div>':'')+'<h2>'+(st===3?"Perfect!":st===2?"Nice one!":"Cleared!")+'</h2><div class="stars" aria-label="'+st+' of 3 stars">'+"★★★".slice(0,st)+'<b>'+"★★★".slice(st)+'</b></div><p>Level '+G.lv+' done with '+G.moves+' moves left. You earned <strong style="color:var(--gold)">'+gain+' coins</strong>.</p>'+(chest?'<p><strong style="color:#e09a00">Treasure chest: +50 coins!</strong></p>':'')+(firstWin&&ws>=2?'<p class="streakline">'+FLAME+'<span><strong>Win streak: '+ws+'.</strong> '+(ws>=5?"Next level: +3 moves and a free Swap.":ws>=3?"Next level starts with +2 moves."+(ws===4?" One more for a free Swap too.":""):"One more win for a head start.")+'</span></p>':'')+
+  won.meta=hubWin(won.sh,G.lv>=S.lvl-1&&!won.rep);won.html=function(dbl){return '<p class="mylwin">'+won.meta+'</p>'+libNew(won.card)+(won.wt>=0?(function(o){return '<div class="lnew lnwt"><div class="lmini">'+libCC(o,"mini")+'</div><div><small>New World Tour card</small><b>'+o.n+'</b><span>Special edition. It is in your card library.</span></div></div>';})(libWT(won.wt)):'')+(mi?'<div class="mile"><span class="medal"></span><div><strong>Trophy: '+MNAMES[mi-1]+'</strong><span>Milestone reward: '+mileText(mi)+'</span></div></div>':'')+'<h2>'+(st===3?"Perfect!":st===2?"Nice one!":"Cleared!")+'</h2><div class="stars" aria-label="'+st+' of 3 stars">'+"★★★".slice(0,st)+'<b>'+"★★★".slice(st)+'</b></div><p>Level '+G.lv+' done with '+G.moves+' moves left. You earned <strong style="color:var(--gold)">'+gain+' coins</strong>.</p>'+(chest?'<p><strong style="color:#e09a00">Treasure chest: +50 coins!</strong></p>':'')+(firstWin&&ws>=2?'<p class="streakline">'+FLAME+'<span><strong>Win streak: '+ws+'.</strong> '+(ws>=5?"Next level: +3 moves and a free Swap.":ws>=3?"Next level starts with +2 moves."+(ws===4?" One more for a free Swap too.":""):"One more win for a head start.")+'</span></p>':'')+
     (last?'<div class="allbeat"><b>You beat every level!</b><span>All '+MAXLV+' levels of Jelly Lagoon are done. New lagoons are coming soon, so watch for the next update!</span></div><button class="btn wide" data-act="home">Home</button>':'<button class="btn wide" data-act="next">Continue</button>'+(dbl?'<button class="btn gold wide sm" data-act="double" id="dblBtn">Watch an ad: double coins (+'+gain+')</button>':'<p>Coins doubled!</p>')+'<button class="btn alt sm" data-act="home">Home</button>');};
   if(mi)celebrate(mi,function(){modal(won.html(true));winArt(st);if(WT>=0&&WTV[WT])wtVidModal(WTV[WT]);});else{modal(won.html(true));winArt(st);if(WT>=0&&WTV[WT])wtVidModal(WTV[WT]);}askReview(st);setTimeout(function(){if(!$("modal").hidden)talk(rnd(CREWK.slice(0,7)),rnd(WINL));},550);
 }
@@ -2425,6 +2425,96 @@ function openMyLagoon(){if(!S.deco)S.deco=[];var sh=S.shells||0,sc="",ls="";
     S.shells-=d[1];S.deco.push(i);if(S.deco.length===MYDECO.length){S.coins+=300;toast("Lagoon complete! +300 coins");}else toast(d[0]+" placed!");try{SFX.win();}catch(e){}save();hud();mylChip();openMyLagoon();};});
   try{Track("my_lagoon_opened",{});}catch(e){}}
 ACT.mylagoon=openMyLagoon;[].forEach.call(document.querySelectorAll(".mylchip"),function(c){c.onclick=openMyLagoon;});setTimeout(mylChip,600);setInterval(mylChip,4000);
+
+/* ===================== home features (same as Pop): gift, pass, festival, crew race, album, piggy ===================== */
+function hDay(){var d=new Date();return Math.floor((d.getTime()-d.getTimezoneOffset()*60000)/864e5);}
+function hWeek(){return Math.floor((hDay()+3)/7);}
+function hSeason(){var d=new Date();return d.getFullYear()*12+d.getMonth();}
+function hSeasonLeft(){var d=new Date(),e=new Date(d.getFullYear(),d.getMonth()+1,1);return Math.max(1,Math.ceil((e-d)/864e5));}
+function hWeekLeft(){return 7-((hDay()+3)%7);}
+function hDays(n){return n+(n===1?" day":" days");}
+function hrw(r){var a=[];if(r.c)a.push(r.c+" coins");if(r.w)a.push(r.w+(r.w===1?" Swap":" Swaps"));if(r.b)a.push(r.b+(r.b===1?" Blast":" Blasts"));if(r.s)a.push(r.s+" shells");if(r.l)a.push("full lives");return a.join(" + ");}
+function hgive(r){if(r.c)S.coins+=r.c;if(r.w)S.swaps+=r.w;if(r.b)S.blasts+=r.b;if(r.s)S.shells=(S.shells||0)+r.s;if(r.l){S.lives=MAXLIVES;S.lifeTs=Date.now();}save();hud();lhub();try{mylChip();}catch(e){}}
+var HGIFT=[{c:25},{c:40},{w:1},{c:60},{s:8},{c:90},{c:150,b:2}];
+var HPIG_MIN=300,HPIG_MAX=1500;
+var HPASS_XP=12,HPASSF=[{c:20},{w:1},{c:30},{s:5},{c:40},{b:1},{c:50},{s:8},{c:60},{c:100,w:2}],HPASSG=[{c:100},{b:2},{c:150},{s:15},{c:200,l:1},{w:3},{c:250},{s:25},{c:300},{c:600,b:3}];
+var HEVN=["Pearl Rush","Starfish Festival","Treasure Tide","Bubble Bash"],HEVM=[6,15,27,42],HEVR=[{c:40},{w:1},{c:120,s:10},{c:250,b:2}];
+var HRACER=[{c:60},{c:300,b:1},{c:150},{c:75}];
+var HCREW=[["Ruby","ruby"],["Sunny","sunny"],["Kiwi","kiwi"],["Bloop","bloop"],["Jinx","jinx"],["Mango","mango"],["Taffy","taffy"]];
+var HSTK=HCREW.concat([["Fin","fin"],["Gummy","gummy"],["Blizzard","blizzard"],["Bolt","bolt"],["Sol","sol"]]),HSETS=[["The Crew",0,7,{c:200}],["Lagoon Friends",7,12,{c:300,b:2}]];
+function hrng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function hbot(w,i,full){var T=14+Math.floor(hrng(w*31+i*977+5)()*46);if(full)return T;var f=((hDay()+3)%7+(new Date().getHours())/24)/7;return Math.floor(T*Math.pow(f,0.85));}
+function hboard(w,pts,full){var b=[{me:true,name:"You",img:"art/crew/ruby.webp",pts:pts}];for(var i=1;i<7;i++)b.push({name:HCREW[i][0],img:"art/crew/"+HCREW[i][1]+".webp",pts:hbot(w,i,full)});b.sort(function(x,y){return y.pts-x.pts||(x.me?-1:1);});return b;}
+function hplace(w,pts,full){var b=hboard(w,pts,full);for(var i=0;i<b.length;i++)if(b[i].me)return i+1;return 7;}
+function hroll(){var se=hSeason(),w=hWeek();if(S.pig===undefined)S.pig=0;if(!S.alb)S.alb={};if(!S.albDone)S.albDone=[];
+  if(!S.hpass||S.hpass.id!==se)S.hpass={id:se,xp:0,gold:false,f:[],g:[]};
+  if(!S.hev||S.hev.id!==w)S.hev={id:w,pts:0,cl:[]};
+  if(!S.hrace||S.hrace.id!==w){var old=S.hrace;S.hrace={id:w,pts:0};if(old&&old.id&&old.pts>0)S.hrace.won={place:hplace(old.id,old.pts,true),pts:old.pts};}}
+function hGiftReady(){return !S.hgift||S.hgift.n!==hDay();}
+function hPassTier(){return Math.min(HPASSF.length,Math.floor(S.hpass.xp/HPASS_XP));}
+function hPassOpen(){var t=hPassTier(),n=0;for(var i=0;i<t;i++){if(S.hpass.f.indexOf(i)<0)n++;if(S.hpass.gold&&S.hpass.g.indexOf(i)<0)n++;}return n;}
+function hEvOpen(){var n=0;HEVM.forEach(function(m,i){if(S.hev.pts>=m&&S.hev.cl.indexOf(i)<0)n++;});return n;}
+function hAlbCount(){var n=0;for(var i=0;i<HSTK.length;i++)if(S.alb[i])n++;return n;}
+function hSetOpen(){var n=0;HSETS.forEach(function(t,si){var all=true;for(var i=t[1];i<t[2];i++)if(!S.alb[i])all=false;if(all&&S.albDone.indexOf(si)<0)n++;});return n;}
+function lhub(){var e=$("lhub");if(!e)return;hroll();
+  var it=[["gift","Gift",hGiftReady()?"Ready":"Tomorrow",hGiftReady(),"g1"],["pass","Lagoon Pass","Tier "+hPassTier(),hPassOpen()>0,"g2"],["event",HEVN[S.hev.id%HEVN.length],S.hev.pts+" pts",hEvOpen()>0,"g3"],
+    ["race","Crew Race","Place "+hplace(S.hrace.id,S.hrace.pts),!!S.hrace.won,"g4"],["album","Album",hAlbCount()+"/"+HSTK.length,hSetOpen()>0,"g5"],["piggy","Piggy Bank",""+S.pig,S.pig>=HPIG_MIN,"g6"]];
+  e.innerHTML=it.map(function(x){return '<button type="button" class="lhb '+x[4]+(x[3]?" hot":"")+'" data-h="'+x[0]+'"><small>'+x[1]+'</small><b>'+x[2]+'</b></button>';}).join("");}
+var LHUBS={gift:hGiftCard,pass:hPassCard,event:hEventCard,race:hRaceCard,album:hAlbumCard,piggy:hPigCard};
+function hModal(h){modal('<button class="myx" type="button" data-act="close" aria-label="Close">X</button>'+h+'<button class="btn sm" data-act="close">Close</button>');$("sheet").scrollTop=0;
+  [].forEach.call($("sheet").querySelectorAll("[data-hx]"),function(b){b.onclick=function(ev){ev.stopPropagation();if(b.disabled)return;HX[b.dataset.hx](b);};});}
+var HX={};
+function hsfx(){try{SFX.win();}catch(e){}}
+/* gift */
+function hGiftCard(){var rd=hGiftReady(),k=!S.hgift?-1:(S.hgift.n===hDay()-1||!rd?S.hgift.k:-1),next=rd?(k+1)%7:k,h='<p class="libtag">Daily gift</p><h2 class="myh">'+(rd?"Your gift is ready":"Come back tomorrow")+'</h2><div class="hg7">';
+  HGIFT.forEach(function(g,i){h+='<div class="hgd'+(i===next&&rd?" on":"")+((rd?i<next:i<=next)?" got":"")+'"><small>Day '+(i+1)+'</small><b>'+hrw(g).replace(" coins","")+'</b></div>';});
+  h+='</div><p class="mynote">'+(rd?'Today: <b class="hgold">'+hrw(HGIFT[next])+'</b>. Come back every day to reach day 7.':"You already picked up today's gift.")+'</p>'+(rd?'<button class="btn gold wide" data-hx="gift" type="button">Collect</button>':'');hModal(h);}
+HX.gift=function(){if(!hGiftReady())return;var k=S.hgift&&S.hgift.n===hDay()-1?(S.hgift.k+1)%7:0;S.hgift={n:hDay(),k:k};hgive(HGIFT[k]);hsfx();toast("+"+hrw(HGIFT[k]));hGiftCard();};
+/* piggy */
+var HPINFO={};
+function hPrice(id,def){return IAP?(HPINFO[id]&&HPINFO[id].priceString?HPINFO[id].priceString:"..."):def;}
+function hLoadPrices(){if(!IAP||hLoadPrices.done)return;hLoadPrices.done=1;IAP.getProducts({productIdentifiers:[pidOf("piggy"),pidOf("pass")]}).then(function(r){((r&&r.products)||[]).forEach(function(x){var p=x.identifier||x.productIdentifier;if(p===pidOf("piggy"))HPINFO.piggy=x;if(p===pidOf("pass"))HPINFO.pass=x;});}).catch(function(){hLoadPrices.done=0;});}
+function hBuy(id,done){if(!IAP){done();save();return;}if(BUYING)return;BUYING=true;toast("Opening payment...");
+  IAP.purchaseProduct({productIdentifier:pidOf(id),isConsumable:true,quantity:1}).then(function(t){BUYING=false;S.tx=S.tx||[];var tx=t&&t.transactionId;if(tx&&S.tx.indexOf(tx)>=0)return;if(tx)S.tx.push(tx);S.paid=true;done();save();try{Track("purchase",{product:id,test:!CFG.live});}catch(e){}})
+  .catch(function(e){BUYING=false;var m=String((e&&(e.message||e.errorMessage))||e||"");if(/cancel/i.test(m))return;toast("The purchase didn't go through. Please try again.");});}
+function hPigCard(){hroll();hLoadPrices();var ok=S.pig>=HPIG_MIN;
+  hModal('<p class="libtag">Piggy Bank</p><h2 class="myh">'+S.pig+' coins inside</h2><div class="hpig"></div><div class="hbar"><i style="width:'+Math.min(100,S.pig/HPIG_MAX*100)+'%"></i></div><p class="mynote">'+(S.pig>=HPIG_MAX?"Your piggy is full!":"Every level you win drops coins in. It holds up to "+HPIG_MAX+".")+'</p>'+
+    (ok?'<button class="btn gold wide" data-hx="pig" type="button">Open it for '+hPrice("piggy","$2.99")+'</button>':'<p class="mynote">You can open it once it has '+HPIG_MIN+' coins.</p>')+(IAP?'':'<p class="mynote">Test mode: opening is free here.</p>'));}
+HX.pig=function(){if(S.pig<HPIG_MIN)return;hBuy("piggy",function(){var n=S.pig;S.coins+=n;S.pig=0;save();hud();lhub();hsfx();toast("+"+n+" coins!");hPigCard();});};
+/* pass */
+function hPassCard(){hroll();hLoadPrices();var t=hPassTier(),xp=S.hpass.xp,h='<p class="libtag">Lagoon Pass · '+hDays(hSeasonLeft())+' left</p><h2 class="myh">Tier '+t+' of '+HPASSF.length+'</h2>';
+  h+='<div class="hbar"><i style="width:'+(t>=HPASSF.length?100:(xp%HPASS_XP)/HPASS_XP*100)+'%"></i></div><p class="mynote">'+(t>=HPASSF.length?"Pass complete!":"Win stars to climb: "+(HPASS_XP-xp%HPASS_XP)+" more to the next tier.")+'</p><div class="hpl">';
+  for(var i=0;i<HPASSF.length;i++){var un=i<t,fg=S.hpass.f.indexOf(i)>=0,gg=S.hpass.g.indexOf(i)>=0;
+    h+='<div class="hpt'+(un?"":" off")+'"><em>'+(i+1)+'</em><button type="button" data-hx="passget" data-l="f" data-i="'+i+'"'+(un&&!fg?"":" disabled")+'><small>Free</small>'+(fg?"Collected":hrw(HPASSF[i]))+'</button><button type="button" class="g" data-hx="passget" data-l="g" data-i="'+i+'"'+(un&&!gg&&S.hpass.gold?"":" disabled")+'><small>Gold'+(S.hpass.gold?"":" (locked)")+'</small>'+(gg?"Collected":hrw(HPASSG[i]))+'</button></div>';}
+  h+='</div>'+(S.hpass.gold?'<p class="mynote">Gold lane is open for this season.</p>':'<button class="btn gold wide" data-hx="passbuy" type="button">Unlock Gold for '+hPrice("pass","$4.99")+'</button><p class="mynote">Gold lasts until this season ends.'+(IAP?"":" Test mode: free here.")+'</p>');hModal(h);}
+HX.passget=function(b){var l=b.dataset.l,i=+b.dataset.i;if(i>=hPassTier()||S.hpass[l].indexOf(i)>=0||(l==="g"&&!S.hpass.gold))return;S.hpass[l].push(i);var r=(l==="g"?HPASSG:HPASSF)[i];hgive(r);hsfx();toast("+"+hrw(r));hPassCard();};
+HX.passbuy=function(){if(S.hpass.gold)return;hBuy("pass",function(){S.hpass.gold=true;save();lhub();hsfx();toast("Gold lane unlocked!");hPassCard();});};
+/* festival */
+function hEventCard(){hroll();var h='<p class="libtag">This week · '+hDays(hWeekLeft())+' left</p><h2 class="myh">'+HEVN[S.hev.id%HEVN.length]+'</h2><p class="mynote">Every star you win this week is 1 point. <b class="hgold">'+S.hev.pts+' points</b> so far.</p><div class="hbar"><i style="width:'+Math.min(100,S.hev.pts/HEVM[HEVM.length-1]*100)+'%"></i></div><div class="mylist">';
+  HEVM.forEach(function(m,i){var got=S.hev.cl.indexOf(i)>=0,ok=S.hev.pts>=m;h+='<div class="myrow"><div class="myt"><b>'+m+' points</b><small>'+hrw(HEVR[i])+'</small></div>'+(got?'<span class="mybtn placed">Collected ✓</span>':ok?'<button class="mybtn go" type="button" data-hx="evget" data-i="'+i+'">Collect</button>':'<span class="mybtn need"><span class="gt">Locked</span></span>')+'</div>';});
+  hModal(h+'</div>');}
+HX.evget=function(b){var i=+b.dataset.i;if(S.hev.pts<HEVM[i]||S.hev.cl.indexOf(i)>=0)return;S.hev.cl.push(i);hgive(HEVR[i]);hsfx();toast("+"+hrw(HEVR[i]));hEventCard();};
+/* crew race */
+function hRaceCard(){hroll();if(S.hrace.won){var w=S.hrace.won,r=HRACER[w.place<=3?w.place:0];
+    hModal('<p class="libtag">Crew Race results</p><h2 class="myh">'+(w.place===1?"You won the race!":"You finished in place "+w.place)+'</h2><p class="mynote">Last week you earned '+w.pts+' stars.<br>Your prize: <b class="hgold">'+hrw(r)+'</b></p><button class="btn gold wide" data-hx="raceget" type="button">Collect</button>');return;}
+  var b=hboard(S.hrace.id,S.hrace.pts),h='<p class="libtag">Crew Race · '+hDays(hWeekLeft())+' left</p><h2 class="myh">Race the crew</h2><p class="mynote">Win stars this week to climb. Your rivals are the lagoon crew, played by the game.</p><div class="mylist">';
+  b.forEach(function(x,i){h+='<div class="myrow hrc'+(x.me?" mine":"")+'"><em>'+(i+1)+'</em><div class="myi"><img alt="" src="'+x.img+'"></div><div class="myt"><b>'+x.name+'</b></div><b class="hst">'+x.pts+' ★</b></div>';});
+  hModal(h+'</div><p class="mynote">Prizes: 1st '+hrw(HRACER[1])+' · 2nd '+hrw(HRACER[2])+' · 3rd '+hrw(HRACER[3])+'</p>');}
+HX.raceget=function(){var w=S.hrace.won;if(!w)return;delete S.hrace.won;var r=HRACER[w.place<=3?w.place:0];hgive(r);hsfx();toast("+"+hrw(r));hRaceCard();};
+/* album */
+function hSticker(){var miss=[],i;for(i=0;i<HSTK.length;i++)if(!S.alb[i])miss.push(i);
+  i=miss.length&&Math.random()<0.65?miss[Math.floor(Math.random()*miss.length)]:Math.floor(Math.random()*HSTK.length);var dupe=!!S.alb[i];S.alb[i]=(S.alb[i]||0)+1;if(dupe)S.coins+=5;return {i:i,dupe:dupe};}
+function hAlbumCard(){hroll();var h='<p class="libtag">Sticker album</p><h2 class="myh">'+hAlbCount()+' of '+HSTK.length+' stickers</h2><p class="mynote">Win a level for a sticker. Extras turn into 5 coins.</p>';
+  HSETS.forEach(function(t,si){var n=0,g="";for(var i=t[1];i<t[2];i++){if(S.alb[i])n++;g+='<div class="hsk'+(S.alb[i]?"":" no")+'"><img alt="" src="art/crew/'+HSTK[i][1]+'.webp"><span>'+(S.alb[i]?HSTK[i][0]:"?")+'</span></div>';}
+    var all=n===t[2]-t[1],got=S.albDone.indexOf(si)>=0;h+='<div class="lset"><div class="lsh"><b>'+t[0]+' '+n+'/'+(t[2]-t[1])+'</b>'+(all&&!got?'<button class="btn gold sm" data-hx="setget" data-i="'+si+'" type="button">Collect '+hrw(t[3])+'</button>':'<span>'+(got?"Collected":"Full set: "+hrw(t[3]))+'</span>')+'</div><div class="hsg">'+g+'</div></div>';});
+  hModal(h);}
+HX.setget=function(b){var si=+b.dataset.i,t=HSETS[si];if(S.albDone.indexOf(si)>=0)return;for(var i=t[1];i<t[2];i++)if(!S.alb[i])return;S.albDone.push(si);hgive(t[3]);hsfx();toast("+"+hrw(t[3]));hAlbumCard();};
+/* what a win feeds */
+function hubWin(st,first){hroll();var o=[],was=S.pig,add=first?10:4;S.pig=Math.min(HPIG_MAX,S.pig+add);if(S.pig>was)o.push("Piggy +"+(S.pig-was));
+  S.hpass.xp+=st;S.hev.pts+=st;S.hrace.pts+=st;o.push("+"+st+(st===1?" star":" stars")+" for Pass, Festival and Race");o.push("+"+st+(st===1?" shell":" shells"));
+  var d=hSticker();o.push(d.dupe?"Extra sticker: +5 coins":"New sticker: "+HSTK[d.i][0]);save();setTimeout(lhub,50);return o.join(" · ");}
+$("lhub").addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".lhb");if(!b)return;var f=LHUBS[b.dataset.h];if(f)f();});
+setTimeout(lhub,300);setInterval(lhub,5000);
 ACT.lib=function(){openLib();};ACT.lib_lag=function(){openLib("lag");};ACT.lib_spe=function(){openLib("spe");};ACT.lib_hol=function(){openLib("hol");};ACT.lib_wt=function(){openLib("wt");};ACT.libback=function(){openLib(openLib.t);};
 setTimeout(libChip,600);setInterval(libChip,4000);
 if(!CFG.live)window.__lib={open:openLib,view:libView,counts:libCounts,lag:libLag,newc:libNew};
@@ -2493,4 +2583,39 @@ ACT.noresume=function(){S.cur=null;save();closeModal();};
 .mybtn.need{background:linear-gradient(#b4b7be 0%,#8a8d95 45%,#5f6269 55%,#4a4d54 100%);box-shadow:0 4px 0 #2c2e33,inset 0 2px 0 rgba(255,255,255,.55)}
 .mybtn .gt{background:linear-gradient(#fffde0 0%,#fff35a 35%,#ffe600 60%,#fff47a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 1px 0 #5a4200) drop-shadow(0 0 1.5px #3a2a00)}
 .mylwin{margin:0 0 6px;font:800 15px var(--display);color:#7ff0ff}
+</style><style>
+#lhub{position:absolute;z-index:4;left:0;right:0;top:.6%;display:flex;gap:7px;overflow-x:auto;padding:6px 10px 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+#lhub::-webkit-scrollbar{display:none}
+.lhb{position:relative;flex:none;min-width:84px;display:flex;flex-direction:column;align-items:center;gap:1px;border:2.5px solid #fff;border-radius:16px;padding:5px 10px 6px;color:#fff;font-family:var(--display);box-shadow:0 4px 0 rgba(40,10,70,.45);text-shadow:0 1px 0 rgba(0,0,0,.3);cursor:pointer}
+.lhb small{font-size:10.5px;opacity:.95;white-space:nowrap;font-weight:800;text-transform:uppercase;letter-spacing:.03em}.lhb b{font-size:14px;white-space:nowrap}
+.lhb.g1{background:linear-gradient(#ff8fb8,#e0457b)}.lhb.g2{background:linear-gradient(#ffc46b,#f07a1a)}.lhb.g3{background:linear-gradient(#6fe0d8,#13a0a8)}
+.lhb.g4{background:linear-gradient(#a58bff,#6a3fd8)}.lhb.g5{background:linear-gradient(#7fd6ff,#2a86e0)}.lhb.g6{background:linear-gradient(#ffb0d0,#d94f8f)}
+.lhb.hot::after{content:"";position:absolute;right:-4px;top:-4px;width:20px;height:20px;background:url(art/notif.webp) center/contain no-repeat;filter:drop-shadow(0 2px 2px rgba(80,0,20,.35));animation:lndot 1.8s ease-in-out infinite}
+@keyframes lndot{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+@media (prefers-reduced-motion:reduce){.lhb.hot::after{animation:none}}
+.hgold{color:#ffd84a}
+.hbar{height:16px;border-radius:99px;background:rgba(0,0,0,.35);border:2px solid rgba(255,255,255,.6);overflow:hidden;margin:6px 0}.hbar i{display:block;height:100%;background:linear-gradient(90deg,#ffe27a,#f5b229);border-radius:99px}
+.hg7{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}
+.hgd{background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.35);border-radius:12px;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--display)}
+.hgd small{font-size:11px;opacity:.85}.hgd b{font-size:12.5px;line-height:1.1;text-align:center}.hgd.on{background:linear-gradient(#ffe27a,#f5b229);color:#5a2a00;border-color:#fff}.hgd.got{opacity:.45}
+.hpl{display:flex;flex-direction:column;gap:6px;margin:6px 0 10px;text-align:left}
+.hpt{display:flex;align-items:stretch;gap:6px}.hpt em{flex:none;width:28px;display:grid;place-items:center;font:800 15px var(--display);font-style:normal;background:rgba(255,255,255,.15);border-radius:10px}
+.hpt button{flex:1;display:flex;flex-direction:column;align-items:flex-start;gap:1px;border:2px solid rgba(255,255,255,.55);border-radius:12px;padding:5px 8px;background:linear-gradient(#5be06a,#1f9a34);color:#fff;font:800 12.5px/1.15 var(--display);text-align:left;cursor:pointer}
+.hpt button small{font-size:10px;opacity:.9;text-transform:uppercase}.hpt button.g{background:linear-gradient(#ffe27a,#f5b229);color:#5a2a00}
+.hpt button:disabled{filter:grayscale(.75) brightness(.8);cursor:default}.hpt.off em{opacity:.5}
+.hrc em{flex:none;width:22px;font:800 16px var(--display);font-style:normal;text-align:center}.hrc.mine{background:rgba(255,216,74,.25);border-color:#ffd84a}.hst{font-family:var(--display);color:#ffd84a;white-space:nowrap}
+.hsg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:6px}
+.hsk{background:rgba(255,255,255,.9);border-radius:12px;padding:4px;display:flex;flex-direction:column;align-items:center;color:#3b2a7a;font:800 11px var(--display)}
+.hsk img{width:100%;aspect-ratio:1;object-fit:contain}.hsk.no img{filter:brightness(0) opacity(.25)}
+.hpig{width:110px;height:90px;margin:4px auto;background:radial-gradient(circle at 40% 40%,#ffd0e2,#ff8fb8 60%,#d94f8f);border-radius:50% 50% 45% 45%;box-shadow:inset -8px -8px 0 rgba(0,0,0,.08),0 5px 0 rgba(60,10,40,.3);position:relative}
+.hpig::before{content:"";position:absolute;left:44%;top:-6px;width:22px;height:8px;background:#5a2a3a;border-radius:4px}
+.hpig::after{content:"";position:absolute;right:-10px;top:36%;width:26px;height:22px;background:#ff9cc0;border-radius:50%;box-shadow:inset 0 0 0 3px #d94f8f}
+.homeart .logo{margin-top:30px}
+.mybtn{border-width:0!important;border-style:solid!important;border-color:transparent!important;background:none!important;box-shadow:0 6px 8px -3px rgba(40,10,70,.5)!important;border-image:var(--bt-pgreen) 50% 24% fill / 50% 1.2em stretch;padding:11px 6px!important;font-size:15px!important;color:#fff!important;position:relative;isolation:isolate}
+.mybtn.go{border-image-source:var(--bt-pgold);text-shadow:0 2px 0 rgba(130,60,0,.8),0 0 3px rgba(130,60,0,.6)!important;font-size:17px!important}
+.mybtn.placed{border-image-source:var(--bt-pgreen);text-shadow:0 2px 0 rgba(0,80,25,.75)!important}
+.mybtn.need{border-image:none!important;text-shadow:none!important}
+.mybtn.need::before{content:"";position:absolute;inset:0;border:0 solid transparent;border-image:var(--bt-pblue) 50% 24% fill / 50% 1.2em stretch;filter:grayscale(1) brightness(.85);z-index:-1;pointer-events:none}
+.myx ~ .btn.gold,.myx ~ .lset .btn.gold{color:#fff!important;text-shadow:0 2px 0 rgba(130,60,0,.8),0 0 3px rgba(130,60,0,.6)!important}
+
 </style></body></html>
