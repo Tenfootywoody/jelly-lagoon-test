@@ -1087,7 +1087,7 @@ function draw(dt){
   if(ball){ball.d+=dt*D*34;var rem=ball.d,p=ball.pts[ball.pts.length-1];
     for(var j=1;j<ball.pts.length;j++){var a2=ball.pts[j-1],b2=ball.pts[j],L2=Math.hypot(b2.x-a2.x,b2.y-a2.y);
       if(rem<=L2){p={x:a2.x+(b2.x-a2.x)*rem/(L2||1),y:a2.y+(b2.y-a2.y)*rem/(L2||1)};break;}rem-=L2;}
-    bub(ball.col,p.x,p.y);if(ball.d>=ball.len)land();}
+    bub(ball.col,p.x,p.y);if(!ball.t0)ball.t0=Date.now();if(ball.d>=ball.len||!isFinite(ball.len)||Date.now()-ball.t0>3000){try{land();}catch(e){console.warn("land failed",e);ball=null;try{hud();}catch(e2){}}}}
   if(S.off>0.4){var more=Math.round(S.off),mt="\u25B2 "+more+" more row"+(more===1?"":"s")+" above";cx.font="800 "+Math.round(D*0.34)+"px 'Baloo 2',sans-serif";cx.textAlign="center";var mw=cx.measureText(mt).width+D*0.6;
     cx.fillStyle="rgba(34,20,92,.88)";rr(W/2-mw/2,2,mw,D*0.5,D*0.25);cx.fill();cx.strokeStyle="#e9c46a";cx.lineWidth=2;rr(W/2-mw/2,2,mw,D*0.5,D*0.25);cx.stroke();cx.fillStyle="#ffe36b";cx.fillText(mt,W/2,2+D*0.37);}
   scene(dt);
