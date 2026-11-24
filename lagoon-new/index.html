@@ -1907,6 +1907,11 @@ document.addEventListener("touchend",function(){if(!drag)return;var d=drag;setTi
 document.addEventListener("touchcancel",function(){if(!drag)return;var d=drag;setTimeout(function(){if(drag===d){logFz("drag canceled by phone");endDrag(false);}},120);},{passive:true});
 $("tray").addEventListener("pointerup",function(){endDrag(true);});
 $("tray").addEventListener("pointercancel",function(){endDrag(false);});
+var TCH=0;document.addEventListener("touchstart",function(e){TCH=e.touches.length;},{passive:true,capture:true});
+document.addEventListener("touchend",function(e){TCH=e.touches.length;},{passive:true,capture:true});document.addEventListener("touchcancel",function(e){TCH=e.touches.length;},{passive:true,capture:true});
+window.addEventListener("pointerup",function(){if(drag){var d=drag;setTimeout(function(){if(drag===d){logFz("drop rescued (window)");endDrag(true);}},60);}},true);
+window.addEventListener("blur",function(){if(drag)endDrag(false);});document.addEventListener("visibilitychange",function(){if(document.hidden&&drag)endDrag(false);});
+setInterval(function(){if(!drag)return;if(!drag.t0){drag.t0=Date.now();return;}var idle=Date.now()-Math.max(drag.pm||0,drag.t0);if(("ontouchstart" in window)&&TCH===0&&idle>1500){logFz("stuck drag cleared");endDrag(true);}},500);
 
 function clearLines(){
   var rows=[],cols=[],x,y,full,hit={},got=0;
