@@ -1523,7 +1523,7 @@ function dailyWon(){var D=dailyState(),t=today(),first=!D.days[t],left=G.moves/G
 function dplay(){closeModal();var t=today();start("level",dailyLv(t),0,t);}
 function dshare(){var D=dailyState(),t=today(),r=D.days[t];if(!r)return;var txt="Jelly Lagoon Daily Tide, "+dayName(t)+": "+"★★★".slice(0,r.s)+" with "+r.m+" moves left. "+dailyStreak()+"-day streak. Can you beat it?";Track("daily_shared",{day:t});
   var copy=function(){try{navigator.clipboard.writeText(txt).then(function(){toast("Copied. Paste it anywhere to share.");},function(){toast(txt);});}catch(e){toast(txt);}};
-  try{if(NATIVE&&JL.Share){JL.Share.share({text:txt,dialogTitle:"Share your Daily Tide"}).catch(function(){});}else if(navigator.share){navigator.share({text:txt}).catch(function(){});}else copy();}catch(e){copy();}}
+  try{if(NATIVE&&JL.Share){JL.Share.share({text:txt,dialogTitle:"Share your Daily Tide"}).catch(function(){});}else if(navigator.share){navigator.share({text:txt}).then(function(){toast("Shared!");}).catch(function(e){if(!e||e.name!=="AbortError")copy();});}else copy();}catch(e){copy();}}
 /* ---------- weekly treasure hunt: 12 no-lives levels uncover a picture for the gallery ---------- */
 var HN=12,FLAME='<svg class="flame" viewBox="0 0 24 24" aria-hidden="true"><path fill="#ff7a1a" d="M12 2c1 4 5 5.5 5 10.5A5 5 0 0 1 12 22a5 5 0 0 1-5-9.5c0 2 1 3 2 3C8 11 10 7 12 2z"/><path fill="#ffd84d" d="M12 13c.8 1.8 2.2 2.4 2.2 4.3a2.2 2.2 0 0 1-4.4 0c0-1.9 1.4-2.5 2.2-4.3z"/></svg>';
 var PICS=[{n:"Jelly Dolphin",v:"--sp-dolphin",bg:"linear-gradient(180deg,#8fe3ff,#2a9fd6)"},{n:"Jelly Turtle",v:"--sp-turtle",bg:"linear-gradient(180deg,#c9f7d9,#27b6a0)"},{n:"Jelly Crab",v:"--sp-crab",bg:"linear-gradient(180deg,#ffe2b0,#ff9f7a)"},{n:"Jelly Pirate Ship",v:"--sp-ship",bg:"linear-gradient(180deg,#d9c8ff,#6a7fe0)"}];
@@ -2582,7 +2582,7 @@ ACT.noresume=function(){S.cur=null;save();closeModal();};
 .mylchip span:last-child{display:flex;flex-direction:column;align-items:flex-start}.mylchip b{font-family:var(--display);font-size:1em}.mylchip small{font-size:.72em;color:#127a99}
 .mlic{width:1.9em;height:1.9em;background:url(art/deco/d0.webp) center/contain no-repeat}
 .myx{position:absolute;right:6px;top:6px;z-index:6;width:40px;height:40px;border-radius:50%;border:3px solid #fff;background:#e0457b;color:#fff;font:800 20px/1 var(--display);box-shadow:0 4px 0 #8a1c46;cursor:pointer}
-.myscene{position:relative;width:100%;height:0;padding-top:62%;flex:none;border-radius:16px;overflow:hidden;background:url(art/myl-bg.webp) center/cover;margin:6px 0;box-shadow:0 0 0 3px rgba(255,255,255,.6)}
+.myscene{position:relative;width:100%;height:0;padding-top:62.5%;flex:none;border-radius:16px;overflow:hidden;background:url(art/myl-bg.webp) center 62%/cover no-repeat;margin:6px 0;box-shadow:0 0 0 3px rgba(255,255,255,.6)}
 .myd{position:absolute}.myd img{width:100%;height:auto;display:block;filter:drop-shadow(0 3px 3px rgba(0,0,0,.3))}
 .myh{font-size:26px!important;padding:0 34px}.mynote{font-size:14px;margin:4px 0 8px;opacity:.95}
 .mylist{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;text-align:left}
