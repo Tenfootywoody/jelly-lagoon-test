@@ -1792,7 +1792,8 @@ function wtMatch(rects){var ci=WT;G.score+=300;S.coins+=10;S.stamps=S.stamps||{}
   var hero=document.createElement("div");hero.className="wthero";hero.innerHTML='<div class="wtconf">'+cf+'</div><img alt="" src="art/wt/'+WTC[ci]+'-excited.webp"><div class="wtban"><b>Country Match!</b><span>'+WTN[ci]+' · +300 points · +10 coins</span></div>';lay.appendChild(hero);
   [523,659,784,1047,1319].forEach(function(f,i){tone(f,.22,"triangle",.14,0,0.25+i*0.09);});setTimeout(end,2100);}
 function wtStamp(ci,all){var lay=document.createElement("div");lay.className="wtlay wtst";
-  lay.innerHTML='<div class="wtpage"><img class="wtstamp" alt="" src="art/wt/stamp-'+WTC[ci]+'.webp"><b>Passport stamp: '+WTN[ci]+'!</b><span>'+Object.keys(S.stamps).length+' of 18 stamps'+(all?' · World traveler! +500 coins':'')+'</span></div>';
+  var pg=Math.floor(ci/6)*6,sl="";for(var q=pg;q<pg+6&&q<18;q++){var hv=S.stamps&&S.stamps[q];sl+='<div class="wpsl'+(q===ci?" new":"")+'">'+(hv||q===ci?'<img alt="" style="--r:'+((q*37)%24-12)+'deg" src="art/wt/stamp-'+WTC[q]+'.webp">':'<i></i>')+'<span>'+WTN[q]+'</span></div>';}
+  lay.innerHTML='<div class="wtpage wpp"><div class="wpg">'+sl+'</div><b>Passport stamp: '+WTN[ci]+'!</b><span>'+Object.keys(S.stamps).length+' of 18 stamps'+(all?' · World traveler! +500 coins':'')+'</span></div>';
   document.body.appendChild(lay);tone(90,.18,"square",.16,0,0.22);tone(140,.12,"sine",.14,0,0.22);var close=function(){lay.remove();};lay.addEventListener("pointerdown",close);setTimeout(close,all?2600:1700);}
 function wtPassport(){S.stamps=S.stamps||{};var n=Object.keys(S.stamps).length,g="";
   WTC.forEach(function(c,i){var got=S.stamps[i];g+='<div class="wtslot'+(got?" got":"")+'">'+(got?'<img alt="" style="transform:rotate('+((i*37)%24-12)+'deg)" src="art/wt/stamp-'+c+'.webp">':'<i></i>')+'<span>'+WTN[i]+'</span></div>';});
@@ -2638,4 +2639,16 @@ ACT.noresume=function(){S.cur=null;save();closeModal();};
 .mybtn.need::before{content:"";position:absolute;inset:0;border:0 solid transparent;border-image:var(--bt-pblue) 50% 24% fill / 50% 1.2em stretch;filter:grayscale(1) brightness(.85);z-index:-1;pointer-events:none}
 .myx ~ .btn.gold,.myx ~ .lset .btn.gold{color:#fff!important;text-shadow:0 2px 0 rgba(130,60,0,.8),0 0 3px rgba(130,60,0,.6)!important}
 
+</style><style>
+.wtpage.wpp{width:min(330px,88vw);padding:18px 14px 16px;background:#fdf3dc;border:5px solid #e0a72a;box-shadow:inset 0 0 0 3px #fff6dd,0 8px 0 #a8701a,0 18px 40px rgba(0,0,0,.5);color:#6a3a10}
+.wtpage.wpp b{display:block;margin-top:8px;color:#8a3a10;font-size:19px}.wtpage.wpp span{color:#7a4a20}
+.wpg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 6px;padding:8px 4px;border-radius:12px;background:repeating-linear-gradient(0deg,transparent 0 22px,rgba(160,110,50,.08) 22px 23px)}
+.wpsl{display:flex;flex-direction:column;align-items:center;gap:2px}
+.wpsl img{width:70px;height:70px;transform:rotate(var(--r))}
+.wpsl i{width:64px;height:64px;margin:3px;border-radius:50%;border:3px dashed rgba(120,80,40,.35)}
+.wpsl span{font:700 11px "Baloo 2",system-ui,sans-serif;color:#7a4a20}
+.wpsl.new img{animation:wpslam .55s cubic-bezier(.5,0,.6,1.4) .35s both}
+.wpsl.new span{font-weight:900;color:#c0392b}
+@keyframes wpslam{0%{transform:translateY(-60px) scale(2.2) rotate(-20deg);opacity:0}65%{transform:translateY(0) scale(.9) rotate(var(--r));opacity:1}100%{transform:scale(1) rotate(var(--r));opacity:1}}
+@media (prefers-reduced-motion:reduce){.wpsl.new img{animation:none}}
 </style></body></html>
