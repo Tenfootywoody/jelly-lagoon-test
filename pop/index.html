@@ -1144,12 +1144,7 @@ function scene(dt){
   for(i=0;i<6;i++)crewAt(others[i],X0+9*D*xs[i],H-D*0.78,D*0.74,i*1.3);
   /* tide pools: falling jellies bounce on the sand and splash in for bonus points */
   var now2=performance.now()/1000;cx.font="800 "+Math.round(D*0.3)+"px 'Baloo 2',sans-serif";cx.textAlign="center";
-  for(i=0;i<5;i++){var qx=poolX(i),qy=H-D*0.24,qw=D*(i===2?0.86:0.74),qh=D*0.2;if(poolGlow[i]>0)poolGlow[i]-=dt;
-    cx.fillStyle="#b98742";cx.beginPath();cx.ellipse(qx,qy+2,qw+4,qh+4,0,0,7);cx.fill();
-    var pg2=cx.createLinearGradient(0,qy-qh,0,qy+qh);pg2.addColorStop(0,poolGlow[i]>0?"#e9fbff":"#8fe9ff");pg2.addColorStop(1,i===2?"#2f6fe0":"#1f9fd8");cx.fillStyle=pg2;cx.beginPath();cx.ellipse(qx,qy,qw,qh,0,0,7);cx.fill();
-    cx.strokeStyle=i===2?"#ffe36b":"rgba(255,255,255,.85)";cx.lineWidth=2.5;cx.beginPath();cx.ellipse(qx,qy,qw,qh,0,0,7);cx.stroke();
-    cx.strokeStyle="rgba(255,255,255,.7)";cx.lineWidth=1.5;var shx=Math.sin(now2*1.3+i)*qw*0.3;cx.beginPath();cx.moveTo(qx+shx-qw*0.3,qy-qh*0.25);cx.lineTo(qx+shx+qw*0.05,qy-qh*0.25);cx.stroke();
-    cx.lineWidth=3;cx.strokeStyle="#16407a";cx.strokeText(POOLV[i],qx,qy+D*0.11);cx.fillStyle=i===2?"#ffe36b":"#fff";cx.fillText(POOLV[i],qx,qy+D*0.11);}
+  if(!img.hole){img.hole=new Image();img.hole.src="art/hole.webp";}for(i=0;i<5;i++){var qx=poolX(i),qy=H-D*0.24,big=i===2,qw=D*(big?0.98:0.8),qh=qw*0.31;if(poolGlow[i]>0)poolGlow[i]-=dt;if(big){var gg=cx.createRadialGradient(qx,qy-qh*0.6,0,qx,qy-qh*0.6,qw*1.25);gg.addColorStop(0,"rgba(255,227,107,"+(0.45+Math.sin(now2*2.4)*0.12)+")");gg.addColorStop(1,"rgba(255,227,107,0)");cx.fillStyle=gg;cx.beginPath();cx.arc(qx,qy-qh*0.6,qw*1.25,0,7);cx.fill();}if(img.hole.complete&&img.hole.naturalWidth){cx.drawImage(img.hole,qx-qw,qy-qh,qw*2,qh*2);}else{cx.fillStyle="#1f6fd8";cx.beginPath();cx.ellipse(qx,qy,qw*0.7,qh*0.6,0,0,7);cx.fill();}if(poolGlow[i]>0){cx.globalAlpha=Math.min(1,poolGlow[i]*2)*0.7;var hg=cx.createRadialGradient(qx,qy-qh*0.1,0,qx,qy-qh*0.1,qw*0.7);hg.addColorStop(0,"#e9fbff");hg.addColorStop(1,"rgba(143,233,255,0)");cx.fillStyle=hg;cx.beginPath();cx.ellipse(qx,qy-qh*0.1,qw*0.7,qh*0.6,0,0,7);cx.fill();cx.globalAlpha=1;}cx.font="800 "+Math.round(D*(big?0.34:0.28))+"px 'Baloo 2',sans-serif";cx.lineWidth=4;cx.strokeStyle="#5a2a00";cx.strokeText(POOLV[i],qx,qy+qh*0.4);cx.fillStyle=big?"#ffe36b":"#fff";cx.fillText(POOLV[i],qx,qy+qh*0.4);}
   /* the crew mate stands on whichever side the whirlpool is not on */
   var mx=(S.whirl&&S.whirl.fx<4.5)?SX+D*3.15:SX-D*2.35,my=SY+D*0.02,full=S.sup;
   if(full){cx.globalAlpha=0.35+Math.sin(performance.now()/150)*0.2;cx.fillStyle="#ffe36b";cx.beginPath();cx.arc(mx,my,D*0.95,0,7);cx.fill();cx.globalAlpha=1;}
